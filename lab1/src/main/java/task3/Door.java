@@ -14,7 +14,13 @@ public class Door {
     }
 
     public enum Material {
-        WOOD, STEEL, METAL, PLASTIC, IRON, GLASS
+        WOOD("Деревянная"), STEEL("Стальная"), METAL("Металлическая"), PLASTIC("Пластиковая"), IRON("Железная"), GLASS("Стеклянная");
+
+        String name;
+
+        Material(String s) {
+            this.name = s;
+        }
     }
 
 }

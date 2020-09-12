@@ -16,4 +16,16 @@ public class Bridge {
         this.door = door;
         people = new ArrayList<>();
     }
+
+    /**
+     * Close or open door
+     */
+    public void changeDoorState() {
+        if (door == null) {
+            throw new NullPointerException();
+        } else {
+            System.out.println(getDoor().getMaterial().name + " дверь " + (getDoor().isClosed() ? "открылась." : "закрылась."));
+            getDoor().setClosed(!getDoor().isClosed());
+        }
+    }
 }
