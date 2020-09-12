@@ -7,51 +7,67 @@ public class Human {
 
     private Type type = Type.MAN;
 
-    private Intonation intonation = Intonation.CALM;
-
+    /**
+     * If you want to ignore someone when dragging
+     */
     private boolean isIgnore;
 
-    private boolean isKeeping;
-
+    /**
+     * If you want to resist when someone drags you
+     */
     private boolean isResisting;
 
     private Notebook notebook;
 
+    private Hands hands;
+
     public Human(Type type) {
         this.type = type;
+        hands = new Hands();
     }
 
+    /**
+     * Move somewhere when dragging
+     */
     public void move() {
 
     }
 
+    /**
+     * Move from bridge. Change content in Bridge human list
+     */
+    public void moveFromBridge() {
+
+    }
+
+    /**
+     * Read book if exists
+     */
     public void readBook() {
 
     }
 
-    public void say() {
+    /**
+     * Say something with intonation
+     */
+    public void say(Phrase intonation) {
 
     }
 
-    public void drag() {
-
-    }
-
-    public void bowDown() {
+    /**
+     * Drag someone by neck
+     */
+    public void drag(Human human) {
 
     }
 
     //обхватить
-    public void embrace() {
+    public void embrace(Human human) {
 
     }
 
     public enum Type {
         CAPTAIN, GUARD, MAN
-    }
-
-    public enum Intonation {
-        CALM, ANGRY, THOUGHTFUL, EXCITED, SAD
     }
 
 }
