@@ -6,15 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Bridge {
-
-    private List<Human> people;
+public class Bridge extends Location{
 
     private Door door;
 
     public Bridge(Door door) {
         this.door = door;
-        people = new ArrayList<>();
+        this.people = new ArrayList<>();
+        this.name = "мостик";
     }
 
     /**
@@ -24,8 +23,16 @@ public class Bridge {
         if (door == null) {
             throw new NullPointerException();
         } else {
-            System.out.println(getDoor().getMaterial().name + " дверь " + (getDoor().isClosed() ? "открылась." : "закрылась."));
+            System.out.println(getDoor().getMaterial().name + " дверь " + (getDoor().isClosed() ? "открылась" : "закрылась") + ".");
             getDoor().setClosed(!getDoor().isClosed());
         }
+    }
+
+    public boolean isOnlyCaptain() {
+        if (people.size() == 1 && people.get(0).getType() == Human.Type.CAPTAIN) {
+            System.out.println(Human.Type.CAPTAIN.type + " снова остался один.");
+            return true;
+        }
+        return false;
     }
 }

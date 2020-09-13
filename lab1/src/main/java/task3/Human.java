@@ -2,46 +2,50 @@ package task3;
 
 import lombok.Data;
 
+import java.util.NoSuchElementException;
+
 @Data
 public class Human {
-
-    private Type type = Type.MAN;
-
-    /**
-     * If you want to ignore someone when dragging
-     */
-    private boolean isIgnore;
 
     /**
      * If you want to resist when someone drags you
      */
     private boolean isResisting;
 
-    private Notebook notebook;
-
+    private Type type = Type.MAN;
     private Hands hands;
+    private Location location;
 
-    public Human(Type type) {
+
+    public Human(Type type, Location location) {
         this.type = type;
+        this.location = location;
         hands = new Hands();
+        location.enter(this);
     }
 
     /**
-     * Move somewhere when dragging
+     * Move from location and drag human in hands
      */
-    public void move() {
+    public void moveFromLocation() {
+        if (this.location != null) {
+            if (hands.getThings().size() != 0) {
+                System.out.println("Выволок с "+location.name+"а.");
+                boolean resistance = false;
+                for (Object thing: hands.getThings()) {
+                    if (thing instanceof Human) {
+                        Human man = (Human) thing;
+                        man.drag();
+                        resistance |= man.isResisting;
+                    }
+                }
+                if (resistance) {
+                    System.out.println("Не обращая внимания нa их сопротивление.");
+                }
+            }
+            this.location.escape(this);
+            this.location = null;
 
-    }
-
-    /**
-     * Move from bridge. Change content in Bridge human list
-     */
-    //TODO: а тут надо просто всех кроме капитана выгнать? пока так и написала
-    public void moveFromBridge(Bridge bridge) {
-        if (bridge == null) {
-            throw new NullPointerException();
-        } else {
-            bridge.getPeople().removeIf(val -> !val.getType().equals(Type.CAPTAIN));
         }
     }
 
@@ -49,23 +53,28 @@ public class Human {
      * Read book if exists
      */
     public void readBook() {
-        if (getNotebook() == null) {
-            throw new NullPointerException();
+        Notebook notebook = (Notebook) hands.getThings().stream()
+                .filter(thing -> thing instanceof Notebook)
+                .findAny().orElse(null);
+        if (notebook == null) {
+            throw new NoSuchElementException();
         } else {
-            switch (getNotebook().getContent()) {
+            String content = "";
+            switch (notebook.getContent()) {
                 case POEMS:
-                    System.out.println("Полистал свою записную книжку со стихами."); break;
+                    content = " со стихами"; break;
                 case PHONES:
-                    System.out.println("Полистал свою записную книжку с телефонными номерами."); break;
+                    content = " с телефонными номерами"; break;
                 case STORIES:
-                    System.out.println("Полистал свою записную книжку с рассказами."); break;
+                    content = " с рассказами"; break;
                 case ADDRESSES:
-                    System.out.println("Полистал свою записную книжку с адресами."); break;
+                    content = " с адресами"; break;
                 case TIMETABLE:
-                    System.out.println("Полистал свою записную книжку с расписанием."); break;
+                    content = " с расписанием"; break;
                 case FUTURE_PLANS:
-                    System.out.println("Полистал свою записную книжку с планами на будущее."); break;
+                    content = " с планами на будущее"; break;
             }
+            System.out.println("Полистал свою записную книжку" + content + ".");
         }
     }
 
@@ -76,15 +85,17 @@ public class Human {
         if (phrase == null || phrase.getText() == null) {
             throw new NullPointerException();
         } else {
-            System.out.println(phrase.getIntonation().name + " промурлыкал что-то.");
+            System.out.println(this.getType().type + " " + phrase.getIntonation().name + " промурлыкал что-то.");
         }
     }
 
-    /**
-     * Drag someone somewhere
-     */
-    public void drag(Human human) {
+    public void drag() {
+        moveFromLocation();
+        isResisting = true;
+    }
 
+    public void takeInHand(Object thing) {
+        getHands().take(thing);
     }
 
     //обхватить
@@ -92,8 +103,8 @@ public class Human {
         if (human == null) {
             throw new NullPointerException();
         } else {
-            System.out.println("Он обхватил " + human.getType() + "а за шею.");
-            getHands().getThings().add(human);
+            System.out.println(this.getType().type + " обхватил " + human.getType().type + "а за шею.");
+            takeInHand(human);
         }
     }
 

@@ -15,7 +15,7 @@ public class Phrase {
     }
 
     public enum Intonation {
-        CALM("Спокойно"), ANGRY("Злобно"), THOUGHTFUL("Задумчиво"), EXCITED("Радостно"), SAD("Грустно");
+        CALM("спокойно"), ANGRY("злобно"), THOUGHTFUL("задумчиво"), EXCITED("радостно"), SAD("грустно");
 
         String name;
 
