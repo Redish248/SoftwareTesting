@@ -4,6 +4,10 @@ public class FunctionTg {
 
     private final double EPS = 1E-10;
 
+    public static void main(String[] args) {
+        new FunctionTg().calculateTg(Math.PI);
+    }
+
     public double calculateTg(double x) {
 
         x = x % Math.PI;
@@ -16,14 +20,9 @@ public class FunctionTg {
             return -calculateTg(Math.abs(x));
         }
 
-        double prevResult = 0;
         double result = getNextTailor(x,1);
-        double i = 2;
-
-        while (result - prevResult > EPS) {
-            prevResult = result;
+        for (double i = 2; i < 20; i++) {
             result += getNextTailor(x, i);
-            i++;
         }
 
         return result;
@@ -37,7 +36,6 @@ public class FunctionTg {
      */
     private double getNextTailor(double x, double n) {
         return countBernoulli(2*n)*Math.pow(-4,n)*(1-Math.pow(4,n))*Math.pow(x,2*n-1)/countFactorial(2*n);
-        //return Math.abs(countBernoulli(2*n)) * Math.pow(2, 2*n) * (Math.pow(2, 2*n) - 1) * Math.pow(x, 2*n - 1) / countFactorial(2*n);
     }
 
     /**
@@ -52,7 +50,7 @@ public class FunctionTg {
 
         double result = countBernoulli(n-1)*countC(2, n+1);
 
-        for (double i = 2; i <= n; i++) {
+        for (long i = 2; i <= n; i++) {
             result += countBernoulli(n-i)*countC(i+1, n+1);
         }
 
@@ -77,12 +75,12 @@ public class FunctionTg {
      * @return result
      */
     private double countFactorial(double n) {
-
-        long result = 1;
-        for (double i = 1; i <= n; i++) {
-            result *= i;
+        if (n == 0) {
+            return 1;
         }
-        return result;
-    };
+        else {
+            return n * countFactorial(n-1);
+        }
+    }
 
 }
