@@ -2,7 +2,7 @@ package task1;
 
 public class FunctionTg {
 
-    private final double EPS = 1E-10;
+    private final double EPS = 1E-7;
 
     public static void main(String[] args) {
         new FunctionTg().calculateTg(Math.PI);
@@ -20,9 +20,14 @@ public class FunctionTg {
             return -calculateTg(Math.abs(x));
         }
 
+        double prevResult = 0;
         double result = getNextTailor(x,1);
-        for (double i = 2; i < 20; i++) {
+        double i = 2;
+
+        while (result - prevResult > EPS) {
+            prevResult = result;
             result += getNextTailor(x, i);
+            i++;
         }
 
         return result;

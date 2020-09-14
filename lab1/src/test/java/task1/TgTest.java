@@ -13,6 +13,17 @@ public class TgTest {
         assertEquals(Math.tan(Math.PI/2), new FunctionTg().calculateTg(Math.PI/2), DELTA);
     }
 
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testTgPiAndHalfEps2() {
+        assertEquals(Math.tan(Math.PI/2 + DELTA/2), new FunctionTg().calculateTg(Math.PI/2+DELTA/2), DELTA);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testTgPiAndHalfEps() {
+        assertEquals(Math.tan(Math.PI/2 + DELTA), new FunctionTg().calculateTg(Math.PI/2+DELTA), DELTA);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testTg3PiAndHalf() {
         assertEquals(Math.tan(3*Math.PI/2), new FunctionTg().calculateTg(3*Math.PI/2), DELTA);
@@ -49,5 +60,19 @@ public class TgTest {
         assertEquals(Math.tan(2*Math.PI), new FunctionTg().calculateTg(2*Math.PI), DELTA);
     }
 
+    @Test
+    public void testTgInfinityPlus() {
+        assertEquals(Math.tan(Double.POSITIVE_INFINITY), new FunctionTg().calculateTg(Double.POSITIVE_INFINITY), DELTA);
+    }
+
+    @Test
+    public void testTgInfinityMinus() {
+        assertEquals(Math.tan(Double.NEGATIVE_INFINITY), new FunctionTg().calculateTg(Double.NEGATIVE_INFINITY), DELTA);
+    }
+
+    @Test
+    public void testTgNan() {
+        assertEquals(Math.tan(Double.NaN), new FunctionTg().calculateTg(Double.NaN), DELTA);
+    }
 
 }
