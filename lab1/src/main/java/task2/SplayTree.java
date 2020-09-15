@@ -1,11 +1,19 @@
 package task2;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.NoSuchElementException;
+
 @NoArgsConstructor
+@Data
 public class SplayTree {
 
     private SplayTreeNode root;
+
+    public void clear() {
+        root = null;
+    }
 
     public SplayTreeNode find(int value) {
         SplayTreeNode currentNode = root;
@@ -21,9 +29,10 @@ public class SplayTree {
                 }
             }
         }
-        return null;
+        throw new NoSuchElementException();
     }
 
+    //todo: возможно стоит запретить элемент с одинаковым значением
     public void add(int value) {
         SplayTreeNode currentNode = root;
         SplayTreeNode currentNodeParent = null;
