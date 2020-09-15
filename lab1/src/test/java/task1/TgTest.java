@@ -20,6 +20,11 @@ public class TgTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void testTgPiAndEps() {
+        assertEquals(Math.tan(Math.PI/2 - 1E-7), new FunctionTg().calculateTg(Math.PI/2 - 1E-7), DELTA);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void testTgPiAndHalfEps() {
         assertEquals(Math.tan(Math.PI/2 + DELTA), new FunctionTg().calculateTg(Math.PI/2+DELTA), DELTA);
     }
@@ -42,6 +47,11 @@ public class TgTest {
     @Test
     public void testTgPiDel3() {
         assertEquals(Math.tan(Math.PI/3), new FunctionTg().calculateTg(Math.PI/3), DELTA);
+    }
+
+    @Test
+    public void testTgMinusPiDel3() {
+        assertEquals(Math.tan(-Math.PI/3), new FunctionTg().calculateTg(-Math.PI/3), DELTA);
     }
 
     @Test

@@ -3,7 +3,6 @@ package task3;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class Bridge extends Location{

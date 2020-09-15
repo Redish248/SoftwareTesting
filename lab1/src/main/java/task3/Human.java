@@ -3,6 +3,7 @@ package task3;
 import lombok.Data;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Data
 public class Human {

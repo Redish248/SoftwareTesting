@@ -12,7 +12,7 @@ public class FunctionTg {
 
         x = x % Math.PI;
 
-        if (Math.abs(x) + EPS >= Math.PI/2) {
+        if (Math.abs(x) >= Math.PI/2 - EPS) {
             throw new IllegalArgumentException();
         }
 
