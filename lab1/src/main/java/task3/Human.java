@@ -58,7 +58,7 @@ public class Human {
                 .filter(thing -> thing instanceof Notebook)
                 .findAny().orElse(null);
         if (notebook == null) {
-            throw new NoSuchElementException();
+            throw new NullPointerException();
         } else {
             String content = "";
             switch (notebook.getContent()) {
@@ -90,13 +90,26 @@ public class Human {
         }
     }
 
+    /**
+     * If you want to throw out someone from location who is resisting
+     */
     public void drag() {
         moveFromLocation();
         isResisting = true;
     }
 
+    /**
+     * Take someone/something to hands
+     */
     public void takeInHand(Object thing) {
         getHands().take(thing);
+    }
+
+    /**
+     * Drop someone/something to hands
+     */
+    public void dropFromHand(Object thing) {
+        getHands().drop(thing);
     }
 
     //обхватить
@@ -107,6 +120,16 @@ public class Human {
             System.out.println(this.getType().type + " обхватил " + human.getType().type + "а за шею.");
             takeInHand(human);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return  (this == o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isResisting, type, hands, location);
     }
 
     public enum Type {

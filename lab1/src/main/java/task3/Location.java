@@ -16,7 +16,9 @@ public class Location {
     }
 
     public void enter(Human human) {
-        people.add(human);
+        if(!people.contains(human)) {
+            people.add(human);
+        }
     }
 
     public void escape(Human human) {
