@@ -58,7 +58,7 @@ public class Human {
                 .filter(thing -> thing instanceof Notebook)
                 .findAny().orElse(null);
         if (notebook == null) {
-            throw new NullPointerException();
+            throw new NoSuchElementException();
         } else {
             String content = "";
             switch (notebook.getContent()) {
@@ -84,7 +84,7 @@ public class Human {
      */
     public void say(Phrase phrase) {
         if (phrase == null || phrase.getText() == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         } else {
             System.out.println(this.getType().type + " " + phrase.getIntonation().name + " промурлыкал что-то.");
         }
@@ -115,7 +115,7 @@ public class Human {
     //обхватить
     public void embrace(Human human) {
         if (human == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         } else {
             System.out.println(this.getType().type + " обхватил " + human.getType().type + "а за шею.");
             takeInHand(human);
@@ -124,7 +124,7 @@ public class Human {
 
     @Override
     public boolean equals(Object o) {
-        return  (this == o);
+        return (this == o);
     }
 
     @Override

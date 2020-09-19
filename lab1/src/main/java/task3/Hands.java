@@ -14,6 +14,9 @@ public class Hands {
      * Take someone/something to hands
      */
     public void take(Object thing) {
+        if (thing == null) {
+            throw new IllegalArgumentException();
+        }
         if (!things.contains(thing)) {
             things.add(thing);
         }
@@ -23,6 +26,9 @@ public class Hands {
      * Drop someone/something to hands
      */
     public void drop(Object thing) {
+        if (thing == null) {
+            throw new IllegalArgumentException();
+        }
         things.remove(thing);
     }
 

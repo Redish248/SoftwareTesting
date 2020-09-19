@@ -3,7 +3,7 @@ package task3;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.concurrent.Phaser;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -75,20 +75,20 @@ public class ModelTest {
 
     @Test
     public void testHands() {
-        captain.getHands().take(guard);
-        captain.getHands().take(man1);
-        assertEquals(2, captain.getHands().getThings().size());
+        guard.getHands().take(guard);
+        guard.getHands().take(man1);
+        assertEquals(2, guard.getHands().getThings().size());
     }
 
     @Test
     public void testTakingByHands() {
-        captain.takeInHand(man1);
-        captain.takeInHand(man2);
-        assertEquals(2, captain.getHands().getThings().size());
-        captain.dropFromHand(man1);
-        assertEquals(1, captain.getHands().getThings().size());
-        captain.dropFromHand(man2);
-        assertEquals(0, captain.getHands().getThings().size());
+        guard.takeInHand(man1);
+        guard.takeInHand(man2);
+        assertEquals(2, guard.getHands().getThings().size());
+        guard.dropFromHand(man1);
+        assertEquals(1, guard.getHands().getThings().size());
+        guard.dropFromHand(man2);
+        assertEquals(0, guard.getHands().getThings().size());
     }
 
     @Test
@@ -97,15 +97,53 @@ public class ModelTest {
         assertTrue(captain.getHands().getThings().contains(man1));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = NoSuchElementException.class)
     public void testNullNotebook() {
         captain.readBook();
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullEmbrace() {
+        captain.embrace(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullSay() {
+        captain.say(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullDrop() {
+        captain.dropFromHand(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullTake() {
+        captain.takeInHand(null);
+    }
+
     @Test
     public void testNotebook() {
-        captain.takeInHand(notebook);
-        captain.readBook();
+        guard.takeInHand(notebook);
+        guard.readBook();
+    }
+
+    @Test
+    public void testDrag() {
+        guard.takeInHand(man1);
+        guard.takeInHand(man2);
+        guard.moveFromLocation();
+        assertTrue(man1.isResisting());
+        assertFalse(bridge.getPeople().contains(man1));
+        assertTrue(man2.isResisting());
+        assertFalse(bridge.getPeople().contains(man2));
+        assertFalse(bridge.getPeople().contains(guard));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testNullDoor() {
+        Bridge bridge1 = new Bridge(null);
+        bridge1.changeDoorState();
     }
 
 

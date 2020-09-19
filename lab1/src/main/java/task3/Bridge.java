@@ -3,6 +3,7 @@ package task3;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 @Data
 public class Bridge extends Location{
@@ -20,7 +21,7 @@ public class Bridge extends Location{
      */
     public void changeDoorState() {
         if (door == null) {
-            throw new NullPointerException();
+            throw new NoSuchElementException();
         } else {
             System.out.println(getDoor().getMaterial().name + " дверь " + (getDoor().isClosed() ? "открылась" : "закрылась") + ".");
             getDoor().setClosed(!getDoor().isClosed());

@@ -12,7 +12,7 @@ public class FunctionTg {
 
         x = x % Math.PI;
 
-        if (Math.abs(x) >= Math.PI/2 - EPS) {
+        if (Math.abs(x) >= Math.PI/2 - 1E-6) {
             throw new IllegalArgumentException();
         }
 
@@ -28,6 +28,7 @@ public class FunctionTg {
             prevResult = result;
             result += getNextTailor(x, i);
             i++;
+            System.out.println(i);
         }
 
         return result;
