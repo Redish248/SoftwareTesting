@@ -14,8 +14,18 @@ public class TgTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void testTgMinusPiAndHalf() {
+        assertEquals(Math.tan(-Math.PI/2), new FunctionTg().calculateTg(-Math.PI/2), DELTA);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void testTgPiAndHalfEps2() {
         assertEquals(Math.tan(Math.PI/2 + DELTA/2), new FunctionTg().calculateTg(Math.PI/2+DELTA/2), DELTA);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testTgMinusPiAndHalfEps2() {
+        assertEquals(Math.tan(-Math.PI/2 + DELTA/2), new FunctionTg().calculateTg(-Math.PI/2+DELTA/2), DELTA);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -29,8 +39,23 @@ public class TgTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void testTgMinusPiAndHalfEps() {
+        assertEquals(Math.tan(-Math.PI/2 + DELTA), new FunctionTg().calculateTg(-Math.PI/2 + DELTA), DELTA);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testTgMinusPiMinusHalfEps() {
+        assertEquals(Math.tan(-Math.PI/2 - DELTA), new FunctionTg().calculateTg(-Math.PI/2 - DELTA), DELTA);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void testTg3PiAndHalf() {
         assertEquals(Math.tan(3*Math.PI/2), new FunctionTg().calculateTg(3*Math.PI/2), DELTA);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMinusTg3PiAndHalf() {
+        assertEquals(Math.tan(-3*Math.PI/2), new FunctionTg().calculateTg(-3*Math.PI/2), DELTA);
     }
 
     @Test
@@ -39,8 +64,23 @@ public class TgTest {
     }
 
     @Test
+    public void testTgPi() {
+        assertEquals(Math.tan(Math.PI), new FunctionTg().calculateTg(Math.PI), DELTA);
+    }
+
+    @Test
+    public void testTgMinusPi() {
+        assertEquals(Math.tan(-Math.PI), new FunctionTg().calculateTg(-Math.PI), DELTA);
+    }
+
+    @Test
     public void testTgPiAndQuote() {
         assertEquals(Math.tan(Math.PI/4), new FunctionTg().calculateTg(Math.PI/4), DELTA);
+    }
+
+    @Test
+    public void testTgMinusPiAndQuote() {
+        assertEquals(Math.tan(-Math.PI/4), new FunctionTg().calculateTg(-Math.PI/4), DELTA);
     }
 
     @Test
@@ -66,6 +106,11 @@ public class TgTest {
     @Test
     public void testTg2Pi() {
         assertEquals(Math.tan(2*Math.PI), new FunctionTg().calculateTg(2*Math.PI), DELTA);
+    }
+
+    @Test
+    public void testMinusTg2Pi() {
+        assertEquals(Math.tan(-2*Math.PI), new FunctionTg().calculateTg(-2*Math.PI), DELTA);
     }
 
     @Test

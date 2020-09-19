@@ -28,7 +28,6 @@ public class FunctionTg {
             prevResult = result;
             result += getNextTailor(x, i);
             i++;
-            System.out.println(i);
         }
 
         return result;
