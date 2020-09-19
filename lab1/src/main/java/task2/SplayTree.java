@@ -32,7 +32,6 @@ public class SplayTree {
         throw new NoSuchElementException();
     }
 
-    //todo: возможно стоит запретить элемент с одинаковым значением
     public void add(int value) {
         SplayTreeNode currentNode = root;
         SplayTreeNode currentNodeParent = null;
