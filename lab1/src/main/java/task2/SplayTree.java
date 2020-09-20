@@ -69,7 +69,7 @@ public class SplayTree {
         splay(node);
     }
 
-    private SplayTreeNode join(SplayTreeNode leftTree, SplayTreeNode rightTree) {
+    public SplayTreeNode join(SplayTreeNode leftTree, SplayTreeNode rightTree) {
         if (leftTree != null) {
             SplayTreeNode largestNode = leftTree;
             while (largestNode.getRightChild() != null) {

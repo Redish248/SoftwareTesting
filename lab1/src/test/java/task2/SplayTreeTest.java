@@ -132,6 +132,50 @@ public class SplayTreeTest extends Assert {
         splayTree.remove(3);
     }
 
+    @Test
+    public void joinLeftTreeEmptyTest() {
+        SplayTree leftTree = new SplayTree();
+        SplayTree rightTree = new SplayTree();
+        rightTree.add(1);
+        rightTree.add(3);
+        rightTree.add(2);
+        SplayTreeNode newRoot = splayTree.join(leftTree.getRoot(), rightTree.getRoot());
+        assertEquals(2, newRoot.getValue());
+        assertEquals(1, newRoot.getLeftChild().getValue());
+        assertEquals(3, newRoot.getRightChild().getValue());
+    }
+
+    @Test
+    public void joinRightTreeEmptyTest() {
+        SplayTree leftTree = new SplayTree();
+        SplayTree rightTree = new SplayTree();
+        leftTree.add(1);
+        leftTree.add(3);
+        leftTree.add(2);
+        SplayTreeNode newRoot = splayTree.join(leftTree.getRoot(), rightTree.getRoot());
+        assertEquals(3, newRoot.getValue());
+        assertEquals(2, newRoot.getLeftChild().getValue());
+        assertNull(newRoot.getRightChild());
+        assertEquals(1, newRoot.getLeftChild().getLeftChild().getValue());
+    }
+
+    @Test
+    public void joinTest() {
+        SplayTree leftTree = new SplayTree();
+        SplayTree rightTree = new SplayTree();
+        leftTree.add(1);
+        leftTree.add(3);
+        leftTree.add(2);
+        rightTree.add(4);
+        rightTree.add(5);
+        SplayTreeNode newRoot = splayTree.join(leftTree.getRoot(), rightTree.getRoot());
+        assertEquals(3, newRoot.getValue());
+        assertEquals(2, newRoot.getLeftChild().getValue());
+        assertEquals(1, newRoot.getLeftChild().getLeftChild().getValue());
+        assertEquals(5, newRoot.getRightChild().getValue());
+        assertEquals(4, newRoot.getRightChild().getLeftChild().getValue());
+    }
+
     @After
     public void clearTree() {
         splayTree.clear();
