@@ -32,6 +32,15 @@ public class SplayTree {
         throw new NoSuchElementException();
     }
 
+    public boolean contains(int value) {
+        try {
+            find(value);
+            return true;
+        } catch(NoSuchElementException exception) {
+            return false;
+        }
+    }
+
     public void add(int value) {
         SplayTreeNode currentNode = root;
         SplayTreeNode currentNodeParent = null;

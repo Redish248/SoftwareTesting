@@ -100,17 +100,29 @@ public class SplayTreeTest extends Assert {
 
     @Test
     public void removeTest() {
-        splayTree.add(1);
+        splayTree.add(3);
         splayTree.add(5);
         splayTree.add(2);
+        splayTree.add(1);
         splayTree.add(4);
+        splayTree.remove(4);
+        assertFalse(splayTree.contains(4));
+        assertEquals(3, splayTree.getRoot().getValue());
+        assertNull(splayTree.getRoot().getParent());
+        assertEquals(5, splayTree.getRoot().getRightChild().getValue());
+        assertEquals(2, splayTree.getRoot().getLeftChild().getValue());
+        assertEquals(1, splayTree.getRoot().getLeftChild().getLeftChild().getValue());
+    }
+
+    @Test
+    public void containsTest() {
+        assertFalse(splayTree.contains(4));
+        splayTree.add(4);
+        assertTrue(splayTree.contains(4));
+        assertFalse(splayTree.contains(3));
         splayTree.add(3);
-        splayTree.remove(3);
-        assertEquals(2, splayTree.getRoot().getValue());
-        assertNull(splayTree.getRoot().getParent());
-        assertEquals(4, splayTree.getRoot().getRightChild().getValue());
-        assertEquals(1, splayTree.getRoot().getLeftChild().getValue());
-        assertNull(splayTree.getRoot().getParent());
+        assertTrue(splayTree.contains(4));
+        assertTrue(splayTree.contains(3));
     }
 
     @Test(expected = NoSuchElementException.class)
