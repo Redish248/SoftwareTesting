@@ -99,6 +99,62 @@ public class SplayTreeTest extends Assert {
     }
 
     @Test
+    public void splayRightZigTest() {
+        splayTree.add(50);
+        splayTree.add(100);
+        assertEquals(100, splayTree.getRoot().getValue());
+        assertEquals(50, splayTree.getRoot().getLeftChild().getValue());
+    }
+
+    @Test
+    public void splayLeftZigTest() {
+        splayTree.add(100);
+        splayTree.add(50);
+        assertEquals(50, splayTree.getRoot().getValue());
+        assertEquals(100, splayTree.getRoot().getRightChild().getValue());
+    }
+
+    @Test
+    public void splayRightZigZigTest() {
+        splayTree.add(100);
+        splayTree.add(50);
+        splayTree.add(200);
+        assertEquals(200, splayTree.getRoot().getValue());
+        assertEquals(100, splayTree.getRoot().getLeftChild().getValue());
+        assertEquals(50, splayTree.getRoot().getLeftChild().getLeftChild().getValue());
+    }
+
+    @Test
+    public void splayLeftZigZigTest() {
+        splayTree.add(100);
+        splayTree.add(200);
+        splayTree.add(50);
+        assertEquals(50, splayTree.getRoot().getValue());
+        assertEquals(100, splayTree.getRoot().getRightChild().getValue());
+        assertEquals(200, splayTree.getRoot().getRightChild().getRightChild().getValue());
+    }
+
+    @Test
+    public void splayLeftZigZagTest() {
+        splayTree.add(100);
+        splayTree.add(200);
+        splayTree.add(150);
+        assertEquals(150, splayTree.getRoot().getValue());
+        assertEquals(100, splayTree.getRoot().getLeftChild().getValue());
+        assertEquals(200, splayTree.getRoot().getRightChild().getValue());
+    }
+
+    @Test
+    public void splayRightZigZagTest() {
+        splayTree.add(100);
+        splayTree.add(50);
+        splayTree.add(75);
+        assertEquals(75, splayTree.getRoot().getValue());
+        assertEquals(50, splayTree.getRoot().getLeftChild().getValue());
+        assertEquals(100, splayTree.getRoot().getRightChild().getValue());
+    }
+
+    @Test
     public void removeTest() {
         splayTree.add(3);
         splayTree.add(5);
