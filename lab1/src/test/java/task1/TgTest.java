@@ -121,10 +121,14 @@ public class TgTest {
     }
 
     @Test
-    public void testPeriod() {
+    public void testPeriodPositive() {
         assertEquals(functionTg.calculateTg(Math.PI/3), functionTg.calculateTg(Math.PI/3 + Math.PI), DELTA);
         assertEquals(functionTg.calculateTg(Math.PI/3), functionTg.calculateTg(Math.PI/3 + 2*Math.PI), DELTA);
         assertEquals(functionTg.calculateTg(Math.PI/3), functionTg.calculateTg(Math.PI/3 + 3*Math.PI), DELTA);
+    }
+
+    @Test
+    public void testPeriodNegative() {
         assertEquals(functionTg.calculateTg(-Math.PI/3), functionTg.calculateTg(-Math.PI/3 - Math.PI), DELTA);
         assertEquals(functionTg.calculateTg(Math.PI/4), functionTg.calculateTg(Math.PI/4 - 2*Math.PI), DELTA);
         assertEquals(functionTg.calculateTg(Math.PI/4), functionTg.calculateTg(Math.PI/4 - 3*Math.PI), DELTA);
