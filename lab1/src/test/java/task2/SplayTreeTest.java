@@ -42,62 +42,6 @@ public class SplayTreeTest extends Assert {
         splayTree.find(2);
     }
 
-    //test all left and right zigzags
-    @Test
-    public void addAndSplayTest() {
-        //root
-        splayTree.add(50);
-        //right zig
-        splayTree.add(100);
-        assertEquals(100, splayTree.getRoot().getValue());
-        assertEquals(50, splayTree.getRoot().getLeftChild().getValue());
-        //left zig zag
-        splayTree.add(75);
-        assertEquals(75, splayTree.getRoot().getValue());
-        assertEquals(50, splayTree.getRoot().getLeftChild().getValue());
-        assertEquals(100, splayTree.getRoot().getRightChild().getValue());
-        //left zig zig
-        splayTree.add(25);
-        assertEquals(25, splayTree.getRoot().getValue());
-        assertEquals(50, splayTree.getRoot().getRightChild().getValue());
-        assertEquals(75, splayTree.getRoot().getRightChild().getRightChild().getValue());
-        assertEquals(100, splayTree.getRoot().getRightChild().getRightChild().getRightChild().getValue());
-        //left zig
-        splayTree.add(10);
-        assertEquals(10, splayTree.getRoot().getValue());
-        assertEquals(25, splayTree.getRoot().getRightChild().getValue());
-        assertEquals(50, splayTree.getRoot().getRightChild().getRightChild().getValue());
-        assertEquals(75, splayTree.getRoot().getRightChild().getRightChild().getRightChild().getValue());
-        assertEquals(100, splayTree.getRoot().getRightChild().getRightChild().getRightChild().getRightChild().getValue());
-        //right zig zag
-        splayTree.add(17);
-        assertEquals(17, splayTree.getRoot().getValue());
-        assertEquals(10, splayTree.getRoot().getLeftChild().getValue());
-        assertEquals(25, splayTree.getRoot().getRightChild().getValue());
-        assertEquals(50, splayTree.getRoot().getRightChild().getRightChild().getValue());
-        assertEquals(75, splayTree.getRoot().getRightChild().getRightChild().getRightChild().getValue());
-        assertEquals(100, splayTree.getRoot().getRightChild().getRightChild().getRightChild().getRightChild().getValue());
-        //just for getting right zig zig case in next step
-        splayTree.add(80);
-        assertEquals(80, splayTree.getRoot().getValue());
-        assertEquals(17, splayTree.getRoot().getLeftChild().getValue());
-        assertEquals(100, splayTree.getRoot().getRightChild().getValue());
-        assertEquals(10, splayTree.getRoot().getLeftChild().getLeftChild().getValue());
-        assertEquals(50, splayTree.getRoot().getLeftChild().getRightChild().getValue());
-        assertEquals(25, splayTree.getRoot().getLeftChild().getRightChild().getLeftChild().getValue());
-        assertEquals(75, splayTree.getRoot().getLeftChild().getRightChild().getRightChild().getValue());
-        //right zig zig
-        splayTree.add(150);
-        assertEquals(150, splayTree.getRoot().getValue());
-        assertEquals(100, splayTree.getRoot().getLeftChild().getValue());
-        assertEquals(80, splayTree.getRoot().getLeftChild().getLeftChild().getValue());
-        assertEquals(17, splayTree.getRoot().getLeftChild().getLeftChild().getLeftChild().getValue());
-        assertEquals(10, splayTree.getRoot().getLeftChild().getLeftChild().getLeftChild().getLeftChild().getValue());
-        assertEquals(50, splayTree.getRoot().getLeftChild().getLeftChild().getLeftChild().getRightChild().getValue());
-        assertEquals(25, splayTree.getRoot().getLeftChild().getLeftChild().getLeftChild().getRightChild().getLeftChild().getValue());
-        assertEquals(75, splayTree.getRoot().getLeftChild().getLeftChild().getLeftChild().getRightChild().getRightChild().getValue());
-    }
-
     @Test
     public void splayRightZigTest() {
         splayTree.add(50);
