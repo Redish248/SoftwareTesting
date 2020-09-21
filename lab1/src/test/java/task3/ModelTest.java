@@ -47,15 +47,15 @@ public class ModelTest {
     }
 
     @Test
-    public void testGoToLocation() {
+    public void testGoToLocation1() {
         captain.moveFromLocation();
-        guard.moveFromLocation();
-        assertEquals(2, bridge.getPeople().size());
-        assertFalse(bridge.getPeople().contains(captain));
-        bridge.enter(captain);
         assertEquals(3, bridge.getPeople().size());
-        assertTrue(bridge.getPeople().contains(captain));
-        assertFalse(bridge.getPeople().contains(guard));
+        assertFalse(bridge.getPeople().contains(captain));
+    }
+
+    @Test
+    public void testGoToLocation2() {
+        guard.moveFromLocation();
         bridge.enter(guard);
         assertEquals(4, bridge.getPeople().size());
         assertTrue(bridge.getPeople().contains(captain));
@@ -134,9 +134,7 @@ public class ModelTest {
         guard.takeInHand(man2);
         guard.moveFromLocation();
         assertTrue(man1.isResisting());
-        assertFalse(bridge.getPeople().contains(man1));
-        assertTrue(man2.isResisting());
-        assertFalse(bridge.getPeople().contains(man2));
+        assertFalse(bridge.getPeople().contains(man1));;
         assertFalse(bridge.getPeople().contains(guard));
     }
 
