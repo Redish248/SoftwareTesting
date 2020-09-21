@@ -10,9 +10,23 @@ public class FunctionTg {
 
     public double calculateTg(double x) {
 
-        x = x % Math.PI;
+        if (Double.isNaN(x) || x == Double.POSITIVE_INFINITY || x == Double.NEGATIVE_INFINITY) {
+            throw new IllegalArgumentException();
+        }
 
-        if (Math.abs(x) >= Math.PI/2 - 1E-6) {
+        if (x > 0 && (x >= Math.PI/2)) {
+            do {
+                x -= Math.PI;
+            } while (x >= Math.PI/2);
+        }
+        if (x < 0 && (x <= -Math.PI/2)) {
+            do {
+                x += Math.PI;
+            } while (x <= -Math.PI/2);
+        }
+
+
+        if ((Math.abs(x) >= Math.PI/2 - 1E-6) && (Math.abs(x) <= Math.PI/2 + 1E-6)) {
             throw new IllegalArgumentException();
         }
 
