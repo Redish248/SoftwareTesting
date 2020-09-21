@@ -34,43 +34,78 @@ public class ModelTest {
     public void testCloseDoor() {
         bridge.changeDoorState();
         assertTrue(door.isClosed());
+    }
+
+    @Test
+    public void changeOpenDoor() {
+        bridge.changeDoorState();
         bridge.changeDoorState();
         assertFalse(door.isClosed());
     }
 
     @Test
-    public void testLeavingBridge() {
+    public void testLeavingBridgeSize() {
         man1.moveFromLocation();
         assertEquals(3, bridge.getPeople().size());
+    }
+
+    @Test
+    public void testLeavingBridgeCaptain() {
+        man1.moveFromLocation();
         assertTrue(bridge.getPeople().contains(captain));
+    }
+
+    @Test
+    public void testLeavingBridgeMan() {
+        man1.moveFromLocation();
         assertFalse(bridge.getPeople().contains(man1));
     }
 
     @Test
-    public void testGoToLocation1() {
+    public void testGoToLocationSize() {
         captain.moveFromLocation();
         assertEquals(3, bridge.getPeople().size());
+    }
+
+    @Test
+    public void testGoToLocationContains() {
+        captain.moveFromLocation();
         assertFalse(bridge.getPeople().contains(captain));
     }
 
     @Test
-    public void testGoToLocation2() {
+    public void testGoToLocationMoreSize() {
         guard.moveFromLocation();
         bridge.enter(guard);
         assertEquals(4, bridge.getPeople().size());
+    }
+
+    @Test
+    public void testGoToLocationMoreCaptain() {
+        guard.moveFromLocation();
+        bridge.enter(guard);
         assertTrue(bridge.getPeople().contains(captain));
+    }
+
+    @Test
+    public void testGoToLocationMoreGuard() {
+        guard.moveFromLocation();
+        bridge.enter(guard);
         assertTrue(bridge.getPeople().contains(guard));
     }
 
     @Test
-    public void testCaptainInBridge() {
+    public void testCaptainInBridge1() {
         guard.moveFromLocation();
         assertFalse(bridge.isOnlyCaptain());
+    }
+
+    @Test
+    public void testCaptainInBridge2() {
+        guard.moveFromLocation();
         man1.moveFromLocation();
         man2.moveFromLocation();
         assertTrue(bridge.isOnlyCaptain());
-        captain.moveFromLocation();
-        assertFalse(bridge.isOnlyCaptain());
     }
 
     @Test
@@ -85,10 +120,14 @@ public class ModelTest {
         guard.takeInHand(man1);
         guard.takeInHand(man2);
         assertEquals(2, guard.getHands().getThings().size());
+    }
+
+    @Test
+    public void testDropFromHands() {
+        guard.takeInHand(man1);
+        guard.takeInHand(man2);
         guard.dropFromHand(man1);
         assertEquals(1, guard.getHands().getThings().size());
-        guard.dropFromHand(man2);
-        assertEquals(0, guard.getHands().getThings().size());
     }
 
     @Test
@@ -129,12 +168,26 @@ public class ModelTest {
     }
 
     @Test
-    public void testDrag() {
+    public void testDragResisting() {
         guard.takeInHand(man1);
         guard.takeInHand(man2);
         guard.moveFromLocation();
         assertTrue(man1.isResisting());
+    }
+
+    @Test
+    public void testDragMan() {
+        guard.takeInHand(man1);
+        guard.takeInHand(man2);
+        guard.moveFromLocation();
         assertFalse(bridge.getPeople().contains(man1));;
+    }
+
+    @Test
+    public void testDragGuard() {
+        guard.takeInHand(man1);
+        guard.takeInHand(man2);
+        guard.moveFromLocation();
         assertFalse(bridge.getPeople().contains(guard));
     }
 

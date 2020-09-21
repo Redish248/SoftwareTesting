@@ -42,6 +42,11 @@ public class SplayTreeTest extends Assert {
         splayTree.find(2);
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void testRoot() {
+        splayTree.find(1);
+    }
+
     @Test
     public void splayRightZigTest() {
         splayTree.add(50);
