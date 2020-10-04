@@ -44,51 +44,51 @@ public class ModelTest {
     }
 
     @Test
-    public void testLeavingBridgeSize() {
+    public void testLeavingBridgePeopleSize() {
         man1.moveFromLocation();
         assertEquals(3, bridge.getPeople().size());
     }
 
     @Test
-    public void testLeavingBridgeCaptain() {
+    public void testLeavingBridgeWhenCaptainStays() {
         man1.moveFromLocation();
         assertTrue(bridge.getPeople().contains(captain));
     }
 
     @Test
-    public void testLeavingBridgeMan() {
+    public void testLeavingBridgeWhenManStays() {
         man1.moveFromLocation();
         assertFalse(bridge.getPeople().contains(man1));
     }
 
     @Test
-    public void testGoToLocationSize() {
+    public void testGoToLocationPeopleSize() {
         captain.moveFromLocation();
         assertEquals(3, bridge.getPeople().size());
     }
 
     @Test
-    public void testGoToLocationContains() {
+    public void testCaptainGoToLocation() {
         captain.moveFromLocation();
         assertFalse(bridge.getPeople().contains(captain));
     }
 
     @Test
-    public void testGoToLocationMoreSize() {
+    public void testGoToLocationAndCheckPeople() {
         guard.moveFromLocation();
         bridge.enter(guard);
         assertEquals(4, bridge.getPeople().size());
     }
 
     @Test
-    public void testGoToLocationMoreCaptain() {
+    public void testGuardGoToLocationAndCheckCaptainStays() {
         guard.moveFromLocation();
         bridge.enter(guard);
         assertTrue(bridge.getPeople().contains(captain));
     }
 
     @Test
-    public void testGoToLocationMoreGuard() {
+    public void testGuardGoToLocation() {
         guard.moveFromLocation();
         bridge.enter(guard);
         assertTrue(bridge.getPeople().contains(guard));
