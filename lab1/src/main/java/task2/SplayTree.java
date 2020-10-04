@@ -48,7 +48,7 @@ public class SplayTree {
         boolean isLeft = false;
         while (currentNode != null) {
             currentNodeParent = currentNode;
-            if (value <= currentNode.getValue()) {
+            if (value < currentNode.getValue()) {
                 isLeft = true;
                 currentNode = currentNode.getLeftChild();
             } else {

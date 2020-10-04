@@ -74,6 +74,16 @@ public class SplayTreeTest extends Assert {
     }
 
     @Test
+    public void addRepeatingValue() {
+        splayTree.add(2);
+        splayTree.add(3);
+        splayTree.add(2);
+        assertEquals(2, splayTree.getRoot().getValue());
+        assertEquals(2, splayTree.getRoot().getLeftChild().getValue());
+        assertEquals(3, splayTree.getRoot().getRightChild().getValue());
+    }
+
+    @Test
     public void splayLeftZigZigTest() {
         splayTree.add(100);
         splayTree.add(200);
