@@ -11,7 +11,7 @@ public class TgTest {
     FunctionTg functionTg;
 
     @Before
-    public void testInit() {
+    public void init() {
         functionTg = new FunctionTg();
     }
 
