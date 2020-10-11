@@ -4,10 +4,6 @@ public class FunctionTg {
 
     private final double EPS = 1E-7;
 
-    public static void main(String[] args) {
-        new FunctionTg().calculateTg(Math.PI);
-    }
-
     public double calculateTg(double x) {
 
         if (Double.isNaN(x) || x == Double.POSITIVE_INFINITY || x == Double.NEGATIVE_INFINITY) {
