@@ -6,10 +6,6 @@ public class TrigonometricFunction {
         sinus = new Sinus();
     }
 
-    public static void main(String[] args) {
-        new TrigonometricFunction().cos(2*Math.PI);
-    }
-
     public double cos(double x) {
 
         x = sinus.checkX(x);

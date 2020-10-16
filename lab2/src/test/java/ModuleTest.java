@@ -7,11 +7,15 @@ public class ModuleTest {
 
     Sinus sinus;
     LnFunction lnFunction;
+    TrigonometricFunction function;
+    LogN logN;
 
     @Before
     public void init() {
         sinus = new Sinus();
         lnFunction = new LnFunction();
+        function = new TrigonometricFunction();
+        logN = new LogN();
     }
 
     @Test
@@ -20,8 +24,24 @@ public class ModuleTest {
     }
 
     @Test
+    public void testCosinus() {
+        assertEquals(Math.cos(Math.PI/2), function.cos(Math.PI/2), 10E-6);
+    }
+
+    @Test
+    public void testTg() {
+        assertEquals(Math.tan(Math.PI/4), function.tg(Math.PI/4), 10E-6);
+    }
+
+    @Test
     public void testLn() {
-        assertEquals(Math.log(0.4), lnFunction.ln(0.4), 10E-6);
+        assertEquals(Math.log(2), lnFunction.ln(2), 10E-6);
+    }
+
+
+    @Test
+    public void testLn2() {
+        assertEquals(Math.log(0.4)/Math.log(2), logN.log2(0.4), 10E-6);
     }
 
 }
