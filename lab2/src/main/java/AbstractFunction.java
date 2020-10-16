@@ -1,10 +1,10 @@
-public interface AbstractFunction {
+public abstract class AbstractFunction {
 
     double EPS = 1E-7;
 
-    double nextTailor(double x, double n);
+    abstract double nextTailor(double x, double n);
 
-    default double countFactorial(double n) {
+    double countFactorial(double n) {
         if (n == 0) {
             return 1;
         } else {
@@ -12,10 +12,10 @@ public interface AbstractFunction {
         }
     }
 
-    default double countFunction(double x) {
+    double countFunction(double x) {
         double prevResult = 0;
-        double result = nextTailor(x,0);
-        double i = 1;
+        double result = nextTailor(x,1);
+        double i = 2;
 
         while (result - prevResult > EPS) {
             prevResult = result;

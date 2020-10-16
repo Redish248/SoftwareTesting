@@ -16,7 +16,7 @@ public class ModuleTest {
 
     @Test
     public void testSinus() {
-        assertEquals(Math.sin(Math.PI/3), sinus.sin(Math.PI/3), 10E-6);
+        assertEquals(Math.sin(Math.PI/2), sinus.sin(Math.PI/2), 10E-6);
     }
 
     @Test
