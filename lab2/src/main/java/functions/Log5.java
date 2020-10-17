@@ -4,7 +4,7 @@ public class Log5 {
 
     LnFunction lnFunction;
 
-    Log5(LnFunction function) {
+    public Log5(LnFunction function) {
         lnFunction = function;
     }
 

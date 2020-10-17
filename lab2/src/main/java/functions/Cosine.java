@@ -4,7 +4,7 @@ public class Cosine {
 
     Sinus sinus;
 
-    Cosine() {
+    public Cosine() {
         sinus = new Sinus();
     }
 

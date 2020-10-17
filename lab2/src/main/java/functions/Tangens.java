@@ -5,7 +5,7 @@ public class Tangens {
     Sinus sinus;
     Cosine cosine;
 
-    Tangens() {
+    public Tangens() {
         sinus = new Sinus();
         cosine = new Cosine();
     }
