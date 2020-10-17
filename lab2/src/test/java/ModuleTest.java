@@ -1,29 +1,20 @@
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ModuleTest {
 
-    Sinus sinus;
-    LnFunction lnFunction;
-    TrigonometricFunction function;
-    LogN logN;
-
-    @Before
-    public void init() {
-        sinus = new Sinus();
-        lnFunction = new LnFunction();
-        function = new TrigonometricFunction();
-        logN = new LogN();
-    }
+    private final Sinus sinus = new Sinus();
+    private final LnFunction lnFunction = new LnFunction();
+    private final TrigonometricFunction function = new TrigonometricFunction();
+    private final LogN logN = new LogN();
 
     @Test
     public void testSinus() {
         assertEquals(Math.sin(Math.PI/2), sinus.sin(Math.PI/2), 10E-6);
     }
 
-    //тест валиться, но так и надо
+    //тест валится, но так и надо
     @Test
     public void testCosinus() {
         assertEquals(Math.cos(Math.PI/2), function.cos(Math.PI/2), 10E-6);
