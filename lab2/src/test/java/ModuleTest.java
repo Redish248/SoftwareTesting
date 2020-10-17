@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ModuleTest {
 
     private final Sinus sinus = new Sinus();
+    private final Cosine cosine = new Cosine();
     private final LnFunction lnFunction = new LnFunction();
-    private final TrigonometricFunction function = new TrigonometricFunction();
+    private final Tangens function = new Tangens();
     private final LogN logN = new LogN();
+    private final Log2 log2 = new Log2();
+    private final Log5 log5 = new Log5();
 
     @Test
     public void testSinus() {
@@ -16,8 +19,8 @@ public class ModuleTest {
 
     //тест валится, но так и надо
     @Test
-    public void testCosinus() {
-        assertEquals(Math.cos(Math.PI/2), function.cos(Math.PI/2), 10E-6);
+    public void testCosine() {
+        assertEquals(Math.cos(Math.PI/2), cosine.cos(Math.PI/2), 10E-6);
     }
 
     @Test
@@ -33,7 +36,7 @@ public class ModuleTest {
 
     @Test
     public void testLn2() {
-        assertEquals(Math.log(4)/Math.log(2), logN.log2(4), 10E-6);
+        assertEquals(Math.log(4)/Math.log(2), log2.log2(4), 10E-6);
     }
 
 }
