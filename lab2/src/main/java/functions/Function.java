@@ -1,8 +1,8 @@
 package functions;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Function {
     private final Sinus sin;
     private final Tangens tan;
