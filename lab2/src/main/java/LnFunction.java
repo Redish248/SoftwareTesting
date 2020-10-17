@@ -1,7 +1,6 @@
 public class LnFunction extends AbstractFunction{
 
     public double ln(double x) {
-        x-=1;
         if (x < 0) {
             throw new IllegalArgumentException();
         }
@@ -11,7 +10,13 @@ public class LnFunction extends AbstractFunction{
     }
 
     public double nextTailor(double x, double n) {
-        return Math.pow(-1, n-1) * Math.pow(x, n) / n;
+        if (x <= 2) {
+            x-=1;
+            return Math.pow(-1, n - 1) * Math.pow(x, n) / n;
+        } else {
+            x = (x-1)/(x+1);
+            return 2*Math.pow(x, 2*n-1)/(2*n-1);
+        }
     }
 
 }

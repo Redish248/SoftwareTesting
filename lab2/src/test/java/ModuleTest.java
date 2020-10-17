@@ -23,6 +23,7 @@ public class ModuleTest {
         assertEquals(Math.sin(Math.PI/2), sinus.sin(Math.PI/2), 10E-6);
     }
 
+    //тест валиться, но так и надо
     @Test
     public void testCosinus() {
         assertEquals(Math.cos(Math.PI/2), function.cos(Math.PI/2), 10E-6);

@@ -17,7 +17,7 @@ public abstract class AbstractFunction {
         double result = nextTailor(x,i);
         i++;
 
-        while (result - prevResult > EPS) {
+        while (Math.abs(result - prevResult) > EPS) {
             prevResult = result;
             result += nextTailor(x, i);
             i++;
