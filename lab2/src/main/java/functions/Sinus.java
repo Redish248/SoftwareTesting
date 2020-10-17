@@ -1,3 +1,5 @@
+package functions;
+
 public class Sinus extends AbstractFunction {
 
     public double sin(double x) {

@@ -1,3 +1,5 @@
+package functions;
+
 public abstract class AbstractFunction {
 
     double EPS = 1E-7;

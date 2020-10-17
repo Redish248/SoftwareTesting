@@ -1,3 +1,5 @@
+package functions;
+
 public class Log2 {
 
     LnFunction lnFunction;

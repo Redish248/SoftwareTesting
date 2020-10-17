@@ -1,3 +1,5 @@
+package functions;
+
 public class LnFunction extends AbstractFunction{
 
     public double ln(double x) {
