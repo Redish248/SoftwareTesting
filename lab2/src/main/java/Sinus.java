@@ -7,7 +7,7 @@ public class Sinus extends AbstractFunction {
             return -sin(Math.abs(x));
         }
 
-        return countFunction(x);
+        return countFunction(x, 0);
 
     }
 
@@ -31,7 +31,7 @@ public class Sinus extends AbstractFunction {
     }
 
     public double nextTailor(double x, double n) {
-        return Math.pow(-1, n+1) * Math.pow(x, 2*n-1) / countFactorial(2*n-1);
+        return Math.pow(-1, n) * Math.pow(x, 2*n+1) / countFactorial(2*n+1);
     }
 
 }

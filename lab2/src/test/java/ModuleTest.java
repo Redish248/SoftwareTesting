@@ -41,7 +41,7 @@ public class ModuleTest {
 
     @Test
     public void testLn2() {
-        assertEquals(Math.log(0.4)/Math.log(2), logN.log2(0.4), 10E-6);
+        assertEquals(Math.log(4)/Math.log(2), logN.log2(4), 10E-6);
     }
 
 }

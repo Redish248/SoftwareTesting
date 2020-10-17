@@ -15,7 +15,7 @@ public class LogN {
     }
 
     public double logN(double x, int s) {
-        return lnFunction.countFunction(x)/lnFunction.countFunction(s);
+        return lnFunction.ln(x)/lnFunction.ln(s);
     }
 
 }

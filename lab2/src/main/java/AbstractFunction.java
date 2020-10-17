@@ -12,10 +12,10 @@ public abstract class AbstractFunction {
         }
     }
 
-    double countFunction(double x) {
+    double countFunction(double x, int i) {
         double prevResult = 0;
-        double result = nextTailor(x,1);
-        double i = 2;
+        double result = nextTailor(x,i);
+        i++;
 
         while (result - prevResult > EPS) {
             prevResult = result;
