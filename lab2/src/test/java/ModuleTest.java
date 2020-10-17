@@ -8,9 +8,8 @@ public class ModuleTest {
     private final Cosine cosine = new Cosine();
     private final LnFunction lnFunction = new LnFunction();
     private final Tangens function = new Tangens();
-    private final LogN logN = new LogN();
-    private final Log2 log2 = new Log2();
-    private final Log5 log5 = new Log5();
+    private final Log2 log2 = new Log2(lnFunction);
+    private final Log5 log5 = new Log5(lnFunction);
 
     @Test
     public void testSinus() {

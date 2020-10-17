@@ -1,13 +1,13 @@
 public class Log2 {
 
-    LogN log;
+    LnFunction lnFunction;
 
-    Log2() {
-        log = new LogN();
+    Log2(LnFunction function) {
+        lnFunction = function;
     }
 
     public double log2(double x) {
-        return log.logN(x, 2);
+        return lnFunction.ln(x)/lnFunction.ln(2);
     }
 
 }

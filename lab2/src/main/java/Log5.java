@@ -1,13 +1,13 @@
 public class Log5 {
 
-    LogN log;
+    LnFunction lnFunction;
 
-    Log5() {
-        log = new LogN();
+    Log5(LnFunction function) {
+        lnFunction = function;
     }
 
     public double log5(double x) {
-        return log.logN(x, 5);
+        return lnFunction.ln(x)/lnFunction.ln(5);
     }
 
 }
