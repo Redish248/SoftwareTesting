@@ -3,11 +3,11 @@ package functions;
 public class Sinus extends AbstractFunction {
 
     public double sin(double x) {
+        x = checkX(x);
+
         if (x < 0) {
             return -sin(Math.abs(x));
         }
-
-        x = checkX(x);
 
         return countFunction(x, 0);
 
@@ -19,7 +19,7 @@ public class Sinus extends AbstractFunction {
             throw new IllegalArgumentException();
         }
 
-        double temp = Math.abs(x) % Math.PI;
+        double temp = Math.abs(x) % (2*Math.PI);
         x = x >= 0 ? temp : -temp;
 
         return x;
