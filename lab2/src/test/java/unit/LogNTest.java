@@ -15,14 +15,12 @@ import static org.mockito.Mockito.when;
 
 public class LogNTest {
 
-    LnFunction lnFunction;
-    private final Log2 log2;
-    private final Log5 log5;
+    LnFunction lnFunction = mock(LnFunction.class);
+    private final Log2 log2 = new Log2(lnFunction);
+    private final Log5 log5 = new Log5(lnFunction);
+    private final double DELTA = 10E-6;
 
     {
-        lnFunction = mock(LnFunction.class);
-        log2 = new Log2(lnFunction);
-        log5 = new Log5(lnFunction);
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(-10);
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(-5);
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(-1);
@@ -50,17 +48,17 @@ public class LogNTest {
 
     @Test
     public void test2One() {
-        assertEquals(log2(1), log2.log2(1), 10E-6);
+        assertEquals(log2(1), log2.log2(1), DELTA);
     }
 
     @Test
     public void test2BetweenZeroAndOne() {
-        assertEquals(log2(0.5), log2.log2(0.5), 10E-6);
+        assertEquals(log2(0.5), log2.log2(0.5), DELTA);
     }
 
     @Test
     public void test2AfterOne() {
-        assertEquals(log2(5), log2.log2(5), 10E-6);
+        assertEquals(log2(5), log2.log2(5), DELTA);
     }
 
     @Test
@@ -79,17 +77,17 @@ public class LogNTest {
 
     @Test
     public void test5One() {
-        assertEquals(log5(1), log5.log5(1), 10E-6);
+        assertEquals(log5(1), log5.log5(1), DELTA);
     }
 
     @Test
     public void test5BetweenZeroAndOne() {
-        assertEquals(log5(0.5), log5.log5(0.5), 10E-6);
+        assertEquals(log5(0.5), log5.log5(0.5), DELTA);
     }
 
     @Test
     public void test5AfterOne() {
-        assertEquals(log5(10), log5.log5(10), 10E-6);
+        assertEquals(log5(10), log5.log5(10), DELTA);
     }
 
     @Ignore

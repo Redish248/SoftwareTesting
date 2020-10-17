@@ -14,12 +14,11 @@ import static org.mockito.Mockito.when;
 
 public class Log2Test {
 
-    LnFunction lnFunction;
-    private final Log2 log2;
+    LnFunction lnFunction = mock(LnFunction.class);
+    private final Log2 log2 = new Log2(lnFunction);
+    private final double DELTA = 10E-6;
 
     {
-        lnFunction = mock(LnFunction.class);
-        log2 = new Log2(lnFunction);
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(-10);
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(-5);
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(-1);
@@ -46,17 +45,17 @@ public class Log2Test {
 
     @Test
     public void testOne() {
-        assertEquals(log2(1), log2.log2(1), 10E-6);
+        assertEquals(log2(1), log2.log2(1), DELTA);
     }
 
     @Test
     public void testBetweenZeroAndOne() {
-        assertEquals(log2(0.5), log2.log2(0.5), 10E-6);
+        assertEquals(log2(0.5), log2.log2(0.5), DELTA);
     }
 
     @Test
     public void testAfterOne() {
-        assertEquals(log2(5), log2.log2(5), 10E-6);
+        assertEquals(log2(5), log2.log2(5), DELTA);
     }
 
     @Ignore
