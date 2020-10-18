@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-public class Log2Test_lvl1 {
+public class Log2Test {
 
     private final LnFunction lnFunction = new LnFunction();
     private final Log2 log2 = new Log2(lnFunction);

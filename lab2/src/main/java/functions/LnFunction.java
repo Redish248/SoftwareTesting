@@ -3,6 +3,10 @@ package functions;
 public class LnFunction extends AbstractFunction implements SystemModule {
 
     public double calc(double x) {
+        if (Double.isNaN(x) || x == Double.POSITIVE_INFINITY || x == Double.NEGATIVE_INFINITY) {
+            throw new IllegalArgumentException();
+        }
+
         if (x <= 0) {
             throw new IllegalArgumentException();
         }

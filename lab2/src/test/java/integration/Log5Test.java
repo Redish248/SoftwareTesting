@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class Log5Test_lvl1 {
+public class Log5Test {
     private final LnFunction lnFunction = new LnFunction();
     private final Log5 log5 = new Log5(lnFunction);
     private final double DELTA = 1E-6;

@@ -33,6 +33,9 @@ public class Log5Test {
         when(lnFunction.calc(5)).thenReturn(1.6094379);
         when(lnFunction.calc(0.5)).thenReturn(-0.6931472);
         when(lnFunction.calc(10)).thenReturn(2.3025851);
+        when(log5.calc(Double.NaN)).thenThrow(new IllegalArgumentException());
+        when(log5.calc(Double.POSITIVE_INFINITY)).thenThrow(new IllegalArgumentException());
+        when(log5.calc(Double.NEGATIVE_INFINITY)).thenThrow(new IllegalArgumentException());
     }
 
     @ParameterizedTest
@@ -61,6 +64,12 @@ public class Log5Test {
     @Test
     public void testAfterOne() {
         assertEquals(log5(10), log5.calc(10), DELTA);
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {Double.NaN, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY})
+    public void testIncorrectArguments(double x) {
+        assertThrows(IllegalArgumentException.class, () -> log5.calc(x));
     }
 
     @Ignore

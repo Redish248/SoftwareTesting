@@ -15,9 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LnTest {
 
     private final LnFunction lnFunction = new LnFunction();
+    private final double DELTA = 1E-6;
 
     @ParameterizedTest
-    @ValueSource(doubles = {-1, -5, -10})
+    @ValueSource(doubles = {-DELTA, -1, -5, -10})
     public void testNegative(double x) {
         assertThrows(IllegalArgumentException.class, () -> lnFunction.calc(x));
     }
@@ -27,14 +28,15 @@ public class LnTest {
         assertThrows(IllegalArgumentException.class, () -> lnFunction.calc(0));
     }
 
-    @Test
-    public void testOne() {
-        assertEquals(Math.log(1), lnFunction.calc(1));
+    @ParameterizedTest
+    @ValueSource(doubles = {DELTA, 1, 1 - DELTA, 1 + DELTA})
+    public void testOne(double x) {
+        assertEquals(Math.log(x), lnFunction.calc(x));
     }
 
     @Test
     public void testBetweenZeroAndOne() {
-        assertEquals(Math.log(0.5), lnFunction.calc(0.5), 1E-6);
+        assertEquals(Math.log(0.5), lnFunction.calc(0.5), DELTA);
     }
 
     @Test
@@ -48,7 +50,7 @@ public class LnTest {
 
     @Test
     public void testBetweenOneAndInfinity() {
-        assertEquals(Math.log(5), lnFunction.calc(5), 1E-6);
+        assertEquals(Math.log(5), lnFunction.calc(5), DELTA);
     }
 
     @Test
@@ -58,6 +60,12 @@ public class LnTest {
                 () -> assertTrue(lnFunction.calc(2) < lnFunction.calc(5)),
                 () -> assertTrue(lnFunction.calc(5) < lnFunction.calc(10))
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {Double.NaN, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY})
+    public void testIncorrectArguments(double x) {
+        assertThrows(IllegalArgumentException.class, () -> lnFunction.calc(x));
     }
 
 }
