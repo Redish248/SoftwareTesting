@@ -3,6 +3,7 @@ package unit;
 import functions.LnFunction;
 import functions.Log2;
 import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,7 +20,8 @@ public class Log2Test {
     private final Log2 log2 = new Log2(lnFunction);
     private final double DELTA = 1E-6;
 
-    {
+    @BeforeEach
+    public void createMock(){
         doThrow(new IllegalArgumentException()).when(lnFunction).calc(-10);
         doThrow(new IllegalArgumentException()).when(lnFunction).calc(-5);
         doThrow(new IllegalArgumentException()).when(lnFunction).calc(0);
@@ -32,6 +34,9 @@ public class Log2Test {
         when(lnFunction.calc(5)).thenReturn(1.6094379);
         when(lnFunction.calc(0.5)).thenReturn(-0.6931472);
         when(lnFunction.calc(10)).thenReturn(2.3025851);
+        when(log2.calc(Double.NaN)).thenThrow(new IllegalArgumentException());
+        when(log2.calc(Double.POSITIVE_INFINITY)).thenThrow(new IllegalArgumentException());
+        when(log2.calc(Double.NEGATIVE_INFINITY)).thenThrow(new IllegalArgumentException());
     }
 
     @ParameterizedTest
@@ -60,6 +65,12 @@ public class Log2Test {
     @Test
     public void testAfterOne() {
         assertEquals(log2(10), log2.calc(10), DELTA);
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {Double.NaN, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY})
+    public void testIncorrectArguments(double x) {
+        assertThrows(IllegalArgumentException.class, () -> log2.calc(x));
     }
 
     @Ignore
