@@ -1,6 +1,6 @@
 package functions;
 
-public class Cosine implements SystemModule{
+public class Cosine implements SystemModule {
 
     Sinus sinus;
 

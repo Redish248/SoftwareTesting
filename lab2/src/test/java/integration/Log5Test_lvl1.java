@@ -18,29 +18,29 @@ public class Log5Test_lvl1 {
     @ParameterizedTest
     @ValueSource(doubles = {-1, -5, -10})
     public void testNegative(double x) {
-        assertThrows(IllegalArgumentException.class, () -> log5.log5(x));
+        assertThrows(IllegalArgumentException.class, () -> log5.calc(x));
     }
 
     @ParameterizedTest
     @ValueSource(doubles = {0, -DELTA})
     public void testZero(double x) {
-        assertThrows(IllegalArgumentException.class, () -> log5.log5(x));
+        assertThrows(IllegalArgumentException.class, () -> log5.calc(x));
     }
 
     @ParameterizedTest
     @ValueSource(doubles = {0.1, 1, 1+DELTA, 1-DELTA})
     public void testOne(double x) {
-        assertEquals(log5(x), log5.log5(x), DELTA);
+        assertEquals(log5(x), log5.calc(x), DELTA);
     }
 
     @Test
     public void testBetweenZeroAndOne() {
-        assertEquals(log5(0.5), log5.log5(0.5), DELTA);
+        assertEquals(log5(0.5), log5.calc(0.5), DELTA);
     }
 
     @Test
     public void testAfterOne() {
-        assertEquals(log5(10), log5.log5(10), DELTA);
+        assertEquals(log5(10), log5.calc(10), DELTA);
     }
 
     @Ignore

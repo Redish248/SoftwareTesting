@@ -3,12 +3,16 @@ package functions;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class Log5 {
+public class Log5 implements SystemModule{
 
     LnFunction lnFunction;
 
-    public double log5(double x) {
-        return lnFunction.ln(x)/lnFunction.ln(5);
+    public double calc(double x) {
+        return lnFunction.calc(x)/lnFunction.calc(5);
     }
 
+    @Override
+    public String getModuleName() {
+        return "Log5";
+    }
 }

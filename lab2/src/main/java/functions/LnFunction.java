@@ -1,8 +1,8 @@
 package functions;
 
-public class LnFunction extends AbstractFunction{
+public class LnFunction extends AbstractFunction implements SystemModule {
 
-    public double ln(double x) {
+    public double calc(double x) {
         if (x <= 0) {
             throw new IllegalArgumentException();
         }
@@ -19,6 +19,11 @@ public class LnFunction extends AbstractFunction{
             x = (x-1)/(x+1);
             return 2*Math.pow(x, 2*n-1)/(2*n-1);
         }
+    }
+
+    @Override
+    public String getModuleName() {
+        return "Ln";
     }
 
 }
