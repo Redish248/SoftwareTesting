@@ -23,7 +23,7 @@ public class TgTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0, -1E-6, -Math.PI/2 + 1E-6, -Math.PI/2, -Math.PI/2 - 1E-6, -2, -Math.PI + 1E-6,
+    @ValueSource(doubles = {0, -1E-6, -Math.PI/2 + 1E-6, -Math.PI/2 - 1E-6, -2, -Math.PI + 1E-6,
             -Math.PI, -Math.PI - 1E-6})
     public void testNegativePeriod(double x) {
         assertEquals(Math.tan(x), tangens.calc(x), delta);

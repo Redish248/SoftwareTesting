@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -25,59 +24,59 @@ public class FunctionTest {
         Log5 log5 = mock(Log5.class);
 
         //x <= 0
-        when(sinus.calc(0)).thenReturn(Math.sin(0));
-        when(tangens.calc(0)).thenReturn(Math.tan(0));
+        when(sinus.calc(0)).thenReturn(0.0);
+        when(tangens.calc(0)).thenReturn(0.0);
 
-        when(sinus.calc(-0.8)).thenReturn(Math.sin(-0.8));
-        when(tangens.calc(-0.8)).thenReturn(Math.tan(-0.8));
+        when(sinus.calc(-0.8)).thenReturn(-0.7173560908995228);
+        when(tangens.calc(-0.8)).thenReturn(-1.0296385570503641);
 
-        when(sinus.calc(-2.6)).thenReturn(Math.sin(-2.6));
-        when(tangens.calc(-2.6)).thenReturn(Math.tan(-2.6));
+        when(sinus.calc(-2.6)).thenReturn(-0.5155013718214642);
+        when(tangens.calc(-2.6)).thenReturn(0.6015966130897586);
 
-        when(sinus.calc(-Math.PI)).thenReturn(Math.sin(-Math.PI));
-        when(tangens.calc(-Math.PI)).thenReturn(Math.tan(-Math.PI));
+        when(sinus.calc(-3.141592653589793)).thenReturn(-1.2246467991473532e-16);
+        when(tangens.calc(-3.141592653589793)).thenReturn(1.2246467991473532e-16);
 
-        when(sinus.calc(-3.566 + delta)).thenReturn(Math.sin(-3.566 + delta));
-        when(tangens.calc(-3.566 + delta)).thenReturn(Math.tan(-3.566 + delta));
+        when(sinus.calc(-3.5659989999999997)).thenReturn(0.4117798677049453);
+        when(tangens.calc(-3.5659989999999997)).thenReturn(-0.45186809191281263);
 
-        when(sinus.calc(-3.566)).thenReturn(Math.sin(-3.566));
-        when(tangens.calc(-3.566)).thenReturn(Math.tan(-3.566));
+        when(sinus.calc(-3.566)).thenReturn(0.4117807789880876);
+        when(tangens.calc(-3.566)).thenReturn(-0.45186929609812937);
 
-        when(sinus.calc(-3.566 - delta)).thenReturn(Math.sin(-3.566 - delta));
-        when(tangens.calc(-3.566 - delta)).thenReturn(Math.tan(-3.566 - delta));
+        when(sinus.calc(-3.566001)).thenReturn(0.4117816902708182);
+        when(tangens.calc(-3.566001)).thenReturn(-0.45187050028453446);
 
-        when(sinus.calc(-3.732)).thenReturn(Math.sin(-3.732));
-        when(tangens.calc(-3.732)).thenReturn(Math.tan(-3.732));
+        when(sinus.calc(-3.732)).thenReturn(0.5566994574473524);
+        when(tangens.calc(-3.732)).thenReturn(-0.6701457684046108);
 
-        when(sinus.calc(-5.311)).thenReturn(Math.sin(-5.311));
-        when(tangens.calc(-5.311)).thenReturn(Math.tan(-5.311));
+        when(sinus.calc(-5.311)).thenReturn(0.8261190958313546);
+        when(tangens.calc(-5.311)).thenReturn(1.466061426402528);
 
-        when(sinus.calc(-5.478 + delta)).thenReturn(Math.sin(-5.478 + delta));
-        when(tangens.calc(-5.478 + delta)).thenReturn(Math.tan(-5.478 + delta));
+        when(sinus.calc(-5.477999)).thenReturn(0.720959762087541);
+        when(tangens.calc(-5.477999)).thenReturn(1.0403806157535207);
 
-        when(sinus.calc(-5.478)).thenReturn(Math.sin(-5.478));
-        when(tangens.calc(-5.478)).thenReturn(Math.tan(-5.478));
+        when(sinus.calc(-5.478)).thenReturn(0.7209590691102533);
+        when(tangens.calc(-5.478)).thenReturn(1.0403785333638613);
 
-        when(sinus.calc(-5.478 - delta)).thenReturn(Math.sin(-5.478 - delta));
-        when(tangens.calc(-5.478 - delta)).thenReturn(Math.tan(-5.478 - delta));
+        when(sinus.calc(-5.478001)).thenReturn(0.7209583761322448);
+        when(tangens.calc(-5.478001)).thenReturn(1.040376450978535);
 
-        when(sinus.calc(-2*Math.PI)).thenReturn(Math.sin(-2*Math.PI));
-        when(tangens.calc(-2*Math.PI)).thenReturn(Math.tan(-2*Math.PI));
+        when(sinus.calc(-6.283185307179586)).thenReturn(2.4492935982947064e-16);
+        when(tangens.calc(-6.283185307179586)).thenReturn(2.4492935982947064e-16);
 
-        when(sinus.calc(-Math.PI/2)).thenReturn(Math.sin(-Math.PI/2));
-        when(tangens.calc(-Math.PI/2)).thenReturn(Math.tan(-Math.PI/2));
+        when(sinus.calc(-1.5707963267948966)).thenReturn(-1.0);
+        when(tangens.calc(-1.5707963267948966)).thenReturn(-1.633123935319537e+16);
 
-        when(sinus.calc(-3*Math.PI/2)).thenReturn(Math.sin(-3*Math.PI/2));
-        when(tangens.calc(-3*Math.PI/2)).thenReturn(Math.tan(-3*Math.PI/2));
+        when(sinus.calc(-4.71238898038469)).thenReturn(1.0);
+        when(tangens.calc(-4.71238898038469)).thenReturn(-5443746451065123.0);
 
-        when(sinus.calc(-2)).thenReturn(Math.sin(-2));
-        when(tangens.calc(-2)).thenReturn(Math.tan(-2));
+        when(sinus.calc(-2)).thenReturn(-0.9092974268256817);
+        when(tangens.calc(-2)).thenReturn(2.185039863261519);
 
-        when(sinus.calc(-4)).thenReturn(Math.sin(-4));
-        when(tangens.calc(-4)).thenReturn(Math.tan(-4));
+        when(sinus.calc(-4)).thenReturn(0.7568024953079282);
+        when(tangens.calc(-4)).thenReturn(-1.1578212823495777);
 
-        when(sinus.calc(-5)).thenReturn(Math.sin(-5));
-        when(tangens.calc(-5)).thenReturn(Math.tan(-5));
+        when(sinus.calc(-5)).thenReturn(0.9589242746631385);
+        when(tangens.calc(-5)).thenReturn(3.380515006246586);
 
         //x > 0
         doThrow(new IllegalArgumentException()).when(ln).ln(0);
@@ -124,8 +123,8 @@ public class FunctionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0, -0.8, -2.6, -Math.PI, -3.566 + 1E-6, -3.566, -3.566 - 1E-6, -3.732, -5.311,
-            -5.478 + 1E-6, -5.478, -5.478 - 1E-6, -2*Math.PI, -Math.PI/2, -3*Math.PI/2, -2, -4, -5})
+    @ValueSource(doubles = {0, -0.8, -2.6, -3.141592653589793, -3.5659989999999997, -3.566, -3.566001, -3.732, -5.311,
+            -5.477999, -5.478, -5.478001, -6.283185307179586, -1.5707963267948966, -4.71238898038469, -2, -4, -5})
     public void testTrigonometry(double x) {
         assertEquals(Math.pow((Math.pow((Math.tan(x) - Math.sin(x)) * Math.tan(x), 3) - Math.sin(x)), 3),
                 function.calc(x), delta);

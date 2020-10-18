@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FunctionTest {
     private Function function;
@@ -32,12 +31,6 @@ public class FunctionTest {
     public void testTrigonometry(double x) {
         assertEquals(Math.pow((Math.pow((Math.tan(x) - Math.sin(x)) * Math.tan(x), 3) - Math.sin(x)), 3),
                 function.calc(x), delta);
-    }
-
-    @ParameterizedTest
-    @ValueSource(doubles = {Double.NaN, Double.NEGATIVE_INFINITY})
-    public void testTrigonometryIncorrectParam(double x) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> function.calc(x));
     }
 
     @ParameterizedTest

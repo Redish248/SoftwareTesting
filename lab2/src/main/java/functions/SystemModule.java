@@ -1,6 +1,6 @@
 package functions;
 
 public interface SystemModule {
-    public String getModuleName();
-    public double calc(double x);
+    String getModuleName();
+    double calc(double x);
 }
