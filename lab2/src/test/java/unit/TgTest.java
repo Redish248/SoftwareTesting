@@ -25,12 +25,15 @@ public class TgTest {
         when(sinus.calc(-Math.PI/2+delta)).thenReturn(Math.sin(-Math.PI/2+delta));
         when(sinus.calc(-Math.PI/2)).thenReturn(Math.sin(-Math.PI/2));
         when(sinus.calc(-Math.PI/2-delta)).thenReturn(Math.sin(-Math.PI/2-delta));
+        when(sinus.calc(-2)).thenReturn(Math.sin(-2));
         when(sinus.calc(-Math.PI+delta)).thenReturn(Math.sin(-Math.PI+delta));
         when(sinus.calc(-Math.PI)).thenReturn(Math.sin(-Math.PI));
         when(sinus.calc(-Math.PI-delta)).thenReturn(Math.sin(-Math.PI-delta));
+        when(sinus.calc(-4)).thenReturn(Math.sin(-4));
         when(sinus.calc(-3*Math.PI/2+delta)).thenReturn(Math.sin(-3*Math.PI/2+delta));
         when(sinus.calc(-3*Math.PI/2)).thenReturn(Math.sin(-3*Math.PI/2));
         when(sinus.calc(-3*Math.PI/2-delta)).thenReturn(Math.sin(-3*Math.PI/2-delta));
+        when(sinus.calc(-5)).thenReturn(Math.sin(-5));
         when(sinus.calc(-2*Math.PI+delta)).thenReturn(Math.sin(-2*Math.PI+delta));
         when(sinus.calc(-2*Math.PI)).thenReturn(Math.sin(-2*Math.PI));
         when(sinus.calc(-2*Math.PI-delta)).thenReturn(Math.sin(-2*Math.PI-delta));
@@ -43,12 +46,15 @@ public class TgTest {
         when(cosine.calc(-Math.PI/2+delta)).thenReturn(Math.cos(-Math.PI/2+delta));
         when(cosine.calc(-Math.PI/2)).thenReturn(Math.cos(-Math.PI/2));
         when(cosine.calc(-Math.PI/2-delta)).thenReturn(Math.cos(-Math.PI/2-delta));
+        when(cosine.calc(-2)).thenReturn(Math.cos(-2));
         when(cosine.calc(-Math.PI+delta)).thenReturn(Math.cos(-Math.PI+delta));
         when(cosine.calc(-Math.PI)).thenReturn(Math.cos(-Math.PI));
         when(cosine.calc(-Math.PI-delta)).thenReturn(Math.cos(-Math.PI-delta));
+        when(cosine.calc(-4)).thenReturn(Math.cos(-4));
         when(cosine.calc(-3*Math.PI/2+delta)).thenReturn(Math.cos(-3*Math.PI/2+delta));
         when(cosine.calc(-3*Math.PI/2)).thenReturn(Math.cos(-3*Math.PI/2));
         when(cosine.calc(-3*Math.PI/2-delta)).thenReturn(Math.cos(-3*Math.PI/2-delta));
+        when(cosine.calc(-5)).thenReturn(Math.cos(-5));
         when(cosine.calc(-2*Math.PI+delta)).thenReturn(Math.cos(-2*Math.PI+delta));
         when(cosine.calc(-2*Math.PI)).thenReturn(Math.cos(-2*Math.PI));
         when(cosine.calc(-2*Math.PI-delta)).thenReturn(Math.cos(-2*Math.PI-delta));
@@ -59,8 +65,9 @@ public class TgTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0, -10E-6, -Math.PI/2 + 10E-6, -Math.PI/2, -Math.PI/2 - 10E-6, -Math.PI + 10E-6, -Math.PI,
-            -Math.PI - 10E-6, -3*Math.PI/2 + 10E-6, -3*Math.PI/2, -3*Math.PI/2 - 10E-6, -2*Math.PI + 10E-6, -2*Math.PI, -2*Math.PI - 10E-6})
+    @ValueSource(doubles = {0, -10E-6, -Math.PI/2 + 10E-6, -Math.PI/2, -Math.PI/2 - 10E-6, -2, -Math.PI + 10E-6,
+            -Math.PI, -Math.PI - 10E-6, -4, -3*Math.PI/2 + 10E-6, -3*Math.PI/2, -3*Math.PI/2 - 10E-6, -5,
+            -2*Math.PI + 10E-6, -2*Math.PI, -2*Math.PI - 10E-6})
     public void testNegativePeriod(double x) {
         assertEquals(Math.tan(x), tangens.calc(x), delta);
     }
