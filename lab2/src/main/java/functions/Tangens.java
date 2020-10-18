@@ -10,15 +10,15 @@ public class Tangens {
         this.cosine = cosine;
     }
 
-    public double tg(double x) {
+    public double calc(double x) {
 
-        double cosResult = cosine.cos(x);
+        double cosResult = cosine.calc(x);
 
         if (cosResult == 0) {
             throw new IllegalArgumentException();
         }
 
-        return sinus.sin(x)/cosResult;
+        return sinus.calc(x)/cosResult;
     }
 
 }

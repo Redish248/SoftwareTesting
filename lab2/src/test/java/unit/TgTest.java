@@ -20,40 +20,40 @@ public class TgTest {
     public void mockFunctions() {
         delta = 10E-6;
         Sinus sinus = mock(Sinus.class);
-        when(sinus.sin(0)).thenReturn(Math.sin(0));
-        when(sinus.sin(-delta)).thenReturn(Math.sin(-delta));
-        when(sinus.sin(-Math.PI/2+delta)).thenReturn(Math.sin(-Math.PI/2+delta));
-        when(sinus.sin(-Math.PI/2)).thenReturn(Math.sin(-Math.PI/2));
-        when(sinus.sin(-Math.PI/2-delta)).thenReturn(Math.sin(-Math.PI/2-delta));
-        when(sinus.sin(-Math.PI+delta)).thenReturn(Math.sin(-Math.PI+delta));
-        when(sinus.sin(-Math.PI)).thenReturn(Math.sin(-Math.PI));
-        when(sinus.sin(-Math.PI-delta)).thenReturn(Math.sin(-Math.PI-delta));
-        when(sinus.sin(-3*Math.PI/2+delta)).thenReturn(Math.sin(-3*Math.PI/2+delta));
-        when(sinus.sin(-3*Math.PI/2)).thenReturn(Math.sin(-3*Math.PI/2));
-        when(sinus.sin(-3*Math.PI/2-delta)).thenReturn(Math.sin(-3*Math.PI/2-delta));
-        when(sinus.sin(-2*Math.PI+delta)).thenReturn(Math.sin(-2*Math.PI+delta));
-        when(sinus.sin(-2*Math.PI)).thenReturn(Math.sin(-2*Math.PI));
-        when(sinus.sin(-2*Math.PI-delta)).thenReturn(Math.sin(-2*Math.PI-delta));
-        when(sinus.sin(Double.NaN)).thenThrow(new IllegalArgumentException());
-        when(sinus.sin(Double.NEGATIVE_INFINITY)).thenThrow(new IllegalArgumentException());
+        when(sinus.calc(0)).thenReturn(Math.sin(0));
+        when(sinus.calc(-delta)).thenReturn(Math.sin(-delta));
+        when(sinus.calc(-Math.PI/2+delta)).thenReturn(Math.sin(-Math.PI/2+delta));
+        when(sinus.calc(-Math.PI/2)).thenReturn(Math.sin(-Math.PI/2));
+        when(sinus.calc(-Math.PI/2-delta)).thenReturn(Math.sin(-Math.PI/2-delta));
+        when(sinus.calc(-Math.PI+delta)).thenReturn(Math.sin(-Math.PI+delta));
+        when(sinus.calc(-Math.PI)).thenReturn(Math.sin(-Math.PI));
+        when(sinus.calc(-Math.PI-delta)).thenReturn(Math.sin(-Math.PI-delta));
+        when(sinus.calc(-3*Math.PI/2+delta)).thenReturn(Math.sin(-3*Math.PI/2+delta));
+        when(sinus.calc(-3*Math.PI/2)).thenReturn(Math.sin(-3*Math.PI/2));
+        when(sinus.calc(-3*Math.PI/2-delta)).thenReturn(Math.sin(-3*Math.PI/2-delta));
+        when(sinus.calc(-2*Math.PI+delta)).thenReturn(Math.sin(-2*Math.PI+delta));
+        when(sinus.calc(-2*Math.PI)).thenReturn(Math.sin(-2*Math.PI));
+        when(sinus.calc(-2*Math.PI-delta)).thenReturn(Math.sin(-2*Math.PI-delta));
+        when(sinus.calc(Double.NaN)).thenThrow(new IllegalArgumentException());
+        when(sinus.calc(Double.NEGATIVE_INFINITY)).thenThrow(new IllegalArgumentException());
 
         Cosine cosine = mock(Cosine.class);
-        when(cosine.cos(0)).thenReturn(Math.cos(2));
-        when(cosine.cos(-delta)).thenReturn(Math.cos(-delta));
-        when(cosine.cos(-Math.PI/2+delta)).thenReturn(Math.cos(-Math.PI/2+delta));
-        when(cosine.cos(-Math.PI/2)).thenReturn(Math.cos(-Math.PI/2));
-        when(cosine.cos(-Math.PI/2-delta)).thenReturn(Math.cos(-Math.PI/2-delta));
-        when(cosine.cos(-Math.PI+delta)).thenReturn(Math.cos(-Math.PI+delta));
-        when(cosine.cos(-Math.PI)).thenReturn(Math.cos(-Math.PI));
-        when(cosine.cos(-Math.PI-delta)).thenReturn(Math.cos(-Math.PI-delta));
-        when(cosine.cos(-3*Math.PI/2+delta)).thenReturn(Math.cos(-3*Math.PI/2+delta));
-        when(cosine.cos(-3*Math.PI/2)).thenReturn(Math.cos(-3*Math.PI/2));
-        when(cosine.cos(-3*Math.PI/2-delta)).thenReturn(Math.cos(-3*Math.PI/2-delta));
-        when(cosine.cos(-2*Math.PI+delta)).thenReturn(Math.cos(-2*Math.PI+delta));
-        when(cosine.cos(-2*Math.PI)).thenReturn(Math.cos(-2*Math.PI));
-        when(cosine.cos(-2*Math.PI-delta)).thenReturn(Math.cos(-2*Math.PI-delta));
-        when(cosine.cos(Double.NaN)).thenThrow(new IllegalArgumentException());
-        when(cosine.cos(Double.NEGATIVE_INFINITY)).thenThrow(new IllegalArgumentException());
+        when(cosine.calc(0)).thenReturn(Math.cos(2));
+        when(cosine.calc(-delta)).thenReturn(Math.cos(-delta));
+        when(cosine.calc(-Math.PI/2+delta)).thenReturn(Math.cos(-Math.PI/2+delta));
+        when(cosine.calc(-Math.PI/2)).thenReturn(Math.cos(-Math.PI/2));
+        when(cosine.calc(-Math.PI/2-delta)).thenReturn(Math.cos(-Math.PI/2-delta));
+        when(cosine.calc(-Math.PI+delta)).thenReturn(Math.cos(-Math.PI+delta));
+        when(cosine.calc(-Math.PI)).thenReturn(Math.cos(-Math.PI));
+        when(cosine.calc(-Math.PI-delta)).thenReturn(Math.cos(-Math.PI-delta));
+        when(cosine.calc(-3*Math.PI/2+delta)).thenReturn(Math.cos(-3*Math.PI/2+delta));
+        when(cosine.calc(-3*Math.PI/2)).thenReturn(Math.cos(-3*Math.PI/2));
+        when(cosine.calc(-3*Math.PI/2-delta)).thenReturn(Math.cos(-3*Math.PI/2-delta));
+        when(cosine.calc(-2*Math.PI+delta)).thenReturn(Math.cos(-2*Math.PI+delta));
+        when(cosine.calc(-2*Math.PI)).thenReturn(Math.cos(-2*Math.PI));
+        when(cosine.calc(-2*Math.PI-delta)).thenReturn(Math.cos(-2*Math.PI-delta));
+        when(cosine.calc(Double.NaN)).thenThrow(new IllegalArgumentException());
+        when(cosine.calc(Double.NEGATIVE_INFINITY)).thenThrow(new IllegalArgumentException());
 
         tangens = new Tangens(sinus, cosine);
     }
@@ -62,12 +62,12 @@ public class TgTest {
     @ValueSource(doubles = {0, -10E-6, -Math.PI/2 + 10E-6, -Math.PI/2, -Math.PI/2 - 10E-6, -Math.PI + 10E-6, -Math.PI,
             -Math.PI - 10E-6, -3*Math.PI/2 + 10E-6, -3*Math.PI/2, -3*Math.PI/2 - 10E-6, -2*Math.PI + 10E-6, -2*Math.PI, -2*Math.PI - 10E-6})
     public void testNegativePeriod(double x) {
-        assertEquals(Math.tan(x), tangens.tg(x), delta);
+        assertEquals(Math.tan(x), tangens.calc(x), delta);
     }
 
     @ParameterizedTest
     @ValueSource(doubles = {Double.NaN, Double.NEGATIVE_INFINITY})
     public void testIncorrectArguments(double x) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> tangens.tg(x));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> tangens.calc(x));
     }
 }

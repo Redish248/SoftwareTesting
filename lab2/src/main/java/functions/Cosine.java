@@ -8,8 +8,8 @@ public class Cosine {
         this.sinus = sinus;
     }
 
-    public double cos(double x) {
-        double result = Math.sqrt(1 - Math.pow(sinus.sin(x), 2));
+    public double calc(double x) {
+        double result = Math.sqrt(1 - Math.pow(sinus.calc(x), 2));
         return isPositive(x) ? result : -result;
     }
 

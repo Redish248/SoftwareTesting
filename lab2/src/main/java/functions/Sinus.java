@@ -2,11 +2,11 @@ package functions;
 
 public class Sinus extends AbstractFunction {
 
-    public double sin(double x) {
+    public double calc(double x) {
         x = checkX(x);
 
         if (x < 0) {
-            return -sin(Math.abs(x));
+            return -calc(Math.abs(x));
         }
 
         return countFunction(x, 0);

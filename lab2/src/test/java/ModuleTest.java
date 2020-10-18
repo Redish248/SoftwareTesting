@@ -14,18 +14,18 @@ public class ModuleTest {
 
     @Test
     public void testSinus() {
-        assertEquals(Math.sin(Math.PI/2), sinus.sin(Math.PI/2), 10E-6);
+        assertEquals(Math.sin(Math.PI/2), sinus.calc(Math.PI/2), 10E-6);
     }
 
     //тест валится, но так и надо
     @Test
     public void testCosine() {
-        assertEquals(Math.cos(Math.PI/2), cosine.cos(Math.PI/2), 10E-6);
+        assertEquals(Math.cos(Math.PI/2), cosine.calc(Math.PI/2), 10E-6);
     }
 
     @Test
     public void testTg() {
-        assertEquals(Math.tan(Math.PI/4), function.tg(Math.PI/4), 10E-6);
+        assertEquals(Math.tan(Math.PI/4), function.calc(Math.PI/4), 10E-6);
     }
 
     @Test

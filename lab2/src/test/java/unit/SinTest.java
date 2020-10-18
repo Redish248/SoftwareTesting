@@ -23,12 +23,12 @@ public class SinTest {
     @ValueSource(doubles = {0, -10E-6, -Math.PI/2 + 10E-6, -Math.PI/2, -Math.PI/2 - 10E-6, -Math.PI + 10E-6, -Math.PI,
         -Math.PI - 10E-6, -3*Math.PI/2 + 10E-6, -3*Math.PI/2, -3*Math.PI/2 - 10E-6, -2*Math.PI + 10E-6, -2*Math.PI, -2*Math.PI - 10E-6})
     public void testNegativePeriod(double x) {
-        assertEquals(Math.sin(x), sinus.sin(x), delta);
+        assertEquals(Math.sin(x), sinus.calc(x), delta);
     }
 
     @ParameterizedTest
     @ValueSource(doubles = {Double.NaN, Double.NEGATIVE_INFINITY})
     public void testIncorrectArguments(double x) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> sinus.sin(x));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sinus.calc(x));
     }
 }
