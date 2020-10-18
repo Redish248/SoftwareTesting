@@ -2,16 +2,18 @@ package unit;
 
 import functions.Sinus;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.Assert.assertEquals;
 
 public class SinTest {
-    private final Sinus sinus;
-    private final double delta;
+    private Sinus sinus;
+    private double delta;
 
-    public SinTest() {
+    @BeforeEach
+    public void mockFunctions() {
         sinus = new Sinus();
         delta = 10E-6;
     }

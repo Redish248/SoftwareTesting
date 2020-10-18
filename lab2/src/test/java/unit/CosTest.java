@@ -2,8 +2,9 @@ package unit;
 
 import functions.Cosine;
 import functions.Sinus;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -12,10 +13,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CosTest {
-    private final Cosine cosine;
-    private final double delta;
+    private Cosine cosine;
+    private double delta;
 
-    public CosTest() {
+    @BeforeEach
+    public void mockFunctions() {
         delta = 10E-6;
         Sinus sinus = mock(Sinus.class);
         when(sinus.sin(0)).thenReturn(Math.sin(0));

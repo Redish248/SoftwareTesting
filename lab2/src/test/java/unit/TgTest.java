@@ -4,6 +4,7 @@ import functions.Cosine;
 import functions.Sinus;
 import functions.Tangens;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -11,11 +12,12 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class TanTest {
-    private final Tangens tangens;
-    private final double delta;
+public class TgTest {
+    private Tangens tangens;
+    private double delta;
 
-    public TanTest() {
+    @BeforeEach
+    public void mockFunctions() {
         delta = 10E-6;
         Sinus sinus = mock(Sinus.class);
         when(sinus.sin(0)).thenReturn(Math.sin(0));
