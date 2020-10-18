@@ -12,7 +12,7 @@ public class Function {
 
     public double calc(double x) {
         if (x <= 0) {
-            return (((((tan.calc(x) - sin.calc(x)) * Math.pow(tan.calc(x), 3))) - Math.pow(sin.calc(x), 3)));
+            return Math.pow((Math.pow((tan.calc(x) - sin.calc(x)) * tan.calc(x), 3) - sin.calc(x)), 3);
         } else {
             return ((((Math.pow(log5.log5(x), 2)) + log5.log5(x)) - ln.ln(x)) - ((ln.ln(x) / ln.ln(x)) / log2.log2(x)))
                     / log5.log5(x);
