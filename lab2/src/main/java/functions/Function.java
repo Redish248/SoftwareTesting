@@ -3,12 +3,17 @@ package functions;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class Function {
+public class Function implements SystemModule {
     private final Sinus sin;
     private final Tangens tan;
     private final LnFunction ln;
     private final Log5 log5;
     private final Log2 log2;
+
+    @Override
+    public String getModuleName() {
+        return "Function";
+    }
 
     public double calc(double x) {
         if (x <= 0) {

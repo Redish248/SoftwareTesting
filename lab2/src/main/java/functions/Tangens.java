@@ -1,6 +1,6 @@
 package functions;
 
-public class Tangens {
+public class Tangens implements SystemModule{
 
     Sinus sinus;
     Cosine cosine;
@@ -8,6 +8,11 @@ public class Tangens {
     public Tangens(Sinus sinus, Cosine cosine) {
         this.sinus = sinus;
         this.cosine = cosine;
+    }
+
+    @Override
+    public String getModuleName() {
+        return "Tg";
     }
 
     public double calc(double x) {
@@ -20,5 +25,6 @@ public class Tangens {
 
         return sinus.calc(x)/cosResult;
     }
+
 
 }

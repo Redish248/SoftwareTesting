@@ -2,6 +2,7 @@ package integration;
 
 import functions.*;
 import org.junit.Ignore;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -26,10 +27,17 @@ public class FunctionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0, -0.8, -2.6, -Math.PI, -3.566, -3.732, -5.311, -5.478, -2*Math.PI, -Math.PI/2, -3*Math.PI/2, -2, -4, -5})
+    @ValueSource(doubles = {0, -0.8, -2.6, -Math.PI, -3.566 + 1E-6, -3.566, -3.566 - 1E-6, -3.732, -5.311,
+            -5.478 + 1E-6, -5.478, -5.478 - 1E-6, -2*Math.PI, -Math.PI/2, -3*Math.PI/2, -2, -4, -5})
     public void testTrigonometry(double x) {
         assertEquals(Math.pow((Math.pow((Math.tan(x) - Math.sin(x)) * Math.tan(x), 3) - Math.sin(x)), 3),
                 function.calc(x), delta);
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {Double.NaN, Double.NEGATIVE_INFINITY})
+    public void testTrigonometryIncorrectParam(double x) {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> function.calc(x));
     }
 
     @ParameterizedTest

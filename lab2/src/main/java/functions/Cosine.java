@@ -1,6 +1,6 @@
 package functions;
 
-public class Cosine {
+public class Cosine implements SystemModule{
 
     Sinus sinus;
 
@@ -11,6 +11,10 @@ public class Cosine {
     public double calc(double x) {
         double result = Math.sqrt(1 - Math.pow(sinus.calc(x), 2));
         return isPositive(x) ? result : -result;
+    }
+
+    public String getModuleName() {
+        return "Cos";
     }
 
     private boolean isPositive(double x) {

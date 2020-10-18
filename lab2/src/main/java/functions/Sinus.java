@@ -1,6 +1,6 @@
 package functions;
 
-public class Sinus extends AbstractFunction {
+public class Sinus extends AbstractFunction implements SystemModule {
 
     public double calc(double x) {
         x = checkX(x);
@@ -10,9 +10,11 @@ public class Sinus extends AbstractFunction {
         }
 
         return countFunction(x, 0);
-
     }
 
+    public String getModuleName() {
+        return "Sin";
+    }
 
     public double checkX(double x) {
         if (Double.isNaN(x) || x == Double.POSITIVE_INFINITY || x == Double.NEGATIVE_INFINITY) {
