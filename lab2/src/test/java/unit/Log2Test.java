@@ -24,14 +24,14 @@ public class Log2Test {
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(-5);
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(0);
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(-DELTA);
-        when(lnFunction.ln(DELTA)).thenReturn(Math.log(DELTA));
-        when(lnFunction.ln(1)).thenReturn(Math.log(1));
-        when(lnFunction.ln(2)).thenReturn(Math.log(2));
-        when(lnFunction.ln(1+DELTA)).thenReturn(Math.log(1+DELTA));
-        when(lnFunction.ln(1-DELTA)).thenReturn(Math.log(1-DELTA));
-        when(lnFunction.ln(5)).thenReturn(Math.log(5));
-        when(lnFunction.ln(0.5)).thenReturn(Math.log(0.5));
-        when(lnFunction.ln(10)).thenReturn(Math.log(10));
+        when(lnFunction.ln(DELTA)).thenReturn(-13.8155106);
+        when(lnFunction.ln(1)).thenReturn(0.0);
+        when(lnFunction.ln(2)).thenReturn(0.6931472);
+        when(lnFunction.ln(1+DELTA)).thenReturn(0.000001);
+        when(lnFunction.ln(1-DELTA)).thenReturn(-0.000001);
+        when(lnFunction.ln(5)).thenReturn(1.6094379);
+        when(lnFunction.ln(0.5)).thenReturn(-0.6931472);
+        when(lnFunction.ln(10)).thenReturn(2.3025851);
     }
 
     @ParameterizedTest

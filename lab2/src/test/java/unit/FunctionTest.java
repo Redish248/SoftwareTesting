@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -84,41 +83,41 @@ public class FunctionTest {
         doThrow(new IllegalArgumentException()).when(log2).log2(0);
         doThrow(new IllegalArgumentException()).when(log5).log5(0);
 
-        when(log2.log2(0.21624849)).thenReturn(log2(0.21624849));
-        when(log5.log5(0.21624849)).thenReturn(log5(0.21624849));
-        when(ln.ln(0.21624849)).thenReturn(Math.log(0.21624849));
+        when(log2.log2(0.21624849)).thenReturn(-2.209238036);
+        when(log5.log5(0.21624849)).thenReturn(-0.951467033);
+        when(ln.ln(0.21624849)).thenReturn(-1.5313271);
 
-        when(log2.log2(0.21624849 + delta)).thenReturn(log2(0.21624849 + delta));
-        when(log5.log5(0.21624849 + delta)).thenReturn(log5(0.21624849 + delta));
-        when(ln.ln(0.21624849 + delta)).thenReturn(Math.log(0.21624849 + delta));
+        when(log2.log2(0.21624849 + delta)).thenReturn(-2.2092314);
+        when(log5.log5(0.21624849 + delta)).thenReturn(-0.9514642);
+        when(ln.ln(0.21624849 + delta)).thenReturn(-1.53132249);
 
-        when(log2.log2(0.21624849 - delta)).thenReturn(log2(0.21624849 - delta));
-        when(log5.log5(0.21624849 - delta)).thenReturn(log5(0.21624849 - delta));
-        when(ln.ln(0.21624849 - delta)).thenReturn(Math.log(0.21624849 - delta));
+        when(log2.log2(0.21624849 - delta)).thenReturn(-2.2092447);
+        when(log5.log5(0.21624849 - delta)).thenReturn(-0.9514699);
+        when(ln.ln(0.21624849 - delta)).thenReturn(-1.5313317);
 
-        when(log2.log2(1)).thenReturn(log2(1));
-        when(log5.log5(1)).thenReturn(log5(1));
-        when(ln.ln(1)).thenReturn(Math.log(1));
+        when(log2.log2(1)).thenReturn(0.0);
+        when(log5.log5(1)).thenReturn(0.0);
+        when(ln.ln(1)).thenReturn(0.0);
 
-        when(log2.log2(1 + delta)).thenReturn(log2(1 + delta));
-        when(log5.log5(1 + delta)).thenReturn(log5(1 + delta));
-        when(ln.ln(1 + delta)).thenReturn(Math.log(1 + delta));
+        when(log2.log2(1 + delta)).thenReturn(0.00000144);
+        when(log5.log5(1 + delta)).thenReturn(0.000000621);
+        when(ln.ln(1 + delta)).thenReturn(0.00000099995);
 
-        when(log2.log2(1 - delta)).thenReturn(log2(1 - delta));
-        when(log5.log5(1 - delta)).thenReturn(log5(1 - delta));
-        when(ln.ln(1 - delta)).thenReturn(Math.log(1 - delta));
+        when(log2.log2(1 - delta)).thenReturn(-0.00000144);
+        when(log5.log5(1 - delta)).thenReturn(-0.000000621);
+        when(ln.ln(1 - delta)).thenReturn(-0.00000099995);
 
-        when(log2.log2(5.179158818534)).thenReturn(log2(5.179158818534));
-        when(log5.log5(5.179158818534)).thenReturn(log5(5.179158818534));
-        when(ln.ln(5.179158818534)).thenReturn(Math.log(5.179158818534));
+        when(log2.log2(5.179158818534)).thenReturn(2.3727178);
+        when(log5.log5(5.179158818534)).thenReturn(1.0218739);
+        when(ln.ln(5.179158818534)).thenReturn(1.6446427);
 
-        when(log2.log2(5.179158818534 + delta)).thenReturn(log2(5.179158818534 + delta));
-        when(log5.log5(5.179158818534 + delta)).thenReturn(log5(5.179158818534 + delta));
-        when(ln.ln(5.179158818534 + delta)).thenReturn(Math.log(5.179158818534 + delta));
+        when(log2.log2(5.179158818534 + delta)).thenReturn(2.3727181);
+        when(log5.log5(5.179158818534 + delta)).thenReturn(1.0218741);
+        when(ln.ln(5.179158818534 + delta)).thenReturn(1.6446428);
 
-        when(log2.log2(5.179158818534 - delta)).thenReturn(log2(5.179158818534 - delta));
-        when(log5.log5(5.179158818534 - delta)).thenReturn(log5(5.179158818534 - delta));
-        when(ln.ln(5.179158818534 - delta)).thenReturn(Math.log(5.179158818534 - delta));
+        when(log2.log2(5.179158818534 - delta)).thenReturn(2.3727175);
+        when(log5.log5(5.179158818534 - delta)).thenReturn(1.0218738);
+        when(ln.ln(5.179158818534 - delta)).thenReturn(1.6446425);
 
         function = new Function(sinus, tangens, ln, log5, log2);
     }
