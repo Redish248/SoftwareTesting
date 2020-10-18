@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ModuleTest {
 
     private final Sinus sinus = new Sinus();
-    private final Cosine cosine = new Cosine();
+    private final Cosine cosine = new Cosine(sinus);
     private final LnFunction lnFunction = new LnFunction();
-    private final Tangens function = new Tangens();
+    private final Tangens function = new Tangens(sinus, cosine);
     private final Log2 log2 = new Log2(lnFunction);
     private final Log5 log5 = new Log5(lnFunction);
 

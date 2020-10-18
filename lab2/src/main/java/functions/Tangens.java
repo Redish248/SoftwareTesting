@@ -5,9 +5,9 @@ public class Tangens {
     Sinus sinus;
     Cosine cosine;
 
-    public Tangens() {
-        sinus = new Sinus();
-        cosine = new Cosine();
+    public Tangens(Sinus sinus, Cosine cosine) {
+        this.sinus = sinus;
+        this.cosine = cosine;
     }
 
     public double tg(double x) {

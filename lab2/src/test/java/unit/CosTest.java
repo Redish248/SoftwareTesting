@@ -2,7 +2,6 @@ package unit;
 
 import functions.Cosine;
 import functions.Sinus;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,14 +16,7 @@ public class CosTest {
     private final double delta;
 
     public CosTest() {
-        cosine = new Cosine();
         delta = 10E-6;
-    }
-
-    @BeforeAll
-    public static void mockSin() {
-        //вынести из before all?
-        double delta = 10E-6;
         Sinus sinus = mock(Sinus.class);
         when(sinus.sin(0)).thenReturn(Math.sin(0));
         when(sinus.sin(-delta)).thenReturn(Math.sin(-delta));
@@ -40,6 +32,9 @@ public class CosTest {
         when(sinus.sin(-2*Math.PI+delta)).thenReturn(Math.sin(-2*Math.PI+delta));
         when(sinus.sin(-2*Math.PI)).thenReturn(Math.sin(-2*Math.PI));
         when(sinus.sin(-2*Math.PI-delta)).thenReturn(Math.sin(-2*Math.PI-delta));
+        when(sinus.sin(Double.NaN)).thenThrow(new IllegalArgumentException());
+        when(sinus.sin(Double.NEGATIVE_INFINITY)).thenThrow(new IllegalArgumentException());
+        cosine = new Cosine(sinus);
     }
 
     @ParameterizedTest
@@ -49,9 +44,9 @@ public class CosTest {
         assertEquals(Math.cos(x), cosine.cos(x), delta);
     }
 
-    /*@ParameterizedTest
-    @ValueSource(doubles = {Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY})
+    @ParameterizedTest
+    @ValueSource(doubles = {Double.NaN, Double.NEGATIVE_INFINITY})
     public void testIncorrectArguments(double x) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> cosine.cos(x));
-    }*/
+    }
 }
