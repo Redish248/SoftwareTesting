@@ -30,13 +30,13 @@ public class ModuleTest {
 
     @Test
     public void testLn() {
-        assertEquals(Math.log(2), lnFunction.ln(2), 10E-6);
+        assertEquals(Math.log(2), lnFunction.calc(2), 10E-6);
     }
 
 
     @Test
     public void testLn2() {
-        assertEquals(Math.log(1)/Math.log(2), log2.log2(1), 10E-6);
+        assertEquals(Math.log(1)/Math.log(2), log2.calc(1), 10E-6);
     }
 
 }

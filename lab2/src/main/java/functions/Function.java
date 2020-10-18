@@ -19,8 +19,8 @@ public class Function implements SystemModule {
         if (x <= 0) {
             return Math.pow((Math.pow((tan.calc(x) - sin.calc(x)) * tan.calc(x), 3) - sin.calc(x)), 3);
         } else {
-            return ((((Math.pow(log5.log5(x), 2)) + log5.log5(x)) - ln.ln(x)) - ((ln.ln(x) / ln.ln(x)) / log2.log2(x)))
-                    / log5.log5(x);
+            return ((((Math.pow(log5.calc(x), 2)) + log5.calc(x)) - ln.calc(x)) - ((ln.calc(x) / ln.calc(x)) / log2.calc(x)))
+                    / log5.calc(x);
         }
     }
 }

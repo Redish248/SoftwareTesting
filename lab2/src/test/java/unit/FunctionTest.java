@@ -79,45 +79,45 @@ public class FunctionTest {
         when(tangens.calc(-5)).thenReturn(Math.tan(-5));
 
         //x > 0
-        doThrow(new IllegalArgumentException()).when(ln).ln(0);
-        doThrow(new IllegalArgumentException()).when(log2).log2(0);
-        doThrow(new IllegalArgumentException()).when(log5).log5(0);
+        doThrow(new IllegalArgumentException()).when(ln).calc(0);
+        doThrow(new IllegalArgumentException()).when(log2).calc(0);
+        doThrow(new IllegalArgumentException()).when(log5).calc(0);
 
-        when(log2.log2(0.21624849)).thenReturn(-2.209238036);
-        when(log5.log5(0.21624849)).thenReturn(-0.951467033);
-        when(ln.ln(0.21624849)).thenReturn(-1.5313271);
+        when(log2.calc(0.21624849)).thenReturn(-2.209238036);
+        when(log5.calc(0.21624849)).thenReturn(-0.951467033);
+        when(ln.calc(0.21624849)).thenReturn(-1.5313271);
 
-        when(log2.log2(0.21624849 + delta)).thenReturn(-2.2092314);
-        when(log5.log5(0.21624849 + delta)).thenReturn(-0.9514642);
-        when(ln.ln(0.21624849 + delta)).thenReturn(-1.53132249);
+        when(log2.calc(0.21624849 + delta)).thenReturn(-2.2092314);
+        when(log5.calc(0.21624849 + delta)).thenReturn(-0.9514642);
+        when(ln.calc(0.21624849 + delta)).thenReturn(-1.53132249);
 
-        when(log2.log2(0.21624849 - delta)).thenReturn(-2.2092447);
-        when(log5.log5(0.21624849 - delta)).thenReturn(-0.9514699);
-        when(ln.ln(0.21624849 - delta)).thenReturn(-1.5313317);
+        when(log2.calc(0.21624849 - delta)).thenReturn(-2.2092447);
+        when(log5.calc(0.21624849 - delta)).thenReturn(-0.9514699);
+        when(ln.calc(0.21624849 - delta)).thenReturn(-1.5313317);
 
-        when(log2.log2(1)).thenReturn(0.0);
-        when(log5.log5(1)).thenReturn(0.0);
-        when(ln.ln(1)).thenReturn(0.0);
+        when(log2.calc(1)).thenReturn(0.0);
+        when(log5.calc(1)).thenReturn(0.0);
+        when(ln.calc(1)).thenReturn(0.0);
 
-        when(log2.log2(1 + delta)).thenReturn(0.00000144);
-        when(log5.log5(1 + delta)).thenReturn(0.000000621);
-        when(ln.ln(1 + delta)).thenReturn(0.00000099995);
+        when(log2.calc(1 + delta)).thenReturn(0.0000014469432);
+        when(log5.calc(1 + delta)).thenReturn(0.0000006213352);
+        when(ln.calc(1 + delta)).thenReturn(0.0000009999995);
 
-        when(log2.log2(1 - delta)).thenReturn(-0.00000144);
-        when(log5.log5(1 - delta)).thenReturn(-0.000000621);
-        when(ln.ln(1 - delta)).thenReturn(-0.00000099995);
+        when(log2.calc(1 - delta)).thenReturn(-0.0000014469432);
+        when(log5.calc(1 - delta)).thenReturn(-0.0000006213352);
+        when(ln.calc(1 - delta)).thenReturn(-0.0000009999995);
 
-        when(log2.log2(5.179158818534)).thenReturn(2.3727178);
-        when(log5.log5(5.179158818534)).thenReturn(1.0218739);
-        when(ln.ln(5.179158818534)).thenReturn(1.6446427);
+        when(log2.calc(5.179158818534)).thenReturn(2.3727178);
+        when(log5.calc(5.179158818534)).thenReturn(1.0218739);
+        when(ln.calc(5.179158818534)).thenReturn(1.6446427);
 
-        when(log2.log2(5.179158818534 + delta)).thenReturn(2.3727181);
-        when(log5.log5(5.179158818534 + delta)).thenReturn(1.0218741);
-        when(ln.ln(5.179158818534 + delta)).thenReturn(1.6446428);
+        when(log2.calc(5.179158818534 + delta)).thenReturn(2.3727181);
+        when(log5.calc(5.179158818534 + delta)).thenReturn(1.0218741);
+        when(ln.calc(5.179158818534 + delta)).thenReturn(1.6446428);
 
-        when(log2.log2(5.179158818534 - delta)).thenReturn(2.3727175);
-        when(log5.log5(5.179158818534 - delta)).thenReturn(1.0218738);
-        when(ln.ln(5.179158818534 - delta)).thenReturn(1.6446425);
+        when(log2.calc(5.179158818534 - delta)).thenReturn(2.3727175);
+        when(log5.calc(5.179158818534 - delta)).thenReturn(1.0218738);
+        when(ln.calc(5.179158818534 - delta)).thenReturn(1.6446425);
 
         function = new Function(sinus, tangens, ln, log5, log2);
     }

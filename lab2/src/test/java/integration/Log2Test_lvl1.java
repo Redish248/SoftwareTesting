@@ -20,29 +20,29 @@ public class Log2Test_lvl1 {
     @ParameterizedTest
     @ValueSource(doubles = {-DELTA, -5, -10})
     public void testNegative(double x) {
-        assertThrows(IllegalArgumentException.class, () -> log2.log2(x));
+        assertThrows(IllegalArgumentException.class, () -> log2.calc(x));
     }
 
     @ParameterizedTest
     @ValueSource(doubles = {0})
     public void testZero(double x) {
-        assertThrows(IllegalArgumentException.class, () -> log2.log2(x));
+        assertThrows(IllegalArgumentException.class, () -> log2.calc(x));
     }
 
     @ParameterizedTest
     @ValueSource(doubles = {0.1, 1, 1+DELTA, 1-DELTA})
     public void testOne(double x) {
-        assertEquals(log2(x), log2.log2(x), DELTA);
+        assertEquals(log2(x), log2.calc(x), DELTA);
     }
 
     @Test
     public void testBetweenZeroAndOne() {
-        assertEquals(log2(0.5), log2.log2(0.5), DELTA);
+        assertEquals(log2(0.5), log2.calc(0.5), DELTA);
     }
 
     @Test
     public void testAfterOne() {
-        assertEquals(log2(10), log2.log2(10), DELTA);
+        assertEquals(log2(10), log2.calc(10), DELTA);
     }
 
     @Ignore
