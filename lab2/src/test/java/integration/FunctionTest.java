@@ -13,7 +13,7 @@ public class FunctionTest {
 
     @BeforeEach
     public void mockFunctions() {
-        delta = 1E-6;
+        delta = 1E-5;
         Sinus sinus = new Sinus();
         Cosine cosine = new Cosine(sinus);
         Tangens tangens = new Tangens(sinus, cosine);
@@ -25,7 +25,7 @@ public class FunctionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0, -0.8, -2.6, -Math.PI, -3.566, -5.311, -5.478, -2*Math.PI})
+    @ValueSource(doubles = {0, -0.8, -2.6, -Math.PI, -3.566, -3.732, -5.311, -5.478, -2*Math.PI, -Math.PI/2, -3*Math.PI/2, -2, -4, -5})
     public void testTrigonometry(double x) {
         assertEquals(Math.pow((Math.pow((Math.tan(x) - Math.sin(x)) * Math.tan(x), 3) - Math.sin(x)), 3),
                 function.calc(x), delta);

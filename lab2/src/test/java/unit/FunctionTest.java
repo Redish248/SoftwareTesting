@@ -31,10 +31,8 @@ public class FunctionTest {
         when(sinus.calc(-2.6)).thenReturn(Math.sin(-2.6));
         when(tangens.calc(-2.6)).thenReturn(Math.tan(-2.6));
 
-
         when(sinus.calc(-Math.PI)).thenReturn(Math.sin(-Math.PI));
         when(tangens.calc(-Math.PI)).thenReturn(Math.tan(-Math.PI));
-
 
         when(sinus.calc(-3.566)).thenReturn(Math.sin(-3.566));
         when(tangens.calc(-3.566)).thenReturn(Math.tan(-3.566));
@@ -70,7 +68,7 @@ public class FunctionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0, -0.8, -2.6, -Math.PI, -3.566, -3.732, -5.311, -5.478, -2*Math.PI, -3*Math.PI/2, -2, -4, -5})
+    @ValueSource(doubles = {0, -0.8, -2.6, -Math.PI, -3.566, -3.732, -5.311, -5.478, -2*Math.PI, -Math.PI/2, -3*Math.PI/2, -2, -4, -5})
     public void testTrigonometry(double x) {
         assertEquals(Math.pow((Math.pow((Math.tan(x) - Math.sin(x)) * Math.tan(x), 3) - Math.sin(x)), 3),
                 function.calc(x), delta);
