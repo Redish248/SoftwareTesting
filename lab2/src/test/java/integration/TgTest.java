@@ -1,17 +1,37 @@
 package integration;
 
-import functions.*;
+import functions.Cosine;
+import functions.Sinus;
+import functions.Tangens;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertEquals;
 
 public class TgTest {
+    private Tangens tangens;
+    private double delta;
 
-    private final Sinus sinus = mock(Sinus.class);
-    private final LnFunction lnFunction = mock(LnFunction.class);
-    //FIXME: sin and cos as params
-    private final Tangens tangens = new Tangens(sinus, new Cosine(sinus));
-    private final Log5 log5 = mock(Log5.class);
-    private final Log2 log2 = mock(Log2.class);
-    private final Function function = new Function(sinus, tangens, lnFunction, log5, log2);
+    @BeforeEach
+    public void mockFunctions() {
+        delta = 1E-6;
+        Sinus sinus = new Sinus();
+        Cosine cosine = new Cosine(sinus);
+        tangens = new Tangens(sinus, cosine);
+    }
 
+    @ParameterizedTest
+    @ValueSource(doubles = {0, -1E-6, -Math.PI/2 + 1E-6, -Math.PI/2, -Math.PI/2 - 1E-6, -2, -Math.PI + 1E-6,
+            -Math.PI, -Math.PI - 1E-6})
+    public void testNegativePeriod(double x) {
+        assertEquals(Math.tan(x), tangens.calc(x), delta);
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {Double.NaN, Double.NEGATIVE_INFINITY})
+    public void testIncorrectArguments(double x) {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> tangens.calc(x));
+    }
 }
