@@ -15,7 +15,7 @@ public class Log2Test_lvl1 {
 
     private final LnFunction lnFunction = new LnFunction();
     private final Log2 log2 = new Log2(lnFunction);
-    private final double DELTA = 10E-6;
+    private final double DELTA = 1E-6;
 
     @ParameterizedTest
     @ValueSource(doubles = {-DELTA, -5, -10})

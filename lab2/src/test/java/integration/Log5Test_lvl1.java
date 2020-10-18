@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class Log5Test_lvl1 {
     private final LnFunction lnFunction = new LnFunction();
     private final Log5 log5 = new Log5(lnFunction);
-    private final double DELTA = 10E-6;
+    private final double DELTA = 1E-6;
 
     @ParameterizedTest
     @ValueSource(doubles = {-1, -5, -10})

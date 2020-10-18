@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class Log5Test {
     private final LnFunction lnFunction = mock(LnFunction.class);
     private final Log5 log5 = new Log5(lnFunction);
-    private final double DELTA = 10E-6;
+    private final double DELTA = 1E-6;
 
     @BeforeEach
     public void createMock(){

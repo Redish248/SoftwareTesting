@@ -17,7 +17,7 @@ public class Log2Test {
 
     LnFunction lnFunction = mock(LnFunction.class);
     private final Log2 log2 = new Log2(lnFunction);
-    private final double DELTA = 10E-6;
+    private final double DELTA = 1E-6;
 
     {
         doThrow(new IllegalArgumentException()).when(lnFunction).ln(-10);

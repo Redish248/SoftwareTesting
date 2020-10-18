@@ -3,6 +3,8 @@ package unit;
 import functions.LnFunction;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,15 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RequiredArgsConstructor
 public class LnTest {
 
-    private final LnFunction lnFunction;
+    private final LnFunction lnFunction = new LnFunction();
 
-    @Test
-    public void testNegative() {
-        assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> lnFunction.ln(-10)),
-                () -> assertThrows(IllegalArgumentException.class, () -> lnFunction.ln(-5)),
-                () -> assertThrows(IllegalArgumentException.class, () -> lnFunction.ln(-1))
-        );
+    @ParameterizedTest
+    @ValueSource(doubles = {-1, -5, -10})
+    public void testNegative(double x) {
+        assertThrows(IllegalArgumentException.class, () -> lnFunction.ln(x));
     }
 
     @Test
@@ -35,7 +34,7 @@ public class LnTest {
 
     @Test
     public void testBetweenZeroAndOne() {
-        assertEquals(Math.log(0.5), lnFunction.ln(0.5), 10E-6);
+        assertEquals(Math.log(0.5), lnFunction.ln(0.5), 1E-6);
     }
 
     @Test
@@ -49,7 +48,7 @@ public class LnTest {
 
     @Test
     public void testBetweenOneAndInfinity() {
-        assertEquals(Math.log(5), lnFunction.ln(5), 10E-6);
+        assertEquals(Math.log(5), lnFunction.ln(5), 1E-6);
     }
 
     @Test
