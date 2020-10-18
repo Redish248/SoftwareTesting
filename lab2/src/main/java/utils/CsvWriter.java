@@ -1,12 +1,6 @@
 package utils;
 
-import functions.Cosine;
-import functions.LnFunction;
-import functions.Log2;
-import functions.Log5;
-import functions.Sinus;
-import functions.SystemModule;
-import functions.Tangens;
+import functions.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -33,11 +27,13 @@ public class CsvWriter {
         LnFunction lnFunction = new LnFunction();
         Log2 log2 = new Log2(lnFunction);
         Log5 log5 = new Log5(lnFunction);
-        write(sinus, 0, -Math.PI/8, 9);
-        write(cosine, 0, -Math.PI/8, 9);
-        write(tangens, 0, -Math.PI/8, 9);
+        Function function = new Function(sinus, tangens, lnFunction, log5, log2);
+        write(sinus, 0, -Math.PI/8, 17);
+        write(cosine, 0, -Math.PI/8, 17);
+        write(tangens, 0, -Math.PI/8, 17);
         write(lnFunction,1E-4, 0.5, 15);
         write(log2,1E-4, 0.5, 15);
         write(log5,1E-4, 0.5, 15);
+        write(function, -10, 0.5, 41);
     }
 }
