@@ -29,14 +29,19 @@ public class LnTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {DELTA, 1, 1 - DELTA, 1 + DELTA})
+    @ValueSource(doubles = {0.1, 1, 1 - DELTA, 1 + DELTA})
     public void testOne(double x) {
-        assertEquals(Math.log(x), lnFunction.calc(x));
+        assertEquals(Math.log(x), lnFunction.calc(x), DELTA);
     }
 
     @Test
     public void testBetweenZeroAndOne() {
         assertEquals(Math.log(0.5), lnFunction.calc(0.5), DELTA);
+    }
+
+    @Test
+    public void testBetweenOneAndInfinity() {
+        assertEquals(Math.log(5), lnFunction.calc(5), DELTA);
     }
 
     @Test
@@ -46,11 +51,6 @@ public class LnTest {
                 () -> assertTrue(lnFunction.calc(0.5) < lnFunction.calc(0.7)),
                 () -> assertTrue(lnFunction.calc(0.7) < lnFunction.calc(1))
         );
-    }
-
-    @Test
-    public void testBetweenOneAndInfinity() {
-        assertEquals(Math.log(5), lnFunction.calc(5), DELTA);
     }
 
     @Test

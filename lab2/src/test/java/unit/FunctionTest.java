@@ -145,7 +145,7 @@ public class FunctionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {1 - delta, 1, 1 + delta})
+    @ValueSource(doubles = {1 - 0.1, 1, 1 + 0.1})
     public void testLogsException(double x) {
         assertEquals(calcFunctionWithLog(x),
                 function.calc(x), delta);
