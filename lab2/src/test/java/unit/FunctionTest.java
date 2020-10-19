@@ -63,11 +63,17 @@ public class FunctionTest {
         when(sinus.calc(-6.283185307179586)).thenReturn(2.4492935982947064e-16);
         when(tangens.calc(-6.283185307179586)).thenReturn(2.4492935982947064e-16);
 
-        when(sinus.calc(-1.5707963267948966)).thenReturn(-1.0);
-        when(tangens.calc(-1.5707963267948966)).thenReturn(-1.633123935319537e+16);
+        when(sinus.calc(-1.5707953267948966)).thenReturn(-0.9999999999995);
+        when(tangens.calc(-1.5707953267948966)).thenReturn(-1000000.000020701);
 
-        when(sinus.calc(-4.71238898038469)).thenReturn(1.0);
-        when(tangens.calc(-4.71238898038469)).thenReturn(-5443746451065123.0);
+        when(sinus.calc(-1.5707973267948965)).thenReturn(-0.9999999999995);
+        when(tangens.calc(-1.5707973267948965)).thenReturn(1000000.0001431657);
+
+        when(sinus.calc(-4.7123879803846895)).thenReturn(0.9999999999995);
+        when(tangens.calc(-4.7123879803846895)).thenReturn(-999999.9996761917);
+
+        when(sinus.calc(-4.71238998038469)).thenReturn(0.9999999999995);
+        when(tangens.calc(-4.71238998038469)).thenReturn(1000000.0000435857);
 
         when(sinus.calc(-2)).thenReturn(-0.9092974268256817);
         when(tangens.calc(-2)).thenReturn(2.185039863261519);
@@ -124,7 +130,8 @@ public class FunctionTest {
 
     @ParameterizedTest
     @ValueSource(doubles = {0, -0.8, -2.6, -3.141592653589793, -3.5659989999999997, -3.566, -3.566001, -3.732, -5.311,
-            -5.477999, -5.478, -5.478001, -6.283185307179586, -1.5707963267948966, -4.71238898038469, -2, -4, -5})
+            -5.477999, -5.478, -5.478001, -6.283185307179586, -1.5707953267948966, -1.5707973267948965,
+            -4.7123879803846895, -4.71238998038469, -2, -4, -5})
     public void testTrigonometry(double x) {
         assertEquals(Math.pow((Math.pow((Math.tan(x) - Math.sin(x)) * Math.tan(x), 3) - Math.sin(x)), 3),
                 function.calc(x), delta);

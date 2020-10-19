@@ -27,7 +27,8 @@ public class FunctionTest {
 
     @ParameterizedTest
     @ValueSource(doubles = {0, -0.8, -2.6, -Math.PI, -3.566 + 1E-6, -3.566, -3.566 - 1E-6, -3.732, -5.311,
-            -5.478 + 1E-6, -5.478, -5.478 - 1E-6, -2*Math.PI, -Math.PI/2, -3*Math.PI/2, -2, -4, -5})
+            -5.478 + 1E-6, -5.478, -5.478 - 1E-6, -2*Math.PI, -Math.PI/2 + 1E-6,
+            -Math.PI/2 - 1E-6, -2, -4, -5})
     public void testTrigonometry(double x) {
         assertEquals(Math.pow((Math.pow((Math.tan(x) - Math.sin(x)) * Math.tan(x), 3) - Math.sin(x)), 3),
                 function.calc(x), delta);

@@ -29,8 +29,8 @@ public class CsvWriter {
         Log5 log5 = new Log5(lnFunction);
         Function function = new Function(sinus, tangens, lnFunction, log5, log2);
         write(sinus, 0, -Math.PI/8, 17);
-        write(cosine, 0, -Math.PI/8, 17);
-        write(tangens, 0, -Math.PI/8, 17);
+        write(cosine, 0, -Math.PI/16, 33);
+        write(tangens, 0, -Math.PI/16, 17);
         write(lnFunction,1E-4, 0.5, 15);
         write(log2,1E-4, 0.5, 15);
         write(log5,1E-4, 0.5, 15);
