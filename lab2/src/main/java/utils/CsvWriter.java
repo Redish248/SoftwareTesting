@@ -1,6 +1,13 @@
 package utils;
 
-import functions.*;
+import functions.Cosine;
+import functions.LnFunction;
+import functions.Log2;
+import functions.Log5;
+import functions.Sinus;
+import functions.SystemModule;
+import functions.Tangens;
+import functions.Function;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

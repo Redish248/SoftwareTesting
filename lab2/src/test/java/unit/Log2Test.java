@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 
 public class Log2Test {
 
-    LnFunction lnFunction = mock(LnFunction.class);
+    private final LnFunction lnFunction = mock(LnFunction.class);
     private final Log2 log2 = new Log2(lnFunction);
     private final double DELTA = 1E-6;
 
@@ -34,9 +34,9 @@ public class Log2Test {
         when(lnFunction.calc(5)).thenReturn(1.6094379);
         when(lnFunction.calc(0.5)).thenReturn(-0.6931472);
         when(lnFunction.calc(10)).thenReturn(2.3025851);
-        when(log2.calc(Double.NaN)).thenThrow(new IllegalArgumentException());
-        when(log2.calc(Double.POSITIVE_INFINITY)).thenThrow(new IllegalArgumentException());
-        when(log2.calc(Double.NEGATIVE_INFINITY)).thenThrow(new IllegalArgumentException());
+        when(lnFunction.calc(Double.NaN)).thenThrow(new IllegalArgumentException());
+        when(lnFunction.calc(Double.POSITIVE_INFINITY)).thenThrow(new IllegalArgumentException());
+        when(lnFunction.calc(Double.NEGATIVE_INFINITY)).thenThrow(new IllegalArgumentException());
     }
 
     @ParameterizedTest
