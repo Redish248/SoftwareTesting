@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pages.LogInPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,11 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MainPageTest {
     private static WebDriver webDriver;
     private static MainPage mainPage;
+    private static LogInPage logInPage;
 
     @BeforeAll
     public static void setUp() {
         webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.CHROME);
         mainPage = new MainPage(webDriver);
+        logInPage = new LogInPage(webDriver);
     }
 
     @Test
@@ -34,6 +37,12 @@ public class MainPageTest {
         mainPage.enterCity("Казань");
         assertEquals("Казань", mainPage.destinationInput.getAttribute("value"));
 
+    }
+
+    @Test
+    public void testGoToLogInPage() {
+        mainPage.clickToLogIn();
+        assertTrue(logInPage.isEmailInputDisplayed());
     }
 
     @Test
