@@ -12,18 +12,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
+import pages.SignUpPage;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainPageTest {
     private static WebDriver webDriver;
     private static MainPage mainPage;
     private static LogInPage logInPage;
+    private static SignUpPage signUpPage;
 
     @BeforeAll
     public static void setUp() {
         webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.CHROME);
         mainPage = new MainPage(webDriver);
         logInPage = new LogInPage(webDriver);
+        signUpPage = new SignUpPage(webDriver);
     }
 
     @Test
@@ -37,12 +41,6 @@ public class MainPageTest {
         mainPage.enterCity("Казань");
         assertEquals("Казань", mainPage.destinationInput.getAttribute("value"));
 
-    }
-
-    @Test
-    public void testGoToLogInPage() {
-        mainPage.clickToLogIn();
-        assertTrue(logInPage.isEmailInputDisplayed());
     }
 
     @Test
@@ -75,6 +73,26 @@ public class MainPageTest {
         mainPage.enterCity("Йцукен");
         assertEquals(0, mainPage.getSuggestions().size());
 
+    }
+
+    @Test
+    public void testGoToLogInPage() {
+        mainPage.clickToLogIn();
+        assertTrue(logInPage.isEmailInputDisplayed());
+    }
+
+    @Test
+    public void testGoToSignInPage() {
+        mainPage.goToRegisterPage();
+        assertTrue(signUpPage.isEmailInputDisplayed());
+    }
+
+    @Test
+    public void testLogOut() {
+        mainPage.clickToLogIn();
+        logInPage.signIn("yecine5178@aieen.com", "12345678");
+        mainPage.signOutClick();
+        assertTrue(mainPage.isMainSearchDisplayed());
     }
 
     @AfterAll

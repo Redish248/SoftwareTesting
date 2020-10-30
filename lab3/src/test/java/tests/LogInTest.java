@@ -10,6 +10,14 @@ import pages.MainPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/*
+TODO:
+-при вводе почты sign up
+-может, надо соцсети покликать
+-несуществующий --> sign up в ошибке переход
+-тексты ошибок проверить
+ */
+
 public class LogInTest {
     private static WebDriver webDriver;
     private static LogInPage logInPage;
@@ -83,7 +91,7 @@ public class LogInTest {
         assertTrue(mainPage.isAccountDisplayed());
     }
 
-    //FIXME
+    //FIXME или убрать вообще
     @Test
     public void checkShowingPassword() {
         mainPage.clickToLogIn();
@@ -95,6 +103,6 @@ public class LogInTest {
 
     @AfterAll
     public static void tearDown(){
-      //  webDriver.quit();
+        webDriver.quit();
     }
 }
