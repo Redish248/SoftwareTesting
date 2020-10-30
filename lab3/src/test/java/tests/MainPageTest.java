@@ -3,8 +3,13 @@ package tests;
 import config.WebDriverConfiguration;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,9 +24,47 @@ public class MainPageTest {
     }
 
     @Test
-    public void testDestinationField() {
+    public void testDestinationEmptyCityNotEmptySuggestions() {
+        mainPage.focusCity();
+        assertNotEquals(0, mainPage.getSuggestions().size());
+    }
+
+    @Test
+    public void testDestinationRealCityCheckValue() {
         mainPage.enterCity("Казань");
         assertEquals("Казань", mainPage.destinationInput.getAttribute("value"));
+
+    }
+
+    @Test
+    public void testDestinationRealCityNotEmptySuggestions() {
+        mainPage.enterCity("Казань");
+        new WebDriverWait(webDriver, 5)
+                .until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath(mainPage.DESTINATION_SUGGESTIONS), 0));
+        assertNotEquals(0, mainPage.getSuggestions().size());
+    }
+
+    @Test
+    public void testDestinationRealCityFirstSuggestion() {
+        mainPage.enterCity("Казань");
+        new WebDriverWait(webDriver, 5)
+                .until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath(mainPage.DESTINATION_SUGGESTIONS), 0));
+        WebElement firstSuggestion = mainPage.getSuggestions().get(0);
+        assertEquals("Казань", firstSuggestion.getText());
+    }
+
+    @Test
+    public void testDestinationRealCityWithMistake() {
+        mainPage.enterCity("Казаньб");
+        assertNotEquals(0, mainPage.getSuggestions().size());
+
+    }
+
+    @Test
+    @Disabled
+    public void testDestinationFakeCity() {
+        mainPage.enterCity("Йцукен");
+        assertEquals(0, mainPage.getSuggestions().size());
 
     }
 
