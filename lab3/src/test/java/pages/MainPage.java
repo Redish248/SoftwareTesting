@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainPage extends PageObject {
@@ -79,6 +80,15 @@ public class MainPage extends PageObject {
 
     public List<WebElement> getChildrenAgeInput() {
         return guestsContainer.findElements(By.xpath(".//div[@class='sb-group__children__field clearfix']/select"));
+    }
+
+    public WebElement getGuestLabel(int index) {
+        switch (index) {
+            case 0: return guestsLabel.findElement(By.xpath(".//span[@data-adults-count]"));
+            case 1: return guestsLabel.findElement(By.xpath(".//span[@data-children-count]"));
+            case 2:
+            default:return guestsLabel.findElement(By.xpath(".//span[@data-room-count]"));
+        }
     }
 
     public void goToSuggestion(WebElement suggestion) {

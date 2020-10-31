@@ -56,7 +56,7 @@ public class MainPageTest {
     @Order(4)
     public void testDestinationRealCityFirstSuggestion() {
         mainPage.enterCity("Казань");
-        new WebDriverWait(webDriver, 5)
+        new WebDriverWait(webDriver, 10)
                 .until(ExpectedConditions.attributeContains(mainPage.cityUlBlocks.get(0),
                         "class", "-visible"));
         WebElement firstSuggestion = mainPage.getSuggestionsNames().get(0);
@@ -67,7 +67,7 @@ public class MainPageTest {
     @Order(5)
     public void testDestinationRealCityWithMistake() {
         mainPage.enterCity("Казаньб");
-        new WebDriverWait(webDriver, 5)
+        new WebDriverWait(webDriver, 10)
                 .until(ExpectedConditions.attributeContains(mainPage.cityUlBlocks.get(0),
                         "class", "-visible"));
         WebElement firstSuggestion = mainPage.getSuggestionsNames().get(0);
@@ -239,6 +239,30 @@ public class MainPageTest {
         WebElement option = select.findElement(By.xpath("./option[@value='2']"));
         option.click();
         assertTrue(option.isSelected());
+    }
+
+    @Test
+    @Order(23)
+    public void testGuestLabelAdults() {
+        WebElement adultsLabel = mainPage.getGuestLabel(0);
+        String amount = mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText();
+        assertTrue(adultsLabel.getText().contains(amount+" "));
+    }
+
+    @Test
+    @Order(24)
+    public void testGuestLabelChildren() {
+        WebElement childrenLabel = mainPage.getGuestLabel(1);
+        String amount = mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText();
+        assertTrue(childrenLabel.getText().contains(Integer.parseInt(amount) > 0 ? amount+" " : "без"));
+    }
+
+    @Test
+    @Order(25)
+    public void testGuestLabelRooms() {
+        WebElement roomsLabel = mainPage.getGuestLabel(2);
+        String amount = mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText();
+        assertTrue(roomsLabel.getText().contains(amount+" "));
     }
 
 

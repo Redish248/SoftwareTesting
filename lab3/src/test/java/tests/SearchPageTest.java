@@ -22,7 +22,7 @@ public class SearchPageTest {
 
     @Test
     public void testEmptyCity() {
-        mainPage.goToSuggestion(mainPage.getSuggestions().get(0));
+        mainPage.goToSuggestion(mainPage.getSuggestionsNames().get(0));
 
     }
 
