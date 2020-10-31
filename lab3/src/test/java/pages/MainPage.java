@@ -43,6 +43,10 @@ public class MainPage extends PageObject {
         return driver.findElements(By.xpath(DESTINATION_SUGGESTIONS));
     }
 
+    public void goToSuggestion(WebElement suggestion) {
+        suggestion.click();
+    }
+
     public void focusCity() {
         this.destinationInput.click();
     }
