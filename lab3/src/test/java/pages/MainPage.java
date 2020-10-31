@@ -4,10 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 public class MainPage extends PageObject {
@@ -26,11 +24,21 @@ public class MainPage extends PageObject {
     private final String ACCOUNT_ICON = "//*[@id=\"current_account\"]/a";
     private final String GUESTS_LABEL = "//div[@class = 'xp__input-group xp__guests']/label";
     private final String GUESTS_CONTAINER = "//div[@class = 'xp__input-group xp__guests']/div[contains(@class, 'inputs')]";
+    private final String CALENDAR = "//div[@class='bui-calendar']";
+    private final String DATES_INPUT = "//div[@class='xp__dates xp__group']";
+    public final String SELECTED_DATES = ".//td[contains(@class,'bui-calendar__date--selected')]";
+
+    //todo: написать прием куков, баннер мешает остальным элементам
+    public final String ACCEPT_COOKIE = ".//button[@id='onetrust-accept-btn-handler']";
 
     public final String CITY_LOADING_CLASS = "c-autocomplete__list sb-autocomplete__list sb-autocomplete__list--loading";
+    public final String SELECTED_DATES_CLASS = "bui-calendar__date--selected";
 
     @FindBy(xpath = DEST_INPUT)
     public WebElement destinationInput;
+
+    @FindBy(xpath = DATES_INPUT)
+    public WebElement datesInput;
 
     @FindBy(xpath = DEST_SUGGESTIONS_AND_LOADING)
     public List<WebElement> cityUlBlocks;
@@ -40,6 +48,9 @@ public class MainPage extends PageObject {
 
     @FindBy(xpath = GUESTS_CONTAINER)
     public WebElement guestsContainer;
+
+    @FindBy(xpath = CALENDAR)
+    public WebElement calendar;
 
     @FindBy(xpath = LOG_IN)
     WebElement logInButton;
@@ -83,12 +94,37 @@ public class MainPage extends PageObject {
     }
 
     public WebElement getGuestLabel(int index) {
-        switch (index) {
-            case 0: return guestsLabel.findElement(By.xpath(".//span[@data-adults-count]"));
-            case 1: return guestsLabel.findElement(By.xpath(".//span[@data-children-count]"));
-            case 2:
-            default:return guestsLabel.findElement(By.xpath(".//span[@data-room-count]"));
-        }
+        return switch (index) {
+            case 0 -> guestsLabel.findElement(By.xpath(".//span[@data-adults-count]"));
+            case 1 -> guestsLabel.findElement(By.xpath(".//span[@data-children-count]"));
+            default -> guestsLabel.findElement(By.xpath(".//span[@data-room-count]"));
+        };
+    }
+
+    public WebElement getTodayElement() {
+        return calendar.findElement(By.xpath(".//td[contains(@class, 'today')]"));
+    }
+
+    public WebElement getElementByDate(String date) {
+        return calendar.findElement(By.xpath(".//td[@data-date='" +
+                date + "']"));
+    }
+
+    public LocalDate getTodayDate(WebElement todayElement) {
+        String strDate = todayElement.getAttribute("data-date");
+        return LocalDate.parse(strDate);
+    }
+
+    public String getNewDate(LocalDate date, int days) {
+        return date.plusDays(days).toString();
+    }
+
+    public boolean isCalendarClosed() {
+        return !this.calendar.getAttribute("style").equals("display: block;");
+    }
+
+    public List<WebElement> getSelectedDates() {
+        return calendar.findElements(By.xpath(SELECTED_DATES));
     }
 
     public void goToSuggestion(WebElement suggestion) {

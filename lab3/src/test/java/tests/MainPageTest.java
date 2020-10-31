@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
 import pages.SignUpPage;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -263,6 +265,26 @@ public class MainPageTest {
         WebElement roomsLabel = mainPage.getGuestLabel(2);
         String amount = mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText();
         assertTrue(roomsLabel.getText().contains(amount+" "));
+    }
+
+    @Test
+    @Order(26)
+    public void testCheckInToday() {
+        if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
+        WebElement today = mainPage.getTodayElement();
+        today.click();
+        assertTrue(today.getAttribute("class").contains(mainPage.SELECTED_DATES_CLASS));
+    }
+
+    @Test
+    @Order(26)
+    public void testCheckInTodayCheckOutTomorrow() {
+        if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
+        WebElement today = mainPage.getTodayElement();
+        today.click();
+        WebElement tomorrow = mainPage.getElementByDate(mainPage.getNewDate(mainPage.getTodayDate(today), 1));
+        tomorrow.click();
+        assertEquals(List.of(today, tomorrow), mainPage.getSelectedDates());
     }
 
 
