@@ -81,6 +81,10 @@ public class MainPage extends PageObject {
         return guestsContainer.findElements(By.xpath(".//div[@class='sb-group__children__field clearfix']/select"));
     }
 
+    public void goToSuggestion(WebElement suggestion) {
+        suggestion.click();
+    }
+
     public void focusCity() {
         this.destinationInput.click();
     }
