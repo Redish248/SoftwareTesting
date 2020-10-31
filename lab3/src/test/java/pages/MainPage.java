@@ -22,8 +22,8 @@ public class MainPage extends PageObject {
     public final String DEST_SUGGESTIONS_NAMES = "//*[@data-component='search/destination/input']//span[@class='search_hl_name']";
     public final String DEST_SUGGESTIONS_AND_LOADING = "//*[@data-component='search/destination/input']//ul";
     private final String REGISTER_BUTTON = "//*[@id='current_account_create']/a";
-    private final String LOG_OUT = "//*[@id=\"profile-menu\"]/form/input[5]";
-    private final String ACCOUNT_ICON = "//*[@id=\"current_account\"]/a";
+    private final String LOG_OUT = "//*[@id='profile-menu']/form/input[5]";
+    private final String ACCOUNT_ICON = "//*[@id='current_account']/a";
     private final String GUESTS_LABEL = "//div[@class = 'xp__input-group xp__guests']/label";
     private final String GUESTS_CONTAINER = "//div[@class = 'xp__input-group xp__guests']/div[contains(@class, 'inputs')]";
 
@@ -89,10 +89,6 @@ public class MainPage extends PageObject {
             case 2:
             default:return guestsLabel.findElement(By.xpath(".//span[@data-room-count]"));
         }
-    }
-
-    public void goToSuggestion(WebElement suggestion) {
-        suggestion.click();
     }
 
     public void focusCity() {
