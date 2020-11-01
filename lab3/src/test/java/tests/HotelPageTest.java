@@ -30,7 +30,7 @@ public class HotelPageTest {
 
     @BeforeEach
     public void setUp() {
-        webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.CHROME);
+        webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.FIREFOX);
         searchPage = new SearchPage(webDriver);
         hotelPage = new HotelPage(webDriver);
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -89,13 +89,10 @@ public class HotelPageTest {
     @Order(5)
     public void testBooking() {
         String hotelTitle = hotelPage.getHotelTitle().replaceAll("\n", " ").replaceAll("<","").replaceAll(">","");
-        String arrivalDate = hotelPage.getArrivalDate(); //вторник, 24 ноября 2020
+        String arrivalDate = hotelPage.getArrivalDate();
         String departureDate = hotelPage.getDepartureDate();
         hotelPage.bookHotel();
-        //WebDriverWait webDriverWait = new WebDriverWait(webDriver, 10);
-        //webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='retain-leaving-users__modal']/div/div/button")));
-       // webDriver.findElement(By.xpath("//*[@id='retain-leaving-users__modal']/div/div/button")).click();
-        String newDate_1 = webDriver.findElement(By.xpath("//*[@id='fullwidth']/div[2]/div[1]/div[2]/div/div[1]/div[1]/time/span[1]")).getText(); //вт, 24 нояб. 2020
+        String newDate_1 = webDriver.findElement(By.xpath("//*[@id='fullwidth']/div[2]/div[1]/div[2]/div/div[1]/div[1]/time/span[1]")).getText();
         String newDate_2 = webDriver.findElement(By.xpath("//*[@id='fullwidth']/div[2]/div[1]/div[2]/div/div[1]/div[2]/time/span[1]")).getText();
         assertAll(
                 () -> assertTrue(hotelTitle.contains(webDriver.findElement(By.xpath("//*[@id='bookOverviewTop']/div[1]/div[2]/div[1]/h1")).getText())),

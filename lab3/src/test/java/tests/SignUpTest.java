@@ -12,7 +12,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.LogInPage;
 import pages.MainPage;
 import pages.SignUpPage;
 
@@ -20,23 +19,15 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/*
- TODO:
- -перейти в sign in
- -соцсети?
- -там ввод имени при регистрации
- */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SignUpTest {
     private WebDriver webDriver;
-    private LogInPage logInPage;
     private MainPage mainPage;
     private SignUpPage signUpPage;
 
     @BeforeEach
     public void setUp() {
         webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.CHROME);
-        logInPage = new LogInPage(webDriver);
         mainPage = new MainPage(webDriver);
         signUpPage = new SignUpPage(webDriver);
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -128,9 +119,8 @@ public class SignUpTest {
         assertTrue(signUpPage.isPasswordFirstErrorDisplayed());
     }
 
-    //TODO: не запускайте просто так))
     @Test
-    @Disabled
+    @Disabled("не надо просто так запускать")
     @Order(12)
     public void testCorrectPass() {
         signUpPage.createAccount("test123@ya.ru","12345678", "12345678");

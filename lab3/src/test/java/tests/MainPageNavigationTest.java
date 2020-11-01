@@ -12,6 +12,7 @@ import pages.SearchPage;
 import pages.SignUpPage;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,7 +87,7 @@ public class MainPageNavigationTest {
         mainPage.clickToLogIn();
         logInPage.signIn("yecine5178@aieen.com", "12345678");
         mainPage.signOutClick();
-        assertTrue(mainPage.isMainSearchDisplayed());
+        assertThrows(NoSuchElementException.class, () -> mainPage.isAccountDisplayed());
     }
 
 
