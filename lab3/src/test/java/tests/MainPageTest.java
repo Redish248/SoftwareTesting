@@ -4,13 +4,10 @@ import config.WebDriverConfiguration;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pages.LogInPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
-import pages.SearchPage;
-import pages.SignUpPage;
 
 import java.time.LocalDate;
 
@@ -22,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MainPageTest {
     private static WebDriver webDriver;
     private static MainPage mainPage;
-    private static final WebDriverConfiguration.Browser browser = WebDriverConfiguration.Browser.FIREFOX;
+    private static final WebDriverConfiguration.Browser browser = WebDriverConfiguration.Browser.CHROME;
 
     @BeforeAll
     public static void setUp() {
@@ -55,9 +52,13 @@ public class MainPageTest {
     public void testEmptyCity() {
         mainPage.clearCity();
         mainPage.submitButton.click();
-        assertTrue(mainPage.idDestErrorVisible());
+        assertTrue(mainPage.isDestErrorVisible());
     }
 
+    //todo: fix order
+    //клик по прошлой дате
+    //клик по пустому полю в календаре
+    //клик по предложению для направления
     @Test
     @Order(4)
     public void testDestinationRealCityCheckValue() {
@@ -110,7 +111,7 @@ public class MainPageTest {
 
     @Test
     @Order(9)
-    @Disabled("В целом работает, но оооооочень долго")
+    @Disabled("В целом работает, но ооооочень долго")
     public void testDestinationLongNameCity() {
         mainPage.enterCity("НуОченьДлинноеНазваниеГородаДляТестаВводаНаБукинге".repeat(276));
         new WebDriverWait(webDriver, 5)
@@ -143,6 +144,11 @@ public class MainPageTest {
             mainPage.getGuestButton(mainPage.getGuestInput(0), false).click();
         }
         assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(0), false).getAttribute("class").contains("disabled"));
+        mainPage.getGuestButton(mainPage.getGuestInput(0), false).click();
+        assertAll(
+                () -> assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(0), false).getAttribute("class").contains("disabled")),
+                () -> assertEquals("1", mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText())
+        );
     }
 
     @Test
@@ -161,7 +167,12 @@ public class MainPageTest {
         while (!"30".equals(mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText())) {
             mainPage.getGuestButton(mainPage.getGuestInput(0), true).click();
         }
-        assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(0), true).getAttribute("class").contains("disabled"));
+        mainPage.getGuestButton(mainPage.getGuestInput(0), true).click();
+        assertAll(
+                () -> assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(0), true).getAttribute("class").contains("disabled")),
+                () -> assertEquals("30", mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText())
+        );
+
     }
 
     @Test
@@ -180,7 +191,11 @@ public class MainPageTest {
         while (!"10".equals(mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())) {
             mainPage.getGuestButton(mainPage.getGuestInput(1), true).click();
         }
-        assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(1), true).getAttribute("class").contains("disabled"));
+        mainPage.getGuestButton(mainPage.getGuestInput(1), true).click();
+        assertAll(
+                () -> assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(1), true).getAttribute("class").contains("disabled")),
+                () -> assertEquals("10", mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())
+        );
     }
 
     @Test
@@ -199,7 +214,11 @@ public class MainPageTest {
         while (!"0".equals(mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())) {
             mainPage.getGuestButton(mainPage.getGuestInput(1), false).click();
         }
-        assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(1), false).getAttribute("class").contains("disabled"));
+        mainPage.getGuestButton(mainPage.getGuestInput(1), false).click();
+        assertAll(
+                () -> assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(1), false).getAttribute("class").contains("disabled")),
+                () -> assertEquals("0", mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())
+        );
     }
 
     @Test
@@ -227,7 +246,11 @@ public class MainPageTest {
         while (!"1".equals(mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText())) {
             mainPage.getGuestButton(mainPage.getGuestInput(2), false).click();
         }
-        assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(2), false).getAttribute("class").contains("disabled"));
+        mainPage.getGuestButton(mainPage.getGuestInput(2), false).click();
+        assertAll(
+                () -> assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(2), false).getAttribute("class").contains("disabled")),
+                () -> assertEquals("1", mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText())
+        );
     }
 
     @Test
@@ -237,7 +260,11 @@ public class MainPageTest {
         while (!"30".equals(mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText())) {
             mainPage.getGuestButton(mainPage.getGuestInput(2), true).click();
         }
-        assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(2), true).getAttribute("class").contains("disabled"));
+        mainPage.getGuestButton(mainPage.getGuestInput(2), true).click();
+        assertAll(
+                () -> assertTrue(mainPage.getGuestButton(mainPage.getGuestInput(2), true).getAttribute("class").contains("disabled")),
+                () -> assertEquals("30", mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText())
+        );
     }
 
     @Test
@@ -267,6 +294,7 @@ public class MainPageTest {
     @Test
     @Order(25)
     public void testGuestLabelAdults() {
+        if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         WebElement adultsLabel = mainPage.getGuestLabel(0);
         String amount = mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText();
         assertTrue(adultsLabel.getText().contains(amount+" "));
@@ -275,6 +303,7 @@ public class MainPageTest {
     @Test
     @Order(26)
     public void testGuestLabelChildren() {
+        if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         WebElement childrenLabel = mainPage.getGuestLabel(1);
         String amount = mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText();
         assertTrue(childrenLabel.getText().contains(Integer.parseInt(amount) > 0 ? amount+" " : "без"));
@@ -283,6 +312,7 @@ public class MainPageTest {
     @Test
     @Order(27)
     public void testGuestLabelRooms() {
+        if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         WebElement roomsLabel = mainPage.getGuestLabel(2);
         String amount = mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText();
         assertTrue(roomsLabel.getText().contains(amount+" "));

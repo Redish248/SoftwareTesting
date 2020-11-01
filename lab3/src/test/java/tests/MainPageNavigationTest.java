@@ -12,7 +12,6 @@ import pages.SearchPage;
 import pages.SignUpPage;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -89,6 +88,16 @@ public class MainPageNavigationTest {
         assertTrue(mainPage.isMainSearchDisplayed());
     }
 
+    @Test
+    @Order(6)
+    public void testDestinationFakeCitySubmit() {
+        mainPage.enterCity("Йцукен");
+        new WebDriverWait(webDriver, 5)
+                .until(ExpectedConditions.attributeToBe(mainPage.cityUlBlocks.get(1),
+                        "class", mainPage.CITY_LOADING_CLASS));
+        mainPage.submitButton.click();
+        assertTrue(mainPage.isSearchErrorVisible());
+    }
 
     @AfterEach
     public void tearDown(){

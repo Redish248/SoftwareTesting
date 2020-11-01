@@ -32,6 +32,7 @@ public class MainPage extends PageObject {
     public final String SELECTED_DATES = ".//td[contains(@class,'bui-calendar__date--selected')]";
     public final String DATES_ERRORS = ".//div[@data-dates-errors]//div";
     public final String DEST_ERRORS = ".//div[@id='destination__error']";
+    public final String SEARCH_ERRORS = "//div[contains(@class,'sb-searchbox__error')]";
     public final String SUBMIT_BUTTON = "//button[@class='sb-searchbox__button ']";
     public final String NAVIGATION = "//ul[@class='bui-tab__nav']//span[@class='bui-tab__text']";
     public final String LANGUAGE_BUTTON = "//button[@data-modal-id='language-selection']";
@@ -188,8 +189,12 @@ public class MainPage extends PageObject {
         this.driver.findElement(By.xpath("//header")).click();
     }
 
-    public boolean idDestErrorVisible() {
+    public boolean isDestErrorVisible() {
         return driver.findElement(By.xpath(DEST_ERRORS)).getAttribute("class").contains("visible");
+    }
+
+    public boolean isSearchErrorVisible() {
+        return driver.findElement(By.xpath(SEARCH_ERRORS)).getAttribute("class").contains("visible");
     }
 
     public boolean idDatesErrorVisible() {
