@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 /*
 TODO:
@@ -28,12 +29,18 @@ public class SearchPage extends PageObject{
     private final String FIRST_RESULT = "//*[@id='hotellist_inner']/div[1]";
     private final String FIRST_RESULT_IMAGE = "//*[@id='hotellist_inner']/div[1]/div/a/img";
     private final String FIRST_RESULT_TITLE = "//*[@id='hotellist_inner']/div[1]/div[2]/div[1]/div[1]/div[1]/h3/a";
-    private final String FIRST_RESULT_CHOOSE_BUTTON = "//*[@id='hotellist_inner']/div[1]/div[2]/div[3]/div/div/div/div/div[2]/div[2]/div/div/div/a";
+    private final String FIRST_RESULT_CHOOSE_BUTTON = "//*[@id='hotellist_inner']/div[1]/div[2]/div[4]/div/div/div/div/div[2]/div[2]/div/div/div/a";
     private final String FIRST_RESULT_NAME = "//*[@id='hotellist_inner']/div[1]/div[2]/div[1]/div[1]/div[2]/a";
     private final String CITY_ERROR = "//*[@id='destination__error']/div";
     private final String CHILD_AGE = "//*[@name='age']";
     private final String MAP = "//*[@id='b_google_map_thumbnail']";
     private final String MAP_IMAGE = "//*[@id='b_map_tiles']/div/div/div[1]/div[3]";
+    private final String CURRENCY_CHOOSER = "//*[@id='user_form']/ul/li[1]/a";
+    private final String SELECT_PAYMENT = "//*[@id='filter_price']/div[3]/a[1]";
+    private final String STAR = "//*[@id='filter_class']/div[2]";
+    private final String RATING = "//*[@id='filter_review']/div[2]";
+    private final String DISTANCE = "//*[@id='filter_distance']/div[2]";
+    private final String BOOKING_RULES = "//*[@id='filter_fc']/div[2]";
 
     @FindBy(xpath = CITY_INPUT)
     WebElement cityInput;
@@ -57,10 +64,7 @@ public class SearchPage extends PageObject{
     WebElement searchButton;
 
     @FindBy(xpath = FIRST_RESULT)
-    WebElement firstResult;
-
-    @FindBy(xpath = FIRST_RESULT_IMAGE)
-    WebElement firstResultImage;
+    public WebElement firstResult;
 
     @FindBy(xpath = FIRST_RESULT_TITLE)
     WebElement firstResultTitle;
@@ -76,6 +80,24 @@ public class SearchPage extends PageObject{
 
     @FindBy(xpath = MAP)
     WebElement map;
+
+    @FindBy(xpath = CURRENCY_CHOOSER)
+    WebElement currencyChooser;
+
+    @FindBy(xpath = SELECT_PAYMENT)
+    WebElement selectPayment;
+
+    @FindBy(xpath = STAR)
+    WebElement selectStartRating;
+
+    @FindBy(xpath = RATING)
+    WebElement rating;
+
+    @FindBy(xpath = DISTANCE)
+    WebElement distanceCheckbox;
+
+    @FindBy(xpath = BOOKING_RULES)
+    WebElement bookingRules;
 
     public void enterCity(String city) {
         cityInput.click();
@@ -170,6 +192,83 @@ public class SearchPage extends PageObject{
         enterCity("Сочи");
         setUpDate();
         searchButton.click();
+    }
+
+    public void goToSomeHotel() {
+        enterCity("Сочи");
+        setUpDate();
+        selectAdultAmount(3);
+        selectChildAmount(3);
+        searchButton.click();
+        firstResultChooseButton.click();
+    }
+
+    public String getTitleText() {
+        return firstResultTitle.getText();
+    }
+
+    public String getCityText() {
+        return cityInput.getText();
+    }
+
+    public String getArrivalDateText() {
+        return calendarFirst.getText();
+    }
+
+    public String getDepartureDateText() {
+        return calendarSecond.getText();
+    }
+
+    public String getAdultAmountText() {
+        return new Select(selectAdult).getFirstSelectedOption().getText();
+    }
+
+    public String getChildAmountText() {
+        return new Select(selectChild).getFirstSelectedOption().getText();
+    }
+
+    public String getRoomAmountText() {
+        return new Select(selectRoom).getFirstSelectedOption().getText();
+    }
+
+    public void selectCurrency(String currency_name) {
+        currencyChooser.click();
+        driver.findElement(By.xpath("//*[@class='currency_" + currency_name + "']")).click();
+    }
+
+    public void selectPaymentCheckbox() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(selectPayment);
+        actions.perform();
+        selectPayment.click();
+    }
+
+    public void selectStarRating(int amount) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(selectStartRating);
+        actions.perform();
+        driver.findElement(By.xpath(STAR + "/a[" + amount + "]")).click();
+    }
+
+    public void selectRating(int amount) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(rating);
+        actions.perform();
+        driver.findElement(By.xpath(RATING + "/a[" + amount + "]")).click();
+    }
+
+    public void selectDistance(int amount) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(distanceCheckbox);
+        actions.perform();
+        driver.findElement(By.xpath(DISTANCE + "/a[" + amount + "]")).click();
+    }
+
+    public void selectBookingRule(int amount) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(bookingRules);
+        actions.perform();
+        driver.findElement(By.xpath(BOOKING_RULES + "/a[" + amount + "]")).click();
     }
 
 }

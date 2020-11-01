@@ -1,22 +1,24 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class HotelPage extends PageObject{
     public HotelPage(WebDriver driver) {
         super(driver);
     }
 
-    private final String HOTEL_TITLE = "//*[@id='hp_hotel_name']";
-    private final String CITY_INPUT = "//*[@id='ss']";
-    private final String CALENDAR_1 = "//*[@id='frm']/div[3]/div/div[1]/div[1]/div/div/div/div[2]";
-    private final String CALENDAR_2 = "//*[@id='frm']/div[3]/div/div[1]/div[2]/div/div/div/div[2]";
-    private final String ADULT = "//*[@id='group_adults']";
-    private final String CHILD = "//*[@id='group_children']";
-    private final String ROOM = "//*[@id='no_rooms']";
-    private final String CHILD_AGE = "//*[@id='frm']/div[4]/div/div/div/div[2]/div[2]";
+    public final String HOTEL_TITLE = "//*[@id='hp_hotel_name']";
+    public final String CITY_INPUT = "//*[@id='ss']";
+    public final String CALENDAR_1 = "//*[@id='frm']/div[3]/div/div[1]/div[1]/div/div/div/div[2]";
+    public final String CALENDAR_2 = "//*[@id='frm']/div[3]/div/div[1]/div[2]/div/div/div/div[2]";
+    public final String ADULT = "//*[@id='group_adults']";
+    public final String CHILD = "//*[@id='group_children']";
+    public final String ROOM = "//*[@id='no_rooms']";
+    public final String CHILD_AGE = "//*[@id='frm']/div[4]/div/div/div/div[2]/div[2]";
     private final String BOOK_BUTTON = "//*[@id='hp_book_now_button']";
 
     @FindBy(xpath = HOTEL_TITLE)
@@ -60,14 +62,18 @@ public class HotelPage extends PageObject{
     }
 
     public String getAdultAmount() {
-        return adultInput.getText();
+        return new Select(adultInput).getFirstSelectedOption().getText();
     }
 
     public String getChildAmount() {
-        return childInput.getText();
+        return new Select(childInput).getFirstSelectedOption().getText();
     }
 
     public String getRoomAmount() {
-        return roomInput.getText();
+        return new Select(roomInput).getFirstSelectedOption().getText();
+    }
+
+    public int getChildAgeSize() {
+        return driver.findElements(By.xpath(CHILD_AGE)).size();
     }
 }

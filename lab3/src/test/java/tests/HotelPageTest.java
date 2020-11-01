@@ -28,6 +28,7 @@ public class HotelPageTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='onetrust-accept-btn-handler']")));
         webDriver.findElement(By.xpath("//*[@id='onetrust-accept-btn-handler']")).click();
         webDriver.navigate().to("https://www.booking.com/searchresults.ru.html");
+        searchPage.goToSomeHotel();
     }
 
     @AfterEach
