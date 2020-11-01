@@ -261,13 +261,4 @@ public class SearchPage extends PageObject{
                 .collect(Collectors.toList());
     }
 
-    public void navigateMainPage() {
-        logo.click();
-    }
-
-    public void waitPresence() {
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.urlContains("booking.com/searchresults"));
-    }
-
 }

@@ -87,8 +87,4 @@ public class LogInPage extends PageObject {
     }
 
     public boolean isErrorForIncorrectPasswordDisplayed() { return errorPwd.isDisplayed(); }
-
-    public void navigateMainPage() {
-        logo.click();
-    }
 }

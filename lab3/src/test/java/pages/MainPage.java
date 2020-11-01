@@ -17,13 +17,13 @@ public class MainPage extends PageObject {
         super(driver);
     }
 
-    public final String LOG_IN = "//*[@id='current_account']/a";
+    private final String LOG_IN = "//*[@id='current_account']/a";
     private final String ACCOUNT = "//*[@id='current_account']/a";
     public final String DEST_INPUT = "//*[@class='sb-destination-label-sr']/input";
     public final String DEST_SUGGESTIONS_NAMES = "//*[@data-component='search/destination/input']//span[@class='search_hl_name']";
     public final String DEST_SUGGESTIONS_AND_LOADING = "//*[@data-component='search/destination/input']//ul";
-    public final String REGISTER_BUTTON = "//*[@id='current_account_create']/a";
-    public final String LOG_OUT = "//*[@id='profile-menu']/form/input[5]";
+    private final String REGISTER_BUTTON = "//*[@id='current_account_create']/a";
+    private final String LOG_OUT = "//*[@id='profile-menu']/form/input[5]";
     private final String ACCOUNT_ICON = "//*[@id='current_account']/a";
     private final String GUESTS_LABEL = "//div[@class = 'xp__input-group xp__guests']/label";
     private final String GUESTS_CONTAINER = "//div[@class = 'xp__input-group xp__guests']/div[contains(@class, 'inputs')]";
@@ -237,10 +237,5 @@ public class MainPage extends PageObject {
         return getSelectedDates().stream()
                 .map(date -> date.getAttribute("data-date"))
                 .collect(Collectors.toList());
-    }
-
-    public void waitPresence() {
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.urlContains("booking.com/index.ru"));
     }
 }

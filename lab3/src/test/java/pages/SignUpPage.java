@@ -109,8 +109,4 @@ public class SignUpPage extends PageObject  {
         return errorUnderPwd2.isDisplayed();
     }
 
-    public void navigateMainPage() {
-        logo.click();
-    }
-
 }

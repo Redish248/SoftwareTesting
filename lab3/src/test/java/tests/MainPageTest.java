@@ -22,18 +22,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MainPageTest {
     private static WebDriver webDriver;
     private static MainPage mainPage;
-    private static LogInPage logInPage;
-    private static SignUpPage signUpPage;
-    private static SearchPage searchPage;
     private static final WebDriverConfiguration.Browser browser = WebDriverConfiguration.Browser.FIREFOX;
 
     @BeforeAll
     public static void setUp() {
         webDriver = WebDriverConfiguration.getWebDriver(browser);
         mainPage = new MainPage(webDriver);
-        logInPage = new LogInPage(webDriver);
-        signUpPage = new SignUpPage(webDriver);
-        searchPage = new SearchPage(webDriver);
     }
 
     @BeforeEach
@@ -351,42 +345,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(34)
-    public void testPostcardCity() {
-        mainPage.waitPresence();
-        String city = mainPage.getPostcardCityName();
-        mainPage.postcard.click();
-        searchPage.waitPresence();
-        assertAll(
-                () -> assertTrue(webDriver.getCurrentUrl().contains("booking.com/searchresults.ru")),
-                () -> assertEquals(city, searchPage.getCity())
-        );
-        searchPage.navigateMainPage();
-    }
-
-    //todo: вынести тесты с переходами в отдельный класс
-    @Test
-    @Order(35)
-    public void testInputValuesSearchPage() {
-        mainPage.waitPresence();
-        String city = "Казань";
-        mainPage.enterCity(city);
-        mainPage.setCheckInCheckOut(1);
-        List<String> dates = mainPage.getGuestsDates();
-        List<Integer> guestsAmount = mainPage.getGuestsAmount();
-        mainPage.submitButton.click();
-        new WebDriverWait(webDriver, 5)
-                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//form[@id='frm']")));
-        assertAll(
-                () -> assertEquals(city, searchPage.getCity()),
-                () -> assertEquals(dates, searchPage.getGuestsDates()),
-                () -> assertEquals(guestsAmount, searchPage.getGuestsAmount())
-        );
-        searchPage.navigateMainPage();
-    }
-
-    @Test
-    @Order(36)
+    @Order(33)
     public void testLanguageEnglishUs() {
         mainPage.changeLanguage("en-us");
         assertAll(
@@ -395,35 +354,7 @@ public class MainPageTest {
         );
     }
 
-    @Test
-    @Order(37)
-    public void testGoToLogInPage() {
-        mainPage.waitPresence();
-        mainPage.clickToLogIn();
-        assertTrue(logInPage.isEmailInputDisplayed());
-        logInPage.navigateMainPage();
-    }
-
-    @Test
-    @Order(38)
-    public void testGoToSignInPage() {
-        mainPage.waitPresence();
-        mainPage.goToRegisterPage();
-        assertTrue(signUpPage.isEmailInputDisplayed());
-        signUpPage.navigateMainPage();
-    }
-
-    @Test
-    @Order(39)
-    public void testLogOut() {
-        mainPage.waitPresence();
-        mainPage.clickToLogIn();
-        logInPage.signIn("yecine5178@aieen.com", "12345678");
-        mainPage.signOutClick();
-        assertTrue(mainPage.isMainSearchDisplayed());
-    }
-
-    @AfterAll
+        @AfterAll
     public static void tearDown(){
         webDriver.quit();
     }
