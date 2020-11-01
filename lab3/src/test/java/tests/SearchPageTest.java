@@ -18,6 +18,7 @@ import pages.SearchPage;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -68,34 +69,34 @@ public class SearchPageTest {
     @Order(4)
     public void testRealFirstData() {
         searchPage.enterCity("Saint Petersburg");
-        searchPage.enterDateFirst(4);
-        assertTrue(searchPage.calendarSecond.getText().contains("5 ноября"));
+        searchPage.setArrivalDate("2020-12-09");
+        assertTrue(searchPage.calendarSecond.getText().contains("10 декабря"));
     }
 
     @Test
     @Order(5)
     public void testRealSecondData() {
         searchPage.enterCity("Saint Petersburg");
-        searchPage.enterDateSecond();
-        assertTrue(searchPage.calendarFirst.getText().contains("4 ноября"));
+        searchPage.setDepartureDate("2020-12-10");
+        assertTrue(searchPage.calendarFirst.getText().contains("9 декабря"));
     }
 
     @Test
     @Order(6)
     public void testFirstDataBeforeSecond() {
         searchPage.enterCity("Saint Petersburg");
-        searchPage.enterDateFirst(4);
-        searchPage.enterDateSecond();
-        assertTrue(searchPage.calendarFirst.getText().contains("4 ноября"));
+        searchPage.setArrivalDate("2020-12-09");
+        searchPage.setDepartureDate("2020-12-10");
+        assertTrue(searchPage.calendarFirst.getText().contains("9 декабря"));
     }
 
     @Test
     @Order(7)
     public void testFirstDataAfterSecond() {
         searchPage.enterCity("Saint Petersburg");
-        searchPage.enterDateFirst(11);
-        searchPage.enterDateSecond();
-        assertTrue(searchPage.calendarFirst.getText().contains("10 ноября"));
+        searchPage.setArrivalDate("2020-12-15");
+        searchPage.setDepartureDate("2020-12-10");
+        assertTrue(searchPage.calendarSecond.getText().contains("16 декабря"));
     }
 
     @Test
@@ -117,16 +118,16 @@ public class SearchPageTest {
     @Test
     @Order(10)
     public void testNightAmount() {
-        searchPage.enterCity("Saint Petersburg");
+        searchPage.enterCity("Адлер");
         searchPage.setUpDate();
         searchPage.clickSearch();
-        assertTrue(searchPage.getDaysAndPeopleText().contains("8 ночей"));
+        assertTrue(searchPage.getDaysAndPeopleText().contains("6 ночей"));
     }
 
     @Test
     @Order(11)
     public void testAdultAmount() {
-        searchPage.enterCity("Saint Petersburg");
+        searchPage.enterCity("Адлер");
         searchPage.setUpDate();
         searchPage.selectAdultAmount(4);
         searchPage.clickSearch();
@@ -140,7 +141,7 @@ public class SearchPageTest {
         searchPage.setUpDate();
         searchPage.selectChildAmount(3);
         searchPage.clickSearch();
-        assertTrue(searchPage.getDaysAndPeopleChildText().contains("2 ребенка"));
+        assertTrue(searchPage.getDaysAndPeopleText().contains("2 ребенка"));
     }
 
     @Test
@@ -160,7 +161,7 @@ public class SearchPageTest {
         searchPage.setUpDate();
         searchPage.selectChildAmount(1);
         searchPage.clickSearch();
-        assertThrows(NoSuchElementException.class, () -> searchPage.isChildFirstDisplayed());
+        assertEquals(0, searchPage.getChildAgeSize());
     }
 
     @Test
@@ -170,16 +171,11 @@ public class SearchPageTest {
         searchPage.setUpDate();
         searchPage.selectChildAmount(3);
         searchPage.clickSearch();
-        //FIXME: переделать на размер size()
-        assertAll(
-                () -> assertTrue(searchPage.isChildFirstDisplayed()),
-                () -> assertTrue(searchPage.isChildSecondDisplayed()),
-                () -> assertThrows(NoSuchElementException.class, () -> searchPage.isChildThirdDisplayed())
-        );
+        assertEquals(2, searchPage.getChildAgeSize());
     }
 
     @AfterEach
     public void tearDown(){
-        //webDriver.quit();
+        webDriver.quit();
     }
 }
