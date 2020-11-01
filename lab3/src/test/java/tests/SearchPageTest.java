@@ -45,6 +45,7 @@ public class SearchPageTest {
     @Order(1)
     public void testEmptyCity() {
         searchPage.enterCity("");
+        searchPage.setUpDate();
         searchPage.clickSearch();
         assertTrue(searchPage.isCityErrorDisplayed());
     }
@@ -53,6 +54,7 @@ public class SearchPageTest {
     @Order(2)
     public void testCorrectCity() {
         searchPage.enterCity("Saint Petersburg");
+        searchPage.setUpDate();
         searchPage.clickSearch();
         assertTrue(searchPage.checkFirstResultCity());
     }
@@ -60,6 +62,7 @@ public class SearchPageTest {
     @Test
     @Order(3)
     public void testStrangeInput() {
+        searchPage.setUpDate();
         searchPage.enterCity("а");
         searchPage.clickSearch();
         assertTrue(searchPage.getFirstResultCity().contains("Адлер"));
@@ -344,6 +347,6 @@ public class SearchPageTest {
 
     @AfterEach
     public void tearDown(){
-      //  webDriver.quit();
+        webDriver.quit();
     }
 }

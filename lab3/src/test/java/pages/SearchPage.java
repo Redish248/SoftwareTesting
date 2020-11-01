@@ -105,11 +105,15 @@ public class SearchPage extends PageObject{
     }
 
     public void setArrivalDate(String date) {
+        cityInput.click();
         calendarFirst.click();
         calendarFirst.findElement(By.xpath("//*/td[@data-date='" + date + "']")).click();
     }
 
     public void setDepartureDate(String date) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(calendarSecond);
+        actions.perform();
         calendarSecond.click();
         calendarSecond.findElement(By.xpath("//*/td[@data-date='" + date + "']")).click();
     }
@@ -200,7 +204,7 @@ public class SearchPage extends PageObject{
         selectAdultAmount(3);
         selectChildAmount(3);
         searchButton.click();
-        firstResultChooseButton.click();
+        firstResultTitle.click();
     }
 
     public String getTitleText() {
