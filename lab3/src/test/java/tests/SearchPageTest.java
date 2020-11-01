@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,22 +16,18 @@ import pages.SearchPage;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SearchPageTest {
     private WebDriver webDriver;
-    private MainPage mainPage;
     private SearchPage searchPage;
 
     @BeforeEach
     public void setUp() {
         webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.CHROME);
-        mainPage = new MainPage(webDriver);
         searchPage = new SearchPage(webDriver);
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(webDriver, 10);
@@ -172,6 +167,15 @@ public class SearchPageTest {
         searchPage.selectChildAmount(3);
         searchPage.clickSearch();
         assertEquals(2, searchPage.getChildAgeSize());
+    }
+
+    @Test
+    @Order(16)
+    public void showMap() {searchPage.enterCity("Сочи");
+        searchPage.setUpDate();
+        searchPage.clickSearch();
+        searchPage.showMap();
+        assertTrue(searchPage.isMapImageWasShown());
     }
 
     @AfterEach
