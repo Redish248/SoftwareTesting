@@ -3,11 +3,9 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,26 +29,22 @@ public class SearchPage extends PageObject{
     private final String SELECT_ADULT = "//*[@id='group_adults']";
     private final String SELECT_CHILD = "//*[@id='group_children']";
     private final String SELECT_ROOM = "//*[@id='no_rooms']";
-    private final String TRAVEL_BY_WORK = "//*[@id='frm']/div[5]/div[1]/div[3]/label/input";
     private final String SEARCH_BUTTON = "//*[@id='frm']/div[5]/div[2]/button";
     private final String FIRST_RESULT = "//*[@id='hotellist_inner']/div[1]";
     private final String FIRST_RESULT_IMAGE = "//*[@id='hotellist_inner']/div[1]/div/a/img";
     private final String FIRST_RESULT_TITLE = "//*[@id='hotellist_inner']/div[1]/div[2]/div[1]/div[1]/div[1]/h3/a";
-    private final String FIRST_RESULT_CHOOSE_BUTTON = "//*[@id='hotellist_inner']/div[1]/div[2]/div[3]/div/div/div/div/div[2]/div[2]/div/div/div/a";
+    private final String FIRST_RESULT_CHOOSE_BUTTON = "//*[@id='hotellist_inner']/div[1]/div[2]/div[4]/div/div/div/div/div[2]/div[2]/div/div/div/a";
     private final String FIRST_RESULT_NAME = "//*[@id='hotellist_inner']/div[1]/div[2]/div[1]/div[1]/div[2]/a";
     private final String CITY_ERROR = "//*[@id='destination__error']/div";
-    private final String AUTOCOMPLETE = "//*[@id='frm']/div[2]/div/div[1]/ul[2]/li[1]";
-    private final String FOURTH_OF_NOVEMBER = "//*[@id='frm']/div[3]/div/div[2]/div/div/div[3]/div[2]/table/tbody/tr[2]/td[3]";
-    private final String ELEVENTH_OF_NOVEMBER = "//*[@id='frm']/div[3]/div/div[2]/div/div/div[3]/div[2]/table/tbody/tr[3]/td[2]";
-    private final String FIFTH_OF_OCTOBER = "//*[@id='frm']/div[3]/div/div[2]/div/div/div[3]/div[2]/table/tbody/tr[2]/td[4]";
-    private final String DEC_7 = "//*[@id='frm']/div[3]/div/div[2]/div/div/div[3]/div[2]/table/tbody/tr[2]/td[1]";
-    private final String NOV_10 = "//*[@id='frm']/div[3]/div/div[2]/div/div/div[3]/div[1]/table/tbody/tr[3]/td[2]";
-    private final String PAST_DATE = "//*[@id='frm']/div[3]/div/div[2]/div/div/div[3]/div[1]/table/tbody/tr[3]/td[4]";
-    private final String DAYS_AND_PEOPLE_TEXT = "//*[@id='hotellist_inner']/div[1]/div[2]/div[3]/div/div/div/div/div[2]/div[1]/div[1]/div";
-    private final String DAYS_AND_PEOPLE_CHILD_TEXT = "//*[@id='hotellist_inner']/div[1]/div[2]/div[3]/div/div[2]/div/div[1]/div";
-    private final String CHILD_1 = "//*[@id='frm']/div[4]/div/div/div/div[2]/div[2]/div[1]/div[1]/select";
-    private final String CHILD_2 = "//*[@id='frm']/div[4]/div/div/div/div[2]/div[2]/div[2]/div[2]/select";
-    private final String CHILD_3 = "//*[@id='frm']/div[4]/div/div/div/div[2]/div[2]/div[2]/div[3]/select";
+    private final String CHILD_AGE = "//*[@name='age']";
+    private final String MAP = "//*[@id='b_google_map_thumbnail']";
+    private final String MAP_IMAGE = "//*[@id='b_map_tiles']/div/div/div[1]/div[3]";
+    private final String CURRENCY_CHOOSER = "//*[@id='user_form']/ul/li[1]/a";
+    private final String SELECT_PAYMENT = "//*[@id='filter_price']/div[3]/a[1]";
+    private final String STAR = "//*[@id='filter_class']/div[2]";
+    private final String RATING = "//*[@id='filter_review']/div[2]";
+    private final String DISTANCE = "//*[@id='filter_distance']/div[2]";
+    private final String BOOKING_RULES = "//*[@id='filter_fc']/div[2]";
     private final String SELECTED_DATES = "//td[contains(@class,'bui-calendar__date--selected')]";
     private final String LOGO = "//div[@class='bui-header__logo']";
 
@@ -72,17 +66,11 @@ public class SearchPage extends PageObject{
     @FindBy(xpath = SELECT_ROOM)
     WebElement selectRoom;
 
-    @FindBy(xpath = TRAVEL_BY_WORK)
-    WebElement travelByWorkCheckbox;
-
     @FindBy(xpath = SEARCH_BUTTON)
     WebElement searchButton;
 
     @FindBy(xpath = FIRST_RESULT)
-    WebElement firstResult;
-
-    @FindBy(xpath = FIRST_RESULT_IMAGE)
-    WebElement firstResultImage;
+    public WebElement firstResult;
 
     @FindBy(xpath = FIRST_RESULT_TITLE)
     WebElement firstResultTitle;
@@ -93,38 +81,29 @@ public class SearchPage extends PageObject{
     @FindBy(xpath = CITY_ERROR)
     WebElement cityError;
 
-    @FindBy(xpath = AUTOCOMPLETE)
-    WebElement firstItemInAutocomplete;
-
     @FindBy(xpath = FIRST_RESULT_NAME)
     WebElement firstResultCity;
 
-    @FindBy(xpath = FOURTH_OF_NOVEMBER)
-    WebElement fourthOfNovember;
+    @FindBy(xpath = MAP)
+    WebElement map;
 
-    @FindBy(xpath = ELEVENTH_OF_NOVEMBER)
-    WebElement eleventhOfNovember;
+    @FindBy(xpath = CURRENCY_CHOOSER)
+    WebElement currencyChooser;
 
-    @FindBy(xpath = FIFTH_OF_OCTOBER)
-    WebElement fifthOfOctober;
+    @FindBy(xpath = SELECT_PAYMENT)
+    WebElement selectPayment;
 
-    @FindBy(xpath = PAST_DATE)
-    WebElement pastDate;
+    @FindBy(xpath = STAR)
+    WebElement selectStartRating;
 
-    @FindBy(xpath = DAYS_AND_PEOPLE_TEXT)
-    WebElement daysAndPeople;
+    @FindBy(xpath = RATING)
+    WebElement rating;
 
-    @FindBy(xpath = DAYS_AND_PEOPLE_CHILD_TEXT)
-    WebElement daysAndPeopleChild;
+    @FindBy(xpath = DISTANCE)
+    WebElement distanceCheckbox;
 
-    @FindBy(xpath = CHILD_1)
-    WebElement firstChild;
-
-    @FindBy(xpath = CHILD_2)
-    WebElement secondChild;
-
-    @FindBy(xpath = CHILD_3)
-    WebElement thirdChild;
+    @FindBy(xpath = BOOKING_RULES)
+    WebElement bookingRules;
 
     @FindBy(xpath = LOGO)
     WebElement logo;
@@ -134,21 +113,18 @@ public class SearchPage extends PageObject{
         cityInput.sendKeys(city);
     }
 
-    public void enterDateFirst(int date) {
+    public void setArrivalDate(String date) {
+        cityInput.click();
         calendarFirst.click();
-        switch (date) {
-            case 4:
-                fourthOfNovember.click();
-                break;
-            case 11:
-                eleventhOfNovember.click();
-                break;
-        }
+        calendarFirst.findElement(By.xpath("//*/td[@data-date='" + date + "']")).click();
     }
 
-    public void enterDateSecond() {
+    public void setDepartureDate(String date) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(calendarSecond);
+        actions.perform();
         calendarSecond.click();
-        fifthOfOctober.click();
+        calendarSecond.findElement(By.xpath("//*/td[@data-date='" + date + "']")).click();
     }
 
     public void selectAdultAmount(int amount) {
@@ -167,14 +143,6 @@ public class SearchPage extends PageObject{
         selectRoom.click();
         WebElement number = driver.findElement(By.xpath(SELECT_CHILD.concat("/option[" + amount + "]")));
         number.click();
-    }
-
-    public void clickToAutocomplete() {
-        firstItemInAutocomplete.click();
-    }
-
-    public void setTravelByWork() {
-        travelByWorkCheckbox.click();
     }
 
     public void clickSearch() {
@@ -198,13 +166,11 @@ public class SearchPage extends PageObject{
     }
 
     public void clickDateInPastFirst() {
-        calendarFirst.click();
-        pastDate.click();
+        setArrivalDate("2020-11-01");
     }
 
     public void clickDateInPastSecond() {
-        calendarSecond.click();
-        pastDate.click();
+        setDepartureDate("2020-11-01");
     }
 
     public boolean isCityErrorDisplayed() {
@@ -212,30 +178,110 @@ public class SearchPage extends PageObject{
     }
 
     public String getDaysAndPeopleText() {
-        return daysAndPeople.getText();
-    }
-
-    public String getDaysAndPeopleChildText() {
-        return daysAndPeopleChild.getText();
+        return firstResult.getText();
     }
 
     public void setUpDate() {
-        calendarFirst.click();
-        driver.findElement(By.xpath(DEC_7)).click();
-        calendarSecond.click();
-        driver.findElement(By.xpath(NOV_10)).click();
+        setArrivalDate("2020-11-24");
+        setDepartureDate("2020-11-30");
     }
 
-    public boolean isChildFirstDisplayed() {
-        return firstChild.isDisplayed();
+    public int getChildAgeSize() {
+        return driver.findElements(By.xpath(CHILD_AGE)).size();
     }
 
-    public boolean isChildSecondDisplayed() {
-        return secondChild.isDisplayed();
+    public void showMap() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(map);
+        actions.perform();
+        map.click();
     }
 
-    public boolean isChildThirdDisplayed() {
-        return thirdChild.isDisplayed();
+    public boolean isMapImageWasShown() {
+        return driver.findElement(By.xpath(MAP_IMAGE)).isDisplayed();
+    }
+
+    public void setUpSearch() {
+        enterCity("Сочи");
+        setUpDate();
+        searchButton.click();
+    }
+
+    public void goToSomeHotel() {
+        enterCity("Сочи");
+        setUpDate();
+        selectAdultAmount(3);
+        selectChildAmount(3);
+        searchButton.click();
+        firstResultTitle.click();
+    }
+
+    public String getTitleText() {
+        return firstResultTitle.getText();
+    }
+
+    public String getCityText() {
+        return cityInput.getText();
+    }
+
+    public String getArrivalDateText() {
+        return calendarFirst.getText();
+    }
+
+    public String getDepartureDateText() {
+        return calendarSecond.getText();
+    }
+
+    public String getAdultAmountText() {
+        return new Select(selectAdult).getFirstSelectedOption().getText();
+    }
+
+    public String getChildAmountText() {
+        return new Select(selectChild).getFirstSelectedOption().getText();
+    }
+
+    public String getRoomAmountText() {
+        return new Select(selectRoom).getFirstSelectedOption().getText();
+    }
+
+    public void selectCurrency(String currency_name) {
+        currencyChooser.click();
+        driver.findElement(By.xpath("//*[@class='currency_" + currency_name + "']")).click();
+    }
+
+    public void selectPaymentCheckbox() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(selectPayment);
+        actions.perform();
+        selectPayment.click();
+    }
+
+    public void selectStarRating(int amount) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(selectStartRating);
+        actions.perform();
+        driver.findElement(By.xpath(STAR + "/a[" + amount + "]")).click();
+    }
+
+    public void selectRating(int amount) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(rating);
+        actions.perform();
+        driver.findElement(By.xpath(RATING + "/a[" + amount + "]")).click();
+    }
+
+    public void selectDistance(int amount) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(distanceCheckbox);
+        actions.perform();
+        driver.findElement(By.xpath(DISTANCE + "/a[" + amount + "]")).click();
+    }
+
+    public void selectBookingRule(int amount) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(bookingRules);
+        actions.perform();
+        driver.findElement(By.xpath(BOOKING_RULES + "/a[" + amount + "]")).click();
     }
 
     public String getCity() {
