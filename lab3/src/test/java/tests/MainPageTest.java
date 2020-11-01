@@ -9,9 +9,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
+import pages.SearchPage;
 import pages.SignUpPage;
 
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDate;
 
 import java.util.List;
 
@@ -23,28 +24,48 @@ public class MainPageTest {
     private static MainPage mainPage;
     private static LogInPage logInPage;
     private static SignUpPage signUpPage;
+    private static SearchPage searchPage;
+    private static final WebDriverConfiguration.Browser browser = WebDriverConfiguration.Browser.FIREFOX;
 
     @BeforeAll
     public static void setUp() {
-        webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.CHROME);
+        webDriver = WebDriverConfiguration.getWebDriver(browser);
         mainPage = new MainPage(webDriver);
         logInPage = new LogInPage(webDriver);
         signUpPage = new SignUpPage(webDriver);
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='onetrust-accept-btn-handler']")));
-        webDriver.findElement(By.xpath("//*[@id='onetrust-accept-btn-handler']")).click();
+        searchPage = new SearchPage(webDriver);
+    }
+
+    @BeforeEach
+    public void acceptCookies() {
+        if (mainPage.isCookiesBannerOpen()) {
+            mainPage.acceptCookies();
+        }
     }
 
     @Test
     @Order(1)
+    public void testIsMainPage() {
+        assertTrue(webDriver.getCurrentUrl().contains("booking.com/index.ru"));
+    }
+
+    @Test
+    @Order(2)
     public void testDestinationEmptyCityNotEmptySuggestions() {
         mainPage.focusCity();
         assertNotEquals(0, mainPage.getSuggestionsNames().size());
     }
 
     @Test
-    @Order(2)
+    @Order(3)
+    public void testEmptyCity() {
+        mainPage.clearCity();
+        mainPage.submitButton.click();
+        assertTrue(mainPage.idDestErrorVisible());
+    }
+
+    @Test
+    @Order(4)
     public void testDestinationRealCityCheckValue() {
         mainPage.enterCity("Казань");
         assertEquals("Казань", mainPage.destinationInput.getAttribute("value"));
@@ -52,7 +73,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(3)
+    @Order(5)
     public void testDestinationRealCityNotEmptySuggestions() {
         mainPage.enterCity("Казань");
         new WebDriverWait(webDriver, 5)
@@ -61,7 +82,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(4)
+    @Order(6)
     public void testDestinationRealCityFirstSuggestion() {
         mainPage.enterCity("Казань");
         new WebDriverWait(webDriver, 10)
@@ -72,7 +93,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(5)
+    @Order(7)
     public void testDestinationRealCityWithMistake() {
         mainPage.enterCity("Казаньб");
         new WebDriverWait(webDriver, 10)
@@ -84,7 +105,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(6)
+    @Order(8)
     public void testDestinationFakeCity() {
         mainPage.enterCity("Йцукен");
         new WebDriverWait(webDriver, 5)
@@ -94,7 +115,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(7)
+    @Order(9)
     @Disabled("В целом работает, но оооооочень долго")
     public void testDestinationLongNameCity() {
         mainPage.enterCity("НуОченьДлинноеНазваниеГородаДляТестаВводаНаБукинге".repeat(276));
@@ -105,14 +126,14 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(8)
+    @Order(10)
     public void testGuestsDisplayContainerAfterClick() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         assertEquals("display: block;", mainPage.guestsContainer.getAttribute("style"));
     }
 
     @Test
-    @Order(9)
+    @Order(11)
     public void testGuestsAdultMinusButton() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         String expValue = String.valueOf(Integer.parseInt(mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText())-1);
@@ -121,7 +142,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(10)
+    @Order(12)
     public void testGuestsAdultMinusButtonDisabled() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         while (!"1".equals(mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText())) {
@@ -131,7 +152,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(11)
+    @Order(13)
     public void testGuestsAdultPlusButton() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         String expValue = String.valueOf(Integer.parseInt(mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText())+1);
@@ -140,7 +161,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(12)
+    @Order(14)
     public void testGuestsAdultPlusButtonDisabled() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         while (!"30".equals(mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText())) {
@@ -150,7 +171,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(13)
+    @Order(15)
     public void testGuestsChildPlusButton() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         String expValue = String.valueOf(Integer.parseInt(mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())+1);
@@ -159,7 +180,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(14)
+    @Order(16)
     public void testGuestsChildPlusButtonDisabled() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         while (!"10".equals(mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())) {
@@ -169,7 +190,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(15)
+    @Order(17)
     public void testGuestsChildMinusButton() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         String expValue = String.valueOf(Integer.parseInt(mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())-1);
@@ -178,7 +199,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(16)
+    @Order(18)
     public void testGuestsChildMinusButtonDisabled() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         while (!"0".equals(mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())) {
@@ -188,7 +209,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(17)
+    @Order(19)
     public void testGuestsRoomPlusButton() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         String expValue = String.valueOf(Integer.parseInt(mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText())+1);
@@ -197,7 +218,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(18)
+    @Order(20)
     public void testGuestsRoomMinusButton() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         String expValue = String.valueOf(Integer.parseInt(mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText())-1);
@@ -206,7 +227,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(19)
+    @Order(21)
     public void testGuestsRoomMinusButtonDisabled() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         while (!"1".equals(mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText())) {
@@ -216,7 +237,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(20)
+    @Order(22)
     public void testGuestsRoomPlusButtonDisabled() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         while (!"30".equals(mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText())) {
@@ -226,7 +247,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(21)
+    @Order(23)
     public void testChildrenAgeInputsAmount() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         int expResult = Integer.parseInt(mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())+3;
@@ -237,7 +258,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(22)
+    @Order(24)
     public void testChildrenAgeInput() {
         if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
         if ("0".equals(mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText())) {
@@ -250,7 +271,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(23)
+    @Order(25)
     public void testGuestLabelAdults() {
         WebElement adultsLabel = mainPage.getGuestLabel(0);
         String amount = mainPage.getGuestNumber(mainPage.getGuestInput(0)).getText();
@@ -258,7 +279,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(24)
+    @Order(26)
     public void testGuestLabelChildren() {
         WebElement childrenLabel = mainPage.getGuestLabel(1);
         String amount = mainPage.getGuestNumber(mainPage.getGuestInput(1)).getText();
@@ -266,7 +287,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(25)
+    @Order(27)
     public void testGuestLabelRooms() {
         WebElement roomsLabel = mainPage.getGuestLabel(2);
         String amount = mainPage.getGuestNumber(mainPage.getGuestInput(2)).getText();
@@ -274,7 +295,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(26)
+    @Order(28)
     public void testCheckInToday() {
         if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
         WebElement today = mainPage.getTodayElement();
@@ -283,7 +304,7 @@ public class MainPageTest {
     }
 
     @Test
-    @Order(26)
+    @Order(29)
     public void testCheckInTodayCheckOutTomorrow() {
         if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
         WebElement today = mainPage.getTodayElement();
@@ -293,24 +314,109 @@ public class MainPageTest {
         assertEquals(List.of(today, tomorrow), mainPage.getSelectedDates());
     }
 
+    @Test
+    @Order(30)
+    public void testCheckInTomorrowCheckOutToday() {
+        if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
+        WebElement today = mainPage.getTodayElement();
+        WebElement tomorrow = mainPage.getElementByDate(mainPage.getNewDate(mainPage.getTodayDate(today), 1));
+        tomorrow.click();
+        today.click();
+        assertEquals(List.of(today), mainPage.getSelectedDates());
+    }
 
     @Test
-    @Disabled
+    @Order(31)
+    public void test31Nights() {
+        if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
+        WebElement today = mainPage.getTodayElement();
+        WebElement checkOutDate = mainPage.getElementByDate(mainPage.getNewDate(mainPage.getTodayDate(today), 31));
+        today.click();
+        checkOutDate.click();
+        mainPage.submitButton.click();
+        assertTrue(mainPage.idDatesErrorVisible());
+        if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
+        checkOutDate.click();
+    }
+
+    @Test
+    @Order(32)
+    public void testYesterdayDisabled() {
+        if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
+        LocalDate today = mainPage.getTodayDate(mainPage.getTodayElement());
+        if (today.getDayOfMonth() != 1) {
+            WebElement yesterday = mainPage.getElementByDate(mainPage.getNewDate(today, -1));
+            assertTrue(yesterday.getAttribute("class").contains("disabled"));
+        }
+    }
+
+    @Test
+    @Order(34)
+    public void testPostcardCity() {
+        mainPage.waitPresence();
+        String city = mainPage.getPostcardCityName();
+        mainPage.postcard.click();
+        searchPage.waitPresence();
+        assertAll(
+                () -> assertTrue(webDriver.getCurrentUrl().contains("booking.com/searchresults.ru")),
+                () -> assertEquals(city, searchPage.getCity())
+        );
+        searchPage.navigateMainPage();
+    }
+
+    //todo: вынести тесты с переходами в отдельный класс
+    @Test
+    @Order(35)
+    public void testInputValuesSearchPage() {
+        mainPage.waitPresence();
+        String city = "Казань";
+        mainPage.enterCity(city);
+        mainPage.setCheckInCheckOut(1);
+        List<String> dates = mainPage.getGuestsDates();
+        List<Integer> guestsAmount = mainPage.getGuestsAmount();
+        mainPage.submitButton.click();
+        new WebDriverWait(webDriver, 5)
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//form[@id='frm']")));
+        assertAll(
+                () -> assertEquals(city, searchPage.getCity()),
+                () -> assertEquals(dates, searchPage.getGuestsDates()),
+                () -> assertEquals(guestsAmount, searchPage.getGuestsAmount())
+        );
+        searchPage.navigateMainPage();
+    }
+
+    @Test
+    @Order(36)
+    public void testLanguageEnglishUs() {
+        mainPage.changeLanguage("en-us");
+        assertAll(
+                () -> assertEquals("Stays", mainPage.navigationTabs.get(0).getText()),
+                () -> assertEquals("Search", mainPage.submitButton.getText())
+        );
+    }
+
+    @Test
+    @Order(37)
     public void testGoToLogInPage() {
+        mainPage.waitPresence();
         mainPage.clickToLogIn();
         assertTrue(logInPage.isEmailInputDisplayed());
+        logInPage.navigateMainPage();
     }
 
     @Test
-    @Disabled
+    @Order(38)
     public void testGoToSignInPage() {
+        mainPage.waitPresence();
         mainPage.goToRegisterPage();
         assertTrue(signUpPage.isEmailInputDisplayed());
+        signUpPage.navigateMainPage();
     }
 
     @Test
-    @Disabled
+    @Order(39)
     public void testLogOut() {
+        mainPage.waitPresence();
         mainPage.clickToLogIn();
         logInPage.signIn("yecine5178@aieen.com", "12345678");
         mainPage.signOutClick();

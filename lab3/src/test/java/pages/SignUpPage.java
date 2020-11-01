@@ -1,8 +1,11 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignUpPage extends PageObject  {
     public SignUpPage(WebDriver driver) {
@@ -17,6 +20,7 @@ public class SignUpPage extends PageObject  {
     private final String CREATE_ACCOUNT = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div/div/form/button";
     private final String ERROR_UNDER_PWD_1 = "//*[@id=\"password-description\"]";
     private final String ERROR_UNDER_PWD_2 = "//*[@id=\"confirmed_password-description\"]";
+    private final String LOGO = "//div[@class='bui-header__logo']";
 
     @FindBy(xpath = EMAIL_INPUT)
     WebElement emailInput;
@@ -32,6 +36,9 @@ public class SignUpPage extends PageObject  {
 
     @FindBy(xpath = PASSWORD_INPUT_2)
     WebElement passwordInputSecond;
+
+    @FindBy(xpath = LOGO)
+    WebElement logo;
 
     @FindBy(xpath = CREATE_ACCOUNT)
     WebElement createAccountButton;
@@ -100,6 +107,10 @@ public class SignUpPage extends PageObject  {
 
     public boolean isPasswordSecondErrorDisplayed() {
         return errorUnderPwd2.isDisplayed();
+    }
+
+    public void navigateMainPage() {
+        logo.click();
     }
 
 }

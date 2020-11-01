@@ -6,6 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /*
 TODO:
@@ -45,6 +51,8 @@ public class SearchPage extends PageObject{
     private final String CHILD_1 = "//*[@id='frm']/div[4]/div/div/div/div[2]/div[2]/div[1]/div[1]/select";
     private final String CHILD_2 = "//*[@id='frm']/div[4]/div/div/div/div[2]/div[2]/div[2]/div[2]/select";
     private final String CHILD_3 = "//*[@id='frm']/div[4]/div/div/div/div[2]/div[2]/div[2]/div[3]/select";
+    private final String SELECTED_DATES = "//td[contains(@class,'bui-calendar__date--selected')]";
+    private final String LOGO = "//div[@class='bui-header__logo']";
 
     @FindBy(xpath = CITY_INPUT)
     WebElement cityInput;
@@ -117,6 +125,9 @@ public class SearchPage extends PageObject{
 
     @FindBy(xpath = CHILD_3)
     WebElement thirdChild;
+
+    @FindBy(xpath = LOGO)
+    WebElement logo;
 
     public void enterCity(String city) {
         cityInput.click();
@@ -225,6 +236,38 @@ public class SearchPage extends PageObject{
 
     public boolean isChildThirdDisplayed() {
         return thirdChild.isDisplayed();
+    }
+
+    public String getCity() {
+        return driver.findElement(By.xpath(CITY_INPUT)).getAttribute("value");
+    }
+
+    public List<Integer> getGuestsAmount() {
+        int adult = extractGuestAmount(selectAdult);
+        int child = extractGuestAmount(selectChild);
+        int room = extractGuestAmount(selectRoom);
+        return List.of(adult, child, room);
+    }
+
+    public int extractGuestAmount(WebElement guest) {
+        String text = guest.findElement(By.xpath("./option[@selected='selected']")).getText();
+        String amountStr = Arrays.stream(text.split(" ")).findFirst().get();
+        return amountStr.equals("Без") ? 0 : Integer.parseInt(amountStr);
+    }
+
+    public List<String> getGuestsDates() {
+        return driver.findElements(By.xpath(SELECTED_DATES)).stream()
+                .map(date -> date.getAttribute("data-date"))
+                .collect(Collectors.toList());
+    }
+
+    public void navigateMainPage() {
+        logo.click();
+    }
+
+    public void waitPresence() {
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.urlContains("booking.com/searchresults"));
     }
 
 }

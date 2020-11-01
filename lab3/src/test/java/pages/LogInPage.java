@@ -1,8 +1,11 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LogInPage extends PageObject {
     public LogInPage(WebDriver driver) {
@@ -16,6 +19,7 @@ public class LogInPage extends PageObject {
     private final String EMAIL_ERROR = "//*[@id='username-description']";
     private final String INCORRECT_PASS = "//*[@id='password-description']";
     private final String SHOW_PWD = "//*[@id='root']/div/div[2]/div[1]/div/div/div/div/div/div/form/div/div/div/div/div/div/div[2]/svg";
+    private final String LOGO = "//div[@class='bui-header__logo']";
 
     @FindBy(xpath = EMAIL)
     WebElement emailInput;
@@ -28,6 +32,9 @@ public class LogInPage extends PageObject {
 
     @FindBy(xpath = SIGN_IN)
     WebElement signIn;
+
+    @FindBy(xpath = LOGO)
+    WebElement logo;
 
     @FindBy(xpath = EMAIL_ERROR)
     WebElement error;
@@ -80,4 +87,8 @@ public class LogInPage extends PageObject {
     }
 
     public boolean isErrorForIncorrectPasswordDisplayed() { return errorPwd.isDisplayed(); }
+
+    public void navigateMainPage() {
+        logo.click();
+    }
 }
