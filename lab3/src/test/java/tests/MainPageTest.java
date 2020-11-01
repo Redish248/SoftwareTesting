@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
 import pages.SignUpPage;
 
+import java.util.concurrent.TimeUnit;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,6 +30,10 @@ public class MainPageTest {
         mainPage = new MainPage(webDriver);
         logInPage = new LogInPage(webDriver);
         signUpPage = new SignUpPage(webDriver);
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(webDriver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='onetrust-accept-btn-handler']")));
+        webDriver.findElement(By.xpath("//*[@id='onetrust-accept-btn-handler']")).click();
     }
 
     @Test

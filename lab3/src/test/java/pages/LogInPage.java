@@ -9,13 +9,13 @@ public class LogInPage extends PageObject {
         super(driver);
     }
 
-    private final String EMAIL = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div/div/form/div[1]/div/div/div/input";
-    private final String NEXT = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div/div/form/div[3]/button";
-    private final String PASSWORD = "//*[@id=\"password\"]";
-    private final String SIGN_IN = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div/div/form/button";
-    private final String EMAIL_ERROR = "//*[@id=\"username-description\"]";
-    private final String INCORRECT_PASS = "//*[@id=\"password-description\"]";
-    private final String SHOW_PWD = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div/div/form/div/div/div/div/div/div/div[2]/svg";
+    private final String EMAIL = "//*[@id='root']/div/div[2]/div[1]/div/div/div/div/div/div/form/div[1]/div/div/div/input";
+    private final String NEXT = "//*[@id='root']/div/div[2]/div[1]/div/div/div/div/div/div/form/div[3]/button";
+    private final String PASSWORD = "//*[@id='password']";
+    private final String SIGN_IN = "//*[@id='root']/div/div[2]/div[1]/div/div/div/div/div/div/form/button";
+    private final String EMAIL_ERROR = "//*[@id='username-description']";
+    private final String INCORRECT_PASS = "//*[@id='password-description']";
+    private final String SHOW_PWD = "//*[@id='root']/div/div[2]/div[1]/div/div/div/div/div/div/form/div/div/div/div/div/div/div[2]/svg";
 
     @FindBy(xpath = EMAIL)
     WebElement emailInput;
