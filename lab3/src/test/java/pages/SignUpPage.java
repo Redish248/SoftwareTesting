@@ -1,25 +1,22 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignUpPage extends PageObject  {
     public SignUpPage(WebDriver driver) {
         super(driver);
     }
 
-    private final String EMAIL_INPUT = "//*[@id=\"login_name_register\"]";
-    private final String GET_STARTED = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div/div/form/button";
-    private final String EMAIL_ERROR = "//*[@id=\"login_name_register-description\"]";
-    private final String PASSWORD_INPUT_1 = "//*[@id=\"password\"]";
-    private final String PASSWORD_INPUT_2 = "//*[@id=\"confirmed_password\"]";
-    private final String CREATE_ACCOUNT = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div/div/form/button";
-    private final String ERROR_UNDER_PWD_1 = "//*[@id=\"password-description\"]";
-    private final String ERROR_UNDER_PWD_2 = "//*[@id=\"confirmed_password-description\"]";
+    private final String EMAIL_INPUT = "//*[@id='login_name_register']";
+    private final String GET_STARTED = "//*[@id='root']/div/div[2]/div[1]/div/div/div/div/div/div/form/button";
+    private final String EMAIL_ERROR = "//*[@id='login_name_register-description']";
+    private final String PASSWORD_INPUT_1 = "//*[@id='password']";
+    private final String PASSWORD_INPUT_2 = "//*[@id='confirmed_password']";
+    private final String CREATE_ACCOUNT = "//*[@id='root']/div/div[2]/div[1]/div/div/div/div/div/div/form/button";
+    private final String ERROR_UNDER_PWD_1 = "//*[@id='password-description']";
+    private final String ERROR_UNDER_PWD_2 = "//*[@id='confirmed_password-description']";
     private final String LOGO = "//div[@class='bui-header__logo']";
 
     @FindBy(xpath = EMAIL_INPUT)

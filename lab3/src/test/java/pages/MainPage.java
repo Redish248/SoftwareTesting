@@ -18,7 +18,7 @@ public class MainPage extends PageObject {
     }
 
     private final String LOG_IN = "//*[@id='current_account']/a";
-    private final String ACCOUNT = "//*[@id='current_account']/a";
+    private final String ACCOUNT = "//*[@class='bui-avatar-block']";
     public final String DEST_INPUT = "//*[@class='sb-destination-label-sr']/input";
     public final String DEST_SUGGESTIONS_NAMES = "//*[@data-component='search/destination/input']//span[@class='search_hl_name']";
     public final String DEST_SUGGESTIONS_AND_LOADING = "//*[@data-component='search/destination/input']//ul";
@@ -88,7 +88,7 @@ public class MainPage extends PageObject {
     WebElement logoutButton;
 
     @FindBy(xpath = ACCOUNT_ICON)
-    WebElement accountIcon;
+    WebElement  accountIcon;
 
     public List<WebElement> getSuggestionsNames() {
         return driver.findElements(By.xpath(DEST_SUGGESTIONS_NAMES));

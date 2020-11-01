@@ -3,7 +3,6 @@ package tests;
 import config.WebDriverConfiguration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -19,13 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/*
-TODO:
--при вводе почты sign up
--может, надо соцсети покликать
--несуществующий --> sign up в ошибке переход
--тексты ошибок проверить
- */
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LogInTest {
     private WebDriver webDriver;
@@ -103,16 +96,6 @@ public class LogInTest {
     public void testCorrectPassword() {
         logInPage.signIn("yecine5178@aieen.com", "12345678");
         assertTrue(mainPage.isAccountDisplayed());
-    }
-
-    //FIXME или убрать вообще
-    @Test
-    @Disabled
-    public void checkShowingPassword() {
-        logInPage.inputEmail("yecine5178@aieen.com");
-        logInPage.goNext();
-        logInPage.inputPassword("12345");
-        logInPage.clickShowPassword();
     }
 
     @AfterEach
