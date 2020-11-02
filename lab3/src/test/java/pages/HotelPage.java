@@ -24,7 +24,7 @@ public class HotelPage extends PageObject{
     private final String BOOK_BUTTON = "//*[@id='hp_book_now_button']";
     private final String NAVIGATION = "//*[@id='right']/div[2]/ul/li";
     private final String CHOOSE_ROOM = "//*[@id='hprt-table']/tbody/tr[1]/td[5]/div/select";
-    private final String I_BOOK_BUTTON = "//*[@id='hprt-form']/div[16]/div[2]/div[2]/div[6]/button";
+    private final String I_BOOK_BUTTON = "//*[@id='hprt-form']/div[8]/div[2]/div[2]/div[6]/button";
 
     @FindBy(xpath = HOTEL_TITLE)
     WebElement hotelTitle;
@@ -96,6 +96,7 @@ public class HotelPage extends PageObject{
         bookButton.click();
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(CHOOSE_ROOM)));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CHOOSE_ROOM)));
         chooseRoomButton.click();
         chooseRoomButton.findElement(By.xpath("./option[2]")).click();
         iBookButton.click();

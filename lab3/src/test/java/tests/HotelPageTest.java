@@ -3,13 +3,13 @@ package tests;
 import config.WebDriverConfiguration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HotelPage;
@@ -30,7 +30,7 @@ public class HotelPageTest {
 
     @BeforeEach
     public void setUp() {
-        webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.FIREFOX);
+        webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.CHROME);
         searchPage = new SearchPage(webDriver);
         hotelPage = new HotelPage(webDriver);
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -63,8 +63,8 @@ public class HotelPageTest {
     public void testNavigationToComfortInfo() {
         hotelPage.navigateToSomewhere(2);
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 10);
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='HotelFacilities']")));
-        assertTrue(webDriver.findElement(By.xpath("//*[@id='hp-facilities-sliding']/div[1]/div[2]/div")).isDisplayed());
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='hp-facilities-sliding-wrapper']")));
+        assertTrue(webDriver.findElement(By.xpath("//*[@class='hp-facilities-sliding-wrapper']")).isDisplayed());
     }
 
     @Test
@@ -79,15 +79,16 @@ public class HotelPageTest {
     @Test
     @Order(4)
     public void testNavigationToReviews() {
-        hotelPage.navigateToSomewhere(4);
+        hotelPage.navigateToSomewhere(5);
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 10);
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='review_list_score_container']")));
         assertTrue(webDriver.findElement(By.xpath("//*[@id='review_list_score_container']")).isDisplayed());
     }
 
     @Test
+    @Disabled
     @Order(5)
-    public void testBooking() {
+        public void testBooking() {
         String hotelTitle = hotelPage.getHotelTitle().replaceAll("\n", " ").replaceAll("<","").replaceAll(">","");
         String arrivalDate = hotelPage.getArrivalDate();
         String departureDate = hotelPage.getDepartureDate();
@@ -103,6 +104,6 @@ public class HotelPageTest {
 
     @AfterEach
     public void tearDown(){
-        webDriver.quit();
+        //webDriver.quit();
     }
 }
