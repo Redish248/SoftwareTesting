@@ -141,7 +141,7 @@ public class SearchPage extends PageObject{
 
     public void selectRoomAmount(int amount) {
         selectRoom.click();
-        WebElement number = driver.findElement(By.xpath(SELECT_CHILD.concat("/option[" + amount + "]")));
+        WebElement number = driver.findElement(By.xpath(SELECT_ROOM.concat("/option[" + amount + "]")));
         number.click();
     }
 
