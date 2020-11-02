@@ -86,7 +86,7 @@ public class MainPageNavigationTest {
         mainPage.clickToLogIn();
         logInPage.signIn("yecine5178@aieen.com", "12345678");
         mainPage.signOutClick();
-        assertThrows(NoSuchElementException.class, () -> mainPage.isAccountDisplayed());
+        assertTrue(mainPage.isLoginDisplayed());
     }
 
     @Test

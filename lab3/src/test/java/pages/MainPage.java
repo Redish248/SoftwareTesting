@@ -215,12 +215,18 @@ public class MainPage extends PageObject {
     }
 
     public void signOutClick() {
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(ACCOUNT_ICON)));
         accountIcon.click();
         logoutButton.click();
     }
 
     public boolean isAccountDisplayed() {
         return accountLink.isDisplayed();
+    }
+
+    public boolean isLoginDisplayed() {
+        return logInButton.isDisplayed();
     }
 
     public boolean isMainSearchDisplayed() {

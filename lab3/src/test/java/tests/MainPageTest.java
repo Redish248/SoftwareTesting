@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MainPageTest {
     private static WebDriver webDriver;
     private static MainPage mainPage;
-    private static final WebDriverConfiguration.Browser browser = WebDriverConfiguration.Browser.CHROME;
+    private static final WebDriverConfiguration.Browser browser = WebDriverConfiguration.Browser.FIREFOX;
 
     @BeforeAll
     public static void setUp() {

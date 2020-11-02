@@ -31,7 +31,7 @@ public class SearchPageTest {
 
     @BeforeEach
     public void setUp() {
-        webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.CHROME);
+        webDriver = WebDriverConfiguration.getWebDriver(WebDriverConfiguration.Browser.FIREFOX);
         searchPage = new SearchPage(webDriver);
         hotelPage = new HotelPage(webDriver);
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
