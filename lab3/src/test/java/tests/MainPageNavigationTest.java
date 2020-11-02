@@ -12,7 +12,6 @@ import pages.SearchPage;
 import pages.SignUpPage;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,8 +30,7 @@ public class MainPageNavigationTest {
         mainPage = new MainPage(webDriver);
         logInPage = new LogInPage(webDriver);
         signUpPage = new SignUpPage(webDriver);
-        searchPage = new SearchPage(webDriver);
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
+        searchPage = new SearchPage(webDriver);WebDriverWait wait = new WebDriverWait(webDriver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='onetrust-accept-btn-handler']")));
         mainPage.acceptCookies();
     }
@@ -53,6 +51,7 @@ public class MainPageNavigationTest {
     public void testInputValuesSearchPage() {
         String city = "Казань";
         mainPage.enterCity(city);
+        if (mainPage.isCookiesBannerOpen()) mainPage.acceptCookies();
         mainPage.setCheckInCheckOut(1);
         List<String> dates = mainPage.getGuestsDates();
         List<Integer> guestsAmount = mainPage.getGuestsAmount();

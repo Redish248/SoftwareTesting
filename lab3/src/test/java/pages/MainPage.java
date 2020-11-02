@@ -184,7 +184,7 @@ public class MainPage extends PageObject {
     public void enterCity(String city) {
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(DEST_INPUT)));
-        this.driver.findElement(By.xpath("//header")).click();
+        this.driver.findElement(By.xpath("//span[@class='sb-searchbox__title-text']")).click();
         this.destinationInput.clear();
         this.destinationInput.sendKeys(city);
     }
