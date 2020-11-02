@@ -55,10 +55,6 @@ public class MainPageTest {
         assertTrue(mainPage.isDestErrorVisible());
     }
 
-    //todo: fix order
-    //клик по прошлой дате
-    //клик по пустому полю в календаре
-    //клик по предложению для направления
     @Test
     @Order(4)
     public void testDestinationRealCityCheckValue() {
@@ -319,6 +315,14 @@ public class MainPageTest {
     }
 
     @Test
+    @Order(27)
+    public void testTodayIsToday() {
+        if (mainPage.isGuestContainerClosed()) mainPage.guestsLabel.click();
+        LocalDate today = mainPage.getTodayDate(mainPage.getTodayElement());
+        assertEquals(LocalDate.now(), today);
+    }
+
+    @Test
     @Order(28)
     public void testCheckInToday() {
         if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
@@ -369,9 +373,24 @@ public class MainPageTest {
         if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
         LocalDate today = mainPage.getTodayDate(mainPage.getTodayElement());
         if (today.getDayOfMonth() != 1) {
+            List<WebElement> datesBeforeClick = mainPage.getSelectedDates();
             WebElement yesterday = mainPage.getElementByDate(mainPage.getNewDate(today, -1));
-            assertTrue(yesterday.getAttribute("class").contains("disabled"));
+            yesterday.click();
+            assertAll(
+                    () -> assertTrue(yesterday.getAttribute("class").contains("disabled")),
+                    () -> assertEquals(datesBeforeClick, mainPage.getSelectedDates())
+            );
+            mainPage.datesInput.click();
         }
+    }
+
+    @Test
+    @Order(32)
+    public void testCalendarEmptyCell() {
+        if (mainPage.isCalendarClosed()) mainPage.datesInput.click();
+        List<WebElement> datesBeforeClick = mainPage.getSelectedDates();
+        mainPage.getCalendarEmptyCell().click();
+        assertEquals(datesBeforeClick, mainPage.getSelectedDates());
     }
 
     @Test

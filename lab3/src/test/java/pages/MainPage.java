@@ -39,6 +39,7 @@ public class MainPage extends PageObject {
     public final String LANGUAGE = "//div[@id='language-selection']//li/a[@data-lang='%s']";
     public final String POSTCARD = "//div[@class='promotion-postcard__large'][1]";
     public final String POSTCARDS_CITY = ".//h3/a";
+    public final String EMPTY_CELL = "//td[contains(@class,'bui-calendar__date--empty')][1]";
 
     public final String ACCEPT_COOKIE = ".//button[@id='onetrust-accept-btn-handler']";
 
@@ -106,6 +107,10 @@ public class MainPage extends PageObject {
 
     public WebElement getGuestNumber(WebElement guest) {
         return guest.findElements(By.xpath("./span")).get(0);
+    }
+
+    public WebElement getCalendarEmptyCell() {
+        return driver.findElement(By.xpath(EMPTY_CELL));
     }
 
     public boolean isGuestContainerClosed() {
