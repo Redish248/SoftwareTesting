@@ -32,9 +32,9 @@ public class MainPageNavigationTest {
         logInPage = new LogInPage(webDriver);
         signUpPage = new SignUpPage(webDriver);
         searchPage = new SearchPage(webDriver);
-        if (mainPage.isCookiesBannerOpen()) {
-            mainPage.acceptCookies();
-        }
+        WebDriverWait wait = new WebDriverWait(webDriver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='onetrust-accept-btn-handler']")));
+        mainPage.acceptCookies();
     }
 
     @Test
